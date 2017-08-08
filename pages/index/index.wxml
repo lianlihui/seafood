@@ -1,0 +1,89 @@
+<!--index.wxml-->
+<view class="container">
+
+  <!--start banner -->
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}">
+    <block wx:for="{{imgUrls}}" wx:key="unique">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image"/>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!--start 选择服务 -->
+  <view class="service-box">
+    <navigator url="/pages/roomservice/roomservice" class="service-link">
+      <image src="/images/service1.jpg" class="service-img"/>
+    </navigator>
+    <navigator url="/pages/appointment/appointment" class="service-link">
+      <image src="/images/service2.jpg" class="service-img"/>
+    </navigator>
+  </view>
+
+  <!--start 粥类 -->
+  <view class="classify-box">
+    <view class="classify-title-box">
+      <text class="classify-title">粥类</text>
+    </view>
+    <scroll-view class="scroll-view" scroll-x="true" style="width: 100%">
+      <view class="scroll-view-item">
+        <image src="/images/service1.jpg" class="scroll-view-item-img"/>
+        <view class="scroll-view-item-info">
+          <text>皮蛋瘦肉粥1</text>
+          <text class="scroll-view-item-num">月售：850</text>
+        </view>
+        <text class="scroll-view-item-price">￥29</text>
+      </view>
+      <view class="scroll-view-item">
+        <image src="/images/service1.jpg" class="scroll-view-item-img"/>
+        <view class="scroll-view-item-info">
+          <text>皮蛋瘦肉粥2</text>
+          <text class="scroll-view-item-num">月售：850</text>
+        </view>
+        <text class="scroll-view-item-price">￥29</text>
+      </view>
+      <view class="scroll-view-item">
+        <image src="/images/service1.jpg" class="scroll-view-item-img"/>
+        <view class="scroll-view-item-info">
+          <text>皮蛋瘦肉粥3</text>
+          <text class="scroll-view-item-num">月售：850</text>
+        </view>
+        <text class="scroll-view-item-price">￥29</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!--start 扇贝类 -->
+  <view class="classify-box">
+    <view class="classify-title-box">
+      <text class="classify-title">扇贝类</text>
+    </view>
+    <scroll-view class="scroll-view" scroll-x="true" style="width: 100%">
+      <view class="scroll-view-item">
+        <image src="/images/service1.jpg" class="scroll-view-item-img"/>
+        <view class="scroll-view-item-info">
+          <text>皮蛋瘦肉粥1</text>
+          <text class="scroll-view-item-num">月售：850</text>
+        </view>
+        <text class="scroll-view-item-price">￥29</text>
+      </view>
+      <view class="scroll-view-item">
+        <image src="/images/service1.jpg" class="scroll-view-item-img"/>
+        <view class="scroll-view-item-info">
+          <text>皮蛋瘦肉粥2</text>
+          <text class="scroll-view-item-num">月售：850</text>
+        </view>
+        <text class="scroll-view-item-price">￥29</text>
+      </view>
+      <view class="scroll-view-item">
+        <image src="/images/service1.jpg" class="scroll-view-item-img"/>
+        <view class="scroll-view-item-info">
+          <text>皮蛋瘦肉粥3</text>
+          <text class="scroll-view-item-num">月售：850</text>
+        </view>
+        <text class="scroll-view-item-price">￥29</text>
+      </view>
+    </scroll-view>
+  </view>
+
+</view>

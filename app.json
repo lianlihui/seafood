@@ -1,0 +1,43 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/order/order",
+    "pages/my/my",
+    "pages/appointment/appointment",
+    "pages/roomservice/roomservice"
+  ],
+  "tabBar":{
+    "color": "#333333",
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#66d3fc",
+    "borderStyle": "white",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/index.png",
+      "selectedIconPath": "images/index_active.png" 
+    },
+    {
+      "pagePath": "pages/order/order",
+      "text": "订单",
+      "iconPath": "images/order.png",
+      "selectedIconPath": "images/order_active.png"
+      },
+    {
+      "pagePath": "pages/my/my",
+      "text": "我的",
+      "iconPath": "images/my.png",
+      "selectedIconPath": "images/my_active.png"
+    }]
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": false
+  },
+  "networkTimeout": {
+    "request": 10000
+  }
+}
