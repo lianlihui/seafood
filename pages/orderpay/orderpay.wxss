@@ -1,0 +1,56 @@
+/* orderpay.wxss */
+.orderpay-wrap .title {
+  padding: 0 28rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 76rpx;
+}
+.paymode-wrap {
+  background: #fff;
+  padding: 0 28rpx;
+}
+.paymode-wrap .paymode {
+  position: relative;
+  padding: 21rpx 0;
+  border-top: 2rpx solid #f0f0f0;
+}
+.paymode-wrap .paymode:first-child {
+  border-top: 0;
+}
+.paymode image:first-child {
+  width: 86rpx;
+  height: 86rpx;
+  margin-right: 23rpx;
+  vertical-align: top;
+}
+.paymode text {
+  display: inline-block;
+  line-height: 86rpx;
+  height: 86rpx;
+  font-size: 26rpx;
+  color: #333;
+  vertical-align: top;
+}
+.paymode .checkbox {
+  position: absolute;
+  right: 0;
+  top: 49rpx;
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.orderpay-wrap .confirm-btn {
+  position: fixed;
+  bottom: 54rpx;
+  background-image: -moz-linear-gradient( 90deg, rgb(95,201,254) 0%, rgb(75,178,255) 34%, rgb(55,154,255) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(95,201,254) 0%, rgb(75,178,255) 34%, rgb(55,154,255) 100%);
+  background-image: -ms-linear-gradient( 90deg, rgb(95,201,254) 0%, rgb(75,178,255) 34%, rgb(55,154,255) 100%);
+  width: 694rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #fff;
+  margin-left: 28rpx;
+  margin-right: 28rpx;
+}

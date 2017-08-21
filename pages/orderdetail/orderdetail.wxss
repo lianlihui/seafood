@@ -1,0 +1,233 @@
+/* orderdetail.wxss */
+.orderdetail-wrap .icon {
+  display: inline-block;
+}
+.icon-address {
+  width: 32rpx;
+  height: 45rpx;
+}
+.icon-arrow-right {
+  width: 12rpx;
+  height: 23rpx;
+}
+.icon-arrive-time {
+  width: 28rpx;
+  height: 28rpx;
+}
+.icon-coupons {
+  width: 27rpx;
+  height: 27rpx;
+  font-size: 25rpx;
+  line-height: 27rpx;
+  text-align: center;
+  background: #ef9c00;
+  color: #fff;
+}
+.orderdetail-wrap .address-wrap,
+.orderdetail-wrap .time-wrap,
+.orderdetail-wrap .product-wrap,
+.orderdetail-wrap .coupons-wrap {
+  background: #fff;
+  margin-bottom: 20rpx;
+  padding: 0 28rpx;
+}
+
+.orderdetail-wrap .address-wrap {
+  display: -webkit-box;
+  height: 131rpx;
+  padding-right: 0;
+}
+
+.address-wrap .icon-address {
+  padding-right: 51rpx;
+  padding-top: 43rpx;
+}
+.address-wrap .icon-arrow-right {
+  padding: 0 28rpx;
+  padding-top: 47rpx;
+  padding-bottom: 60rpx;
+}
+.address-wrap .contact-wrap {
+  -webkit-box-flex: 1;
+}
+.address-wrap .contact {
+  font-size: 30rpx;
+  line-height: 82rpx;
+  color: #333;
+}
+.address-wrap .address {
+  font-size: 22rpx;
+  line-height: 28rpx;
+  color: #7f7f7f;
+  width: 590rpx;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.orderdetail-wrap .time-wrap {
+  display: -webkit-box;
+  height: 91rpx;
+  border-left: 7rpx solid #3abeff;
+  box-sizing: border-box;
+  padding-left: 21rpx;
+}
+
+.time-wrap .icon-arrive-time {
+  padding-left: 21rpx;
+  padding-right: 18rpx;
+  padding-top: 31rpx;
+}
+.time-wrap .time-label {
+  width: 120rpx;
+  color: #333;
+  font-size: 30rpx;
+  line-height: 92rpx;
+}
+.time-wrap .time-box {
+  -webkit-box-flex: 1;
+}
+.time-wrap .time-box text{
+  float: right;
+  padding-top: 3rpx;
+  font-size: 24rpx;
+  line-height: 90rpx;
+  color: #5b5b5b;
+  position: relative;
+  padding-right: 40rpx;
+}
+.time-wrap .time-box text:first-child {
+  padding-right: 0;
+}
+.time-wrap .time-box text:first-child:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -23rpx;
+  top: 27rpx;
+  width: 2rpx;
+  height: 38rpx;
+  background: #b3b3b3;
+}
+
+.orderdetail-wrap .product-wrap {
+  padding: 0;
+}
+.product-wrap .title, .product-wrap .freight {
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+}
+.product-wrap .title {
+  display: block;
+  font-size: 26rpx;
+  line-height: 60rpx;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+}
+.product {
+  display: -webkit-box;
+  height: 130rpx;
+  padding-top: 16rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  margin: 0 28rpx;
+}
+.product .product-img {
+  width: 130rpx;
+  height: 130rpx;
+  padding-right: 35rpx;
+}
+.product .product-body {
+  -webkit-box-flex: 1;
+  position: relative;
+  height: 100%;
+}
+.product .product-name,
+.product .product-desc {
+  display: block;
+  width: 500rpx;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.product .product-name {
+  font-size: 28rpx;
+  line-height: 2;
+}
+.product .product-desc {
+  font-size: 22rpx;
+  line-height: 1;
+  color: #ccc;
+}
+.product .product-price {
+  display: block;
+  height: 36rpx;
+  margin-top: 22rpx;
+  margin-left: -7rpx;
+}
+.product .product-price text{
+  display: inline-block;
+  font-size: 36rpx;
+  color: #19b5ff;
+  line-height: 1;
+  height: 36rpx;
+  vertical-align: top;
+}
+.product .product-count {
+  position: absolute;
+  top: 57rpx;
+  right: 0;
+  font-size: 24rpx;
+  color: #5b5b5b;
+  line-height: 24rpx;
+}
+.product-wrap .freight {
+  font-size: 28rpx;
+  color: #5b5b5b;
+  line-height: 61rpx;
+}
+.product-wrap .freight-price {
+  font-size: 24rpx;
+  color: #333;
+  float: right;
+}
+
+.orderdetail-wrap .coupons-wrap {
+  height: 80rpx;
+  font-size: 26rpx;
+  color: #5b5b5b;
+  line-height: 80rpx;
+}
+.coupons-wrap .icon-coupons {
+  vertical-align: top;
+  margin-right: 18rpx;
+  margin-top: 26rpx;
+}
+.coupons-wrap .coupons-count {
+  color: #19b5ff;
+}
+.coupons-wrap .coupons-count,
+.coupons-wrap .icon-arrow-right {
+  float: right;
+}
+.coupons-wrap .icon-arrow-right {
+  padding-top: 28rpx;
+  padding-left: 14rpx;
+}
+
+.orderdetail-wrap .confirm-btn {
+  background-image: -moz-linear-gradient( 90deg, rgb(95,201,254) 0%, rgb(75,178,255) 34%, rgb(55,154,255) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(95,201,254) 0%, rgb(75,178,255) 34%, rgb(55,154,255) 100%);
+  background-image: -ms-linear-gradient( 90deg, rgb(95,201,254) 0%, rgb(75,178,255) 34%, rgb(55,154,255) 100%);
+  width: 694rpx;
+  height: 80rpx;
+  margin-top: 40rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #fff;
+  margin-left: 28rpx;
+  margin-right: 28rpx;
+}

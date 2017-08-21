@@ -12,7 +12,7 @@
 
   <!--start 选择服务 -->
   <view class="service-box">
-    <navigator url="/pages/roomservice/roomservice" class="service-link">
+    <navigator url="/pages/roomservice/roomservice?id=131" class="service-link">
       <image src="/images/service1.jpg" class="service-img"/>
     </navigator>
     <navigator url="/pages/appointment/appointment" class="service-link">

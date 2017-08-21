@@ -1,0 +1,316 @@
+// roomservice.js
+let detailId = 0
+
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    imageRootPath: '',
+    list: [],
+    products: [],
+    scrollTop: { 
+      category: 0,
+      menu: 0
+    },
+    scrollIntoViewId: '', // 滚动选中分类id
+    curMenuId: 0, // 当前选中分类
+    spec: {}, // 规格弹窗数据
+    specMenuIndex: 0,
+    specProductIndex: 0,
+    modalSpecShow: false, // 规格弹窗是否显示
+    modalSpecPrice: 0, // 规格价格
+    modalSpecIndex: 0, // 规格位置
+    detailShow: false, // 单品详情是否显示
+    detail: {}, // 单品详情数据
+    cart: { // 购物车
+      show: false,
+      list: [],
+      total: 0,
+      freight: 0,
+      amount: 0
+    }
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    if (options.id) {
+      detailId = parseInt(options.id)
+    }
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.fetchData()
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  },
+
+  fetchData () {    
+    var that = this
+
+    wx.request({
+      url: 'http://hjx.pnkoo.cn/mwarelist.html', //仅为示例，并非真实的接口地址
+      data: {},
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        res = res.data
+        const {msg, code} = res
+        const {warelablelist, waretypelist, imageRootPath} = res.data
+        console.log(res)
+        if (code == 0) {
+          let list = []
+          let products = []
+
+          if (warelablelist) {
+            list = list.concat(warelablelist)
+          }
+          if (waretypelist) {
+            list = list.concat(waretypelist)
+            waretypelist.forEach(v => {
+              products = products.concat(v.warelist)
+            })
+          }
+          that.setData({list, products, imageRootPath})
+
+          if (detailId) {
+            that.showDetail(null, detailId)
+          }
+        } else {
+          console.error(msg)
+        }
+      }
+    })
+  },
+
+  showMenu (e) {
+    const id = e.target.dataset.menuid
+    this.setData({
+      scrollIntoViewId: 'Menu'+id,
+      curMenuId: id
+    })
+  },
+
+  // 加入购物车
+  addToCart (e) {
+    const data = e.target.dataset
+    const product = data.product || this.data.list[data.menuindex].warelist[data.productindex]
+    const sizelist = product.sizelist
+    const add = data.modaladd || data.cartadd || false // 规格弹窗来源，购物车添加来源
+    if (sizelist && sizelist.length > 1 && !add) {
+      this.setData({
+        spec: product,
+        modalSpecShow: true,
+        modalSpecPrice: sizelist[0].price,
+        specMenuIndex: data.menuindex,
+        specProductIndex: data.productindex
+      })
+    } else {
+      let index // 相同单品（含规格）的位置
+      const specIndex = data.specindex || this.data.modalSpecIndex // 规格位置
+      const list = this.data.cart.list.filter((v, i) => {
+        if (v.id === product.id && (this.data.spec.sizelist ? v.size.id === this.data.spec.sizelist[specIndex].id : 1)) {
+          index = i // 找到相同单品（含规格）
+          return true
+        } else{
+          return false
+        }
+      })[0]
+      let newList = list ? Object.assign(list, {
+        len: list.len+1
+      }) : Object.assign({
+        size: product.sizelist[specIndex],
+        len: 1,
+        menuindex: data.menuindex,
+        productindex: data.productindex,
+        specIndex
+      }, product)
+
+      let productCart = product.cart || {}
+      let newSizeId = product.sizelist[specIndex].id
+      let newSize = Object.assign(productCart, {
+        [newSizeId] : ((productCart[newSizeId] || 0) + 1),
+        count: 0
+      })
+      for(let key in newSize) {
+        if (key !== 'count') {
+          newSize.count += newSize[key]
+        }
+      }
+      this.setData({
+        ['cart.list[' + (list ? index : this.data.cart.list.length) + ']'] : newList,
+        ['list[' + data.menuindex + '].warelist[' + data.productindex + '].cart'] : newSize
+      })
+
+      this.calcTotal()
+      this.calcAmount()
+
+      if (add) {
+        this.closeModal(null, 'specModal')
+      }
+    }
+  },
+
+  // 从购物车移除
+  rmFromCart (e) {
+    const data = e.target.dataset
+    const product = data.product || this.data.list[data.menuindex].warelist[data.productindex]
+    let inlineCart = this.data.list[data.menuindex].warelist[data.productindex].cart
+    delete inlineCart.count
+    const key = Object.keys(inlineCart)[Object.keys(inlineCart).length - 1]
+    let newSize = Object.assign(inlineCart, {
+      [key]: inlineCart[key] - 1,
+      count: 0
+    })
+    for(let key in newSize) {
+      if (key !== 'count') {
+        newSize.count += newSize[key]
+      }
+    }
+
+    let cartListRmIndex = this.data.cart.list.map((v, i) => (v.id === product.id && v.size.id == key) ? i : -1).filter(v => v >= 0)[0]
+    let newCartListRm = this.data.cart.list[cartListRmIndex]
+    if (newCartListRm.len - 1 === 0) {
+      newCartListRm = null
+    } else {
+      newCartListRm.len -= 1
+    }
+
+    this.setData({
+      ['list[' + data.menuindex + '].warelist[' + data.productindex + '].cart'] : newSize
+    })
+    if (newCartListRm) {
+      this.setData({
+        ['cart.list[' + cartListRmIndex + ']'] : newCartListRm
+      })
+    } else {
+      let list = this.data.cart.list
+      list.splice(cartListRmIndex, 1)
+      this.setData({
+        ['cart.list'] : list
+      })
+    }
+
+    this.calcTotal()
+
+  },
+
+  // 计算购买数量
+  calcTotal () {
+    let total = 0
+    this.data.cart.list.forEach(v => {
+      total += v.len
+    })
+    this.setData({
+      'cart.total' : total 
+    })
+  },
+
+  // 计算总额
+  calcAmount () {
+    // 计算购买数量
+    let amount = 0
+    this.data.cart.list.forEach(v => {
+      amount += v.len * v.size.price
+    })
+    this.setData({
+      'cart.amount' : amount 
+    })
+  },
+
+  selectSpec (e) {
+    const data = e.target.dataset
+    this.setData({
+      modalSpecIndex: data.index,
+      modalSpecPrice:  data.price
+    })
+  },
+
+  // 关闭弹窗
+  closeModal (e, modalName) {
+    const modal = modalName || e.target.dataset.modal
+
+    switch (modal) {
+      case 'specModal':
+        this.setData({
+          modalSpecShow: false,
+          spec: {},
+          modalSpecPrice: 0,
+          modalSpecIndex: 0
+        })
+      break
+      case 'detailModal':
+        this.setData({
+          detailShow: false,
+          detail: {}
+        })
+      break
+      case 'cart':
+        this.setData({
+          'cart.show': false
+        })
+      break
+    }
+  },
+
+  showDetail (e, id) {
+    const detail = (id && this.data.products.filter(v => v.id === id)[0]) || e.target.dataset.detail
+    this.setData({
+      detail,
+      detailShow: true
+    })
+  },
+
+  showCart (e) {
+    this.setData({
+      'cart.show': true
+    })
+  }
+})

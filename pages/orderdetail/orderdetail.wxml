@@ -1,0 +1,57 @@
+<!--orderdetail.wxml-->
+<view class="container orderdetail-wrap">
+  <view class="address-wrap">
+    <image src="/images/address.png" class="icon icon-address"></image>
+    <view class="contact-wrap">
+      <view class="contact">华小姐 13233333333</view>
+      <view class="address">广东省深圳市宝安区广东省深圳市宝安区广东省深圳市宝安区</view>
+    </view>
+    <image src="/images/arrow_right.png" class="icon icon-arrow-right"></image>
+  </view>
+  <view class="time-wrap">
+    <image src="/images/arrive_time.png" class="icon icon-arrive-time"></image>
+    <text class="time-label">送达时间</text>
+    <view class="time-box">
+      <text class="time-detail">19:05</text>
+      <text class="time-date">2017-04-17 星期一</text>
+    </view>
+  </view>
+  <view class="product-wrap">
+    <text class="title">私宴上门</text>
+    <view class="product">
+      <image class="product-img" src="/images/menu.jpg"></image>
+      <view class="product-body">
+        <text class="product-name">排骨粥</text>
+        <text class="product-desc">大份(5-8人)</text>
+        <view class="product-price">
+          <text>￥29</text>
+        </view>
+
+        <text class="product-count">×1</text>
+      </view>
+    </view>
+    <view class="product">
+      <image class="product-img" src="/images/menu.jpg"></image>
+      <view class="product-body">
+        <text class="product-name">排骨粥排骨粥排骨粥排骨粥排骨粥排骨粥</text>
+        <text class="product-desc">大份(5-8人)大份(5-8人)大份(5-8人)大份(5-8人)</text>
+        <view class="product-price">
+          <text>￥29</text>
+        </view>
+
+        <text class="product-count">×1</text>
+      </view>
+    </view>
+    <view class="freight">
+      <text class="freight-label">配送费</text>
+      <text class="freight-price">￥20</text>
+    </view>
+  </view>
+  <view class="coupons-wrap">
+    <view class="icon icon-coupons">减</view>
+    <text class="coupons-label">使用优惠券</text>
+    <image src="/images/arrow_right.png" class="icon icon-arrow-right"></image>
+    <text class="coupons-count">2张可用</text>
+  </view>
+  <view class="confirm-btn">确认订单</view>
+</view>

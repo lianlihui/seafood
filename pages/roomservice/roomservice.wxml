@@ -1,0 +1,192 @@
+<view class="container roomservice-wrap">
+
+
+  <!-- 菜单分类导航 -->
+  <scroll-view
+    class="category-wrap"
+    scroll-y="true"
+    scroll-top="{{scrollTop.category}}">
+    <text
+      wx:for="{{list}}"
+      class="category{{index == curMenuId ? ' active' : ''}}"
+      data-menuid="{{index}}"
+      wx:key="*this"
+      bindtap="showMenu">{{item.name}}</text>
+    <!-- <text class="category active">热销榜</text>
+    <text class="category">全部热卖</text>
+    <text class="category">粥底类</text>
+    <text class="category">鱼类</text>
+    <text class="category">蟹类</text> -->
+  </scroll-view>
+  <!-- /菜单分类导航 -->
+
+  <!-- 菜单列表 -->
+  <scroll-view
+    class="menu-wrap"
+    scroll-y="true"
+    scroll-top="{{scrollTop.menu}}"
+    scroll-into-view="{{scrollIntoViewId}}">
+    <view wx:for="{{list}}" class="menu" id="Menu{{index}}">
+      <text class="menu-title">{{item.name}}</text>
+      <view wx:for="{{item.warelist}}" wx:key="*this" wx:for-item="product" wx:for-index="productindex" class="menu-list">
+        <view class="menu-product">
+          <image class="product-img" src="{{imageRootPath}}{{product.pic1}}"></image>
+          <view class="product-body">
+            <text class="product-name" bindtap="showDetail" data-detail="{{product}}">{{product.name}}</text>
+            <text class="product-desc">{{product.descript}}</text>
+            <text class="product-sold">月售 {{product.number}}</text>
+            <view class="product-price">
+              <text>￥{{product.price ? product.price : product.sizelist[0].price}}</text>
+              <text wx:if="{{product.sizelist && product.sizelist.length > 1}}" class="product-price-st">起</text>
+            </view>
+
+            <text wx:if="{{product.sizelist && product.sizelist.length > 1}}" class="product-type">多规格</text>
+
+            <view class="product-operate">
+              <image src="/images/product_minus.png" wx:if="{{product.cart && product.cart.count > 0}}" bindtap="rmFromCart" data-product="{{product}}" data-menuindex="{{index}}" data-productindex="{{productindex}}"></image>
+              <text class="product-count" wx:if="{{product.cart && product.cart.count > 0}}">{{product.cart.count}}</text>
+              <image src="/images/product_add.png" bindtap="addToCart" data-product="{{product}}" data-menuindex="{{index}}" data-productindex="{{productindex}}"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="menu">
+      <text class="menu-title">热销榜</text>
+      <view class="menu-list">
+        <view class="menu-product">
+          <image class="product-img" src="/images/menu.jpg"></image>
+          <view class="product-body">
+            <text class="product-name">排骨粥</text>
+            <text class="product-desc">珍珠米，排骨，猪骨汤，软硬适度</text>
+            <text class="product-sold">月售 205</text>
+            <view class="product-price">
+              <text>￥29</text>
+              <text class="product-price-st">起</text>
+            </view>
+
+            <text class="product-type">多规格</text>
+            <image src="/images/menu_add.png" class="icon-menu-add"></image>
+          </view>
+        </view>
+      </view>
+    </view> -->
+  </scroll-view>
+  <!-- /菜单列表 -->
+  
+  <!-- 底部购物车 -->
+  <view class="cart-wrap">
+    <image class="cart-img-border" src="/images/cart_border.png" bindtap="showCart"></image>
+    <image hidden="{{cart.total === 0}}" class="cart-img" src="/images/cart.png" bindtap="showCart"></image>
+    <image hidden="{{cart.total}}"class="cart-img" src="/images/cart.png"></image>
+    <view hidden="{{cart.total === 0}}" class="product-total">{{cart.total}}</view>
+    <view hidden="{{cart.total}}" class="cart-empty">
+      <text class="left">购物车为空</text>
+      <text class="right">￥0元起送</text>
+    </view>
+    <view hidden="{{cart.total === 0}}" class="cart-no-empty">
+      <view class="left">
+        <text class="cart-amount">￥{{cart.amount}}元</text>
+        <text class="cart-freight">另需配送费5元</text>
+      </view>
+      <text class="cart-buy">去结算</text>
+    </view>
+  </view>
+  <!-- /底部购物车 -->
+
+  <!-- 购物车详情 -->
+  <view class="cart-mask" hidden="{{!cart.show}}" bindtap="closeModal" data-modal="cart"></view>
+  <view class="cart-product-wrap" hidden="{{!cart.show}}">
+    <view class="cart-product-head">
+      <text class="head-title">已选商品</text>
+      <view class="head-clear">
+        <image src="/images/head_clear.png" class="icon-head-clear"></image>
+        <text>清空</text>
+      </view>
+    </view>
+    <view class="cart-product-list">
+      <view class="cart-product" wx:for="{{cart.list}}">
+        <block wx:if="{{item}}">
+          <view class="product-name">
+            <text class="product-name-main">{{item.name}}</text>
+            <text class="product-name-sub">{{item.size.name}}</text>
+          </view>
+          <view class="product-pay">
+            <view class="product-operate">
+              <image src="/images/product_minus.png" bindtap="rmFromCart" data-menuindex="{{item.menuindex}}" data-productindex="{{item.productindex}}" data-specindex="{{item.specIndex}}"></image>
+              <text class="product-count">{{item.len}}</text>
+              <image src="/images/product_add.png" bindtap="addToCart" data-menuindex="{{item.menuindex}}" data-productindex="{{item.productindex}}" data-specindex="{{item.specIndex}}" data-cartadd="true"></image>
+            </view>
+            <view class="product-price">￥{{item.size.price}}</view>
+          </view>
+        </block>
+      </view>
+      <!-- <view class="cart-product">
+        <view class="product-name">
+          <text class="product-name-main">皮蛋瘦肉粥</text>
+          <text class="product-name-sub">大份（5-8人）</text>
+        </view>
+        <view class="product-pay">
+          <view class="product-operate">
+            <image src="/images/product_minus.png"></image>
+            <text class="product-count">1</text>
+            <image src="/images/product_add.png"></image>
+          </view>
+          <view class="product-price">￥38</view>
+        </view>
+      </view> -->
+    </view>
+  </view>
+  <!-- 购物车详情 -->
+
+  <!-- 单品详情 -->
+  <view hidden="{{!detailShow}}" class="product-detail-wrap vertical-center"
+    bindtap="closeModal" data-modal="detailModal">
+    <view class="product-detail">
+      <view class="product-detail-img">
+        <view class="img-bg"></view>
+        <image src="{{imageRootPath}}{{detail.pic1}}"></image>
+        <text>{{detail.descript}}</text>
+        <!-- <text>贝大米 排骨 猪油 花生米 细盐 味精 香油 胡椒粉 香菜各少许</text> -->
+      </view>
+      <view class="product-detail-info">
+        <text class="title">{{detail.name}}</text>
+        <text class="sold">月售：{{detail.number}}份</text>
+        <text class="price">￥{{detail.price ? detail.price : detail.sizelist[0].price}}</text>
+        <text class="add-cart">加入购物车</text>
+      </view>
+    </view>
+  </view>
+  <!-- /单品详情 -->
+
+  <!-- 规格弹窗 -->
+  <view hidden="{{!modalSpecShow}}" class="modal-spec modal-wrap vertical-center"
+    bindtap="closeModal" data-modal="specModal">
+    <view class="modal">
+      <view class="modal-header">
+        <text>{{spec.name}}</text>
+        <image src="/images/modal-close.png" class="modal-close" bindtap="closeModal" data-modal="specModal"></image>
+      </view>
+      <view class="modal-body">
+        <view class="title">规格</view>
+        <view class="spec-wrap">
+          <text
+            wx:for="{{spec.sizelist}}"
+            class="spec{{modalSpecIndex == index ? ' active' : ''}}"
+            bindtap="selectSpec"
+            data-index="{{index}}"
+            data-price="{{item.price}}"
+            >{{item.name}}</text>
+          <!-- <text class="spec active">小份（1-4人）</text>
+          <text class="spec">大份（5-8人）</text> -->
+        </view>
+      </view>
+      <view class="modal-footer">
+        <text class="price">￥{{modalSpecPrice}}</text>
+        <text class="confirm" bindtap="addToCart" data-product="{{spec}}" data-modaladd="true" data-menuindex="{{specMenuIndex}}" data-productindex="{{specProductIndex}}">选好了</text>
+      </view>
+    </view>
+  </view>
+  <!-- /规格弹窗 -->
+
+</view>
