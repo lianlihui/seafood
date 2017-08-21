@@ -4,13 +4,11 @@
     "pages/order/list/list",
     "pages/order/detail/detail",
     "pages/my/my",
-    "pages/appointment/appointment",
     "pages/roomservice/roomservice",
     "pages/orderdetail/orderdetail",
-    "pages/orderpay/orderpay"
+    "pages/orderpay/orderpay",
     "pages/appointment/list/list",
     "pages/appointment/info/info",
-    "pages/roomservice/roomservice",
     "pages/address/edit/edit",
     "pages/address/list/list",
     "pages/login/login"
@@ -28,7 +26,7 @@
         "selectedIconPath": "images/index_active.png"
       },
       {
-        "pagePath": "pages/order/order",
+        "pagePath": "pages/order/list/list",
         "text": "订单",
         "iconPath": "images/order.png",
         "selectedIconPath": "images/order_active.png"
