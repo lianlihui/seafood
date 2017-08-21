@@ -4,11 +4,9 @@ var app = getApp();
 
 Page({
   data: {
-    'imgUrls': [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
+    'imgUrls': [],
+    'imageRootPath': '',
+    'warelablelist': [],
     'indicatorDots': true,
     'indicatorColor': '#bdaea7',
     'indicatorActiveColor': '#5eaaf9',
@@ -18,26 +16,27 @@ Page({
     'foodList': []
   },
   onShow: function() {
-    var that = this;
+    var self = this;
     var postData = {
       token: ''
     };
-    wx.request({
+    
+    //获取首页数据    
+    app.ajax({
       url: app.globalData.serviceUrl + 'mindex.html',
       data: postData,
       method: 'GET',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
+      successCallback: function(res) {
         console.log(res);
+        self.setData({
+          imgUrls: res.data.poslinklist,
+          imageRootPath: res.data.imageRootPath,
+          warelablelist: res.data.warelablelist
+        });
       },
-      fail: function () {
-        console.log('fail');
-      },
-      complete: function () {
-        console.log('complete');
+      failCallback: function(res) {
+        console.log(res);
       }
-    })
+    });
   }
 })

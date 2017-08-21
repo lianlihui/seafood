@@ -1,12 +1,19 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/order/order",
+    "pages/order/list/list",
+    "pages/order/detail/detail",
     "pages/my/my",
     "pages/appointment/appointment",
     "pages/roomservice/roomservice",
     "pages/orderdetail/orderdetail",
     "pages/orderpay/orderpay"
+    "pages/appointment/list/list",
+    "pages/appointment/info/info",
+    "pages/roomservice/roomservice",
+    "pages/address/edit/edit",
+    "pages/address/list/list",
+    "pages/login/login"
   ],
   "tabBar": {
     "color": "#333333",

@@ -1,0 +1,72 @@
+<view class="address">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+  <view class="addrss-edit">
+    <view class="addrss-edit-item">
+      <view class="addrss-edit-item-impl">
+        <text class="addrss-edit-item-text">收货人</text>
+        <input placeholder="姓名" name="ordername" value="{{ordername}}" class="addrss-edit-item-inp"/>        
+      </view>
+    </view>
+
+    <view class="addrss-edit-item">
+      <view class="addrss-edit-item-impl">
+        <text class="addrss-edit-item-text">手机号码</text>
+        <input placeholder="可用手机号码" name="mobile" value="{{mobile}}" class="addrss-edit-item-inp"/>        
+      </view>
+    </view>
+
+    <view class="addrss-edit-item">
+      <view class="addrss-edit-item-impl">
+        <text class="addrss-edit-item-text">地区信息</text>
+        <input placeholder="请选择(省)/请选择(市)/请选择(区)" value="{{address}}" class="addrss-edit-item-inp" bindtap="selArea"/>
+      </view>
+    </view>
+
+    <view class="addrss-edit-item">
+      <view class="addrss-edit-item-impl">
+        <text class="addrss-edit-item-xtext">详细信息</text>
+        <textarea value="{{detailaddress}}" name="detailaddress" placeholder="街道门牌信息或者房间号" auto-height class="addrss-edit-item-textarea"/>        
+      </view>
+    </view>
+
+    <view class="addrss-edit-item">
+      <view class="addrss-edit-item-implm">
+        <text class="addrss-edit-item-mtext">设置默认地址</text>
+ 
+        <view wx:if="{{isdefault == 0}}" class="addrss-edit-item-icon" bindtap="defaultChange"></view>
+        <view wx:if="{{isdefault == 1}}" class="addrss-edit-item-icon active" bindtap="defaultChange"></view>
+
+      </view>
+    </view>
+
+  </view>
+
+  <view class="address-btn-add" wx:if="{{bcShow}}">
+      <button class="addrss-edit-add" formType="submit">保存</button>
+  </view>
+  </form>
+  
+  <view class="address-btn-delete" wx:if="{{ddShow}}" bindtap="deleteAddress">
+      <button class="addrss-edit-delete">删除地址</button>
+  </view>
+
+<view wx:if="{{isShow}}" class="picker-view">
+  <view class="picker-view-header">
+    <view class="picker-view-header-qx" bindtap="qxSelArea">取消</view>
+    <view class="picker-view-header-qd" bindtap="qdSelArea">确定</view>
+  </view>
+  <picker-view class="picker-view-impl" indicator-style="height: 50rpx;" value="{{value}}" bindchange="bindChangeArea">
+    <picker-view-column>
+      <view wx:for="{{provinces}}" class="addr-item">{{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{cities}}" class="addr-item">{{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column wx:if="{{showDistrict}}">
+      <view wx:for="{{counties}}" class="addr-item">{{item.name}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+
+</view>
+

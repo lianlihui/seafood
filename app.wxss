@@ -1,6 +1,7 @@
 /**app.wxss**/
 page {
 	background: #f0f0f0;
+  font-family: '微软雅黑';
 }
 .container {
   height: 100%;

@@ -1,0 +1,100 @@
+<view class="order-header">
+  <view class="{{syCls}}" bindtap="syClick">
+    私宴上门
+  </view>
+  <view class="{{myCls}}" bindtap="myClick">
+    我的预约
+  </view>
+</view>
+
+<view class="order-list">
+  <view class="order-list-sy" wx:if="{{syStatus}}">
+
+    <view wx:for="{{orderlist}}" wx:key="unique1">
+      <navigator url="/pages/order/detail/detail?id={{item.id}}">
+      <view class="order-item-sy">
+        <view class="order-item-sy-lf">
+          <image src="{{imageRootPath}}{{item.warelist[0].warepic}}" class="order-item-sy-lf-img"/>
+        </view>
+        <view class="order-item-sy-rt">
+          <text class="order-item-sy-name">{{item.warelist[0].warename}}</text>
+          <span class="order-item-sy-arrow"></span>
+
+          <text class="order-item-sy-time">{{item.createtime}}</text>
+          <text class="order-item-sy-detail">
+            {{item.warelist[0].warename}}等{{item.warelist.length}}件商品
+          </text>
+          <text class="order-item-sy-money">${{item.cost}}</text>
+
+          <view class="order-item-sy-status" wx:if="{{item.status == 1}}">
+            等待支付
+          </view>
+          <view class="order-item-sy-pay pay" wx:if="{{item.status == 1}}">
+            去支付
+          </view>
+
+          <view class="order-item-sy-status" wx:if="{{item.status == 2}}">
+            待配送
+          </view>
+          <view class="order-item-sy-status" wx:if="{{item.status == 3}}">
+            配送中
+          </view>
+          <view class="order-item-sy-status" wx:if="{{item.status == 4}}">
+            已完成
+          </view>
+          <view class="order-item-sy-status" wx:if="{{item.status == 5}}">
+            备货中
+          </view>
+          <view class="order-item-sy-status" wx:if="{{item.status == 7}}">
+            已取消
+          </view>
+          <view class="order-item-sy-pay" wx:if="{{item.status == 2 || item.status == 3 || item.status == 4 ||item.status == 5 ||item.status == 7}}">
+            再来一单
+          </view>
+        </view>
+      </view>
+      </navigator>
+    </view>
+
+    <view wx:if="{{syLoading}}">加载中...</view>
+    <view wx:if="{{syNoData}}">已没有数据...</view>
+  </view>
+
+  <view class="order-list-my" wx:if="{{myStatus}}">
+    
+    <view wx:for="{{subscribelist}}" wx:key="unique1">
+      <view class="order-item-my">
+        <view class="order-item-my-lf">
+          <image src="{{imageRootPath}}{{item.logo}}" class="order-item-my-lf-img"/>
+        </view>
+        <view class="order-item-my-rt">
+          <text class="shop-item-title">{{item.username}}</text>
+          <view class="shop-address-box">
+            <span class="shop-address-icon"></span>
+            <span class="shop-address">{{item.address}}</span>
+          </view>
+          <view class="order-item-my-yy-box">
+            <span class="order-item-my-yy-icon">预约</span>
+            <!-- <span class="order-item-my-yy-span">4月17日</span>
+            <span class="order-item-my-yy-span">星期一</span> -->
+            <span class="order-item-my-yy-span">{{item.time}}</span>
+          </view>
+          
+          <view class="order-item-my-yy-wait wait" wx:if="{{item.status == 0}}">
+            等待到店
+          </view>
+          <view class="order-item-my-yy-wait" wx:if="{{item.status == 1}}">
+            预约完成
+          </view>
+          <view class="order-item-my-yy-wait" wx:if="{{item.status == 2}}">
+            预约已取消
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{myLoading}}">加载中...</view>
+    <view wx:if="{{myNoData}}">已没有数据...</view>
+  </view>
+  
+</view>

@@ -1,0 +1,41 @@
+<!-- 店铺图片详情 -->
+<view class="swiper-box">
+  <image src="{{imageRootPath}}{{shopInfo.logo}}" class="slide-image" mode="widthFix"/>
+  <view class="swiper-hover-box">
+    <text>{{shopInfo.username}}</text>
+    <span class="swiper-num">1张</span>
+  </view>
+</view>
+
+<!-- 头部地址 -->
+<view class="shop-box">
+  <span class="address-icon"></span>
+  <text>{{address}}</text>
+  <span class="shop-phone" data-phone="{{shopInfo.phone}}" bindtap="bindPhoneTab"></span>
+</view>
+
+<form bindsubmit="formSubmit">
+
+  <view class="form-item">
+    <label class=""><i class="icon1"></i>就餐房型</label>
+    <input type="text" placeholder="请选择房型" class="form-input"/>
+    <i class="form-arrow"></i>
+  </view>
+
+  <view class="form-item">
+    <label><i class="icon2"></i>用餐人数</label>
+    <input type="text" placeholder="请选择用餐人数" class="form-input"/>
+    <i class="form-arrow"></i>
+  </view>
+
+  <view class="form-item">
+    <label><i class="icon3"></i>用餐时间</label>
+    <input type="text" placeholder="请选择用餐时间" class="form-input"/>
+    <i class="form-arrow"></i>
+  </view>
+
+  <view class="shop-btn-group">
+    <button class="shop-btn">确定预定</button>
+  </view>
+
+</form>

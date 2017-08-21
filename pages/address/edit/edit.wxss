@@ -1,0 +1,163 @@
+.address{
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+}
+
+.addrss-edit{
+  width:100%;
+  margin-top: 20rpx;
+  background-color: #ffffff;
+}
+
+.addrss-edit-item{
+  width:100%;
+  padding:0 28rpx;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+.addrss-edit-item-impl{
+  border-bottom: 1rpx solid #f0f0f0;
+  padding: 32rpx 0;
+  position: relative;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+.addrss-edit-item-text{
+  font-size: 28rpx;
+  color: #333333;
+  position:absolute;
+  top:50%;
+  margin-top: -14rpx;
+  left: 0;
+}
+.addrss-edit-item-inp{
+  font-size: 24rpx;
+  color: #cccccc;
+  margin-left:150rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+}
+.address-edit-item-picker{
+  display:inline-block;
+  margin-left:150rpx;
+  font-size: 24rpx;
+  color: #cccccc;
+}
+.addrss-edit-item-xtext{
+  font-size: 28rpx;
+  color: #333333;
+  position:absolute;
+  top:30rpx;
+  left: 0;
+}
+.addrss-edit-item-textarea{
+  font-size: 24rpx;
+  color: #cccccc;
+  margin-left:150rpx;
+  width:548rpx;
+  margin-top:2rpx;
+}
+.addrss-edit-item-implm{
+  border-bottom: 1rpx solid #f0f0f0;
+  padding: 34rpx 0;
+  position: relative;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+}
+.addrss-edit-item-mtext{
+  font-size: 28rpx;
+  color: #333333;
+}
+.addrss-edit-item-icon{
+  width: 92rpx;
+  height: 60rpx;
+  background: url(../../../images/address/sel_icon1.png) no-repeat right center;
+  background-size: 30rpx;
+  position: absolute;
+  top: 50%;
+  margin-top: -30rpx;
+  right: 0;
+}
+.addrss-edit-item-icon.active {
+  background: url(../../../images/address/sel_icon2.png) no-repeat right center;
+  background-size: 30rpx;
+}
+
+.address-btn-add{
+  width: 100%;
+  position: absolute;
+  bottom: 170rpx;
+}
+.addrss-edit-add{
+  width:694rpx;
+  height: 86rpx;
+  background: url(../../../images/address/add_btn.png) no-repeat center center;
+  font-size: 32rpx;
+  color: #ffffff;
+}
+
+.address-btn-delete{
+  width: 100%;
+  position: absolute;
+  bottom: 45rpx;
+}
+.addrss-edit-delete{
+  width:694rpx;
+  height: 86rpx;
+  background: url(../../../images/address/del_btn.png) no-repeat center center;
+  font-size: 32rpx;
+  color: #ffffff;
+}
+
+.picker-view {
+  width: 100%; 
+  height: 400rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.picker-view-header{
+  width: 100%; 
+  height: 80rpx;
+  position: relative;
+  background-color: #fff;
+  padding: 0 35rpx;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+}
+.picker-view-header-qd{
+  width:100rpx;
+  height:70rpx;
+  line-height:70rpx;
+  font-size:40rpx;
+  color:#333333;
+  text-align:center;
+  position:absolute;
+  top:50%;
+  margin-top:-35rpx;
+  right:35rpx;
+}
+.picker-view-header-qx{
+  width:100rpx;
+  height:70rpx;
+  line-height:70rpx;
+  font-size:40rpx;
+  color:#333333;
+  text-align:center;
+  position:absolute;
+  top:50%;
+  margin-top:-35rpx;
+  left:35rpx;
+
+}
+.picker-view-impl{
+  width: 100%; 
+  height: 320rpx;
+}
+.addr-item {
+    line-height: 50rpx;
+    text-align: center;
+}
