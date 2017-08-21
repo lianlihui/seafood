@@ -68,20 +68,11 @@
 	display: inline-block;
 	color:#252525;
 	font-size:28rpx;
-	margin-left:28rpx;
+	border-left: 6rpx solid #66d3fc;
+	line-height: 1;
+	padding-left: 28rpx;
 }
-.order-detail-item-title-icon{
-	position:absolute;
-	top:50%;
-	left:0;
-	width:6rpx;
-	height:32rpx;
-	vertical-align:middle;
-	background:url(../../../images/order/od_icon2.png) no-repeat;
-	background-size: 100%;
-	margin-top:-15rpx;
 
-}
 .order-detail-item-title-more{
 	position:absolute;
 	top:50%;
@@ -91,7 +82,7 @@
 	vertical-align:middle;
 	background:url(../../../images/order/od_icon3.png) no-repeat;
 	background-size: 100%;
-	margin-top:-10rpx;
+	margin-top:-6rpx;
 }
 .order-detail-item-txt{
 	padding-top:22rpx;
@@ -111,19 +102,16 @@
   display: block;
 }
 .order-detail-item-txt .icon{
-  position:absolute;
-	top:50%;
-	left:0;
 	width:19rpx;
 	height:20rpx;
+	display: inline-block;
 	vertical-align:middle;
 	background:url(../../../images/order/od_icon4.png) no-repeat;
 	background-size: 100%;
-	margin-top:-10rpx;
 }
 .order-detail-item-txt .shop{
   display: inline-block;
-	margin-left:28rpx;
+	margin-left:16rpx;
   color: #18abfb;
   font-size: 20rpx;
 }

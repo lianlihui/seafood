@@ -16,7 +16,7 @@
 	<view class="order-detail-item">
 		<view class="order-detail-item-title">
 			<span class="order-detail-item-title-tit">海极鲜订单</span>
-			<view class="order-detail-item-title-icon"></view>
+			<!--<view class="order-detail-item-title-icon"></view>-->
 			<view class="order-detail-item-title-more"></view>
 		</view>
 
