@@ -2,36 +2,39 @@
 image {
   width: 100%;
 }
+.slide-image {
+  height: 380rpx;
+}
 .service-box {
-  padding: 10px 15.5px 7px 15.5px;
+  padding: 20rpx 30rpx 20rpx 30rpx;
   background: #fff;
   display: -webkit-box;
 }
 .service-link {
   width: 100%;
-  margin: 0 7.5px;
+  margin: 0 15rpx;
   -webkit-box-flex: 1.0;
           box-flex: 1.0;
 }
 .service-img {
   width: 100%;
-  height: 65px;
+  height: 129rpx;
 }
 .classify-box {
-  padding-left: 13px;
-  margin-bottom: 10px;
+  padding-left: 28rpx;
+  margin-bottom: 20rpx;
   background: #fff;
 }
 .classify-title-box {
-  padding: 7px 0;
+  padding: 15rpx 0;
   border-bottom: 1px solid #f0f0f0;
 }
 .classify-title {
-  padding: 0 10px;
+  padding: 0 20rpx;
   line-height: 1;
-  border-left: 4px solid #66d3fc;
+  border-left: 8rpx solid #66d3fc;
   color: #333;
-  font-size: 14px;
+  font-size: 32rpx;
 }
 
 /* 粥类 */
@@ -40,32 +43,34 @@ image {
 }
 .scroll-view-item {
   display: inline-block;
-  width: 190px;
-  margin-top: 10px;
-  margin-right: 10px;
+  width: 380rpx;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
 }
 .scroll-view-item-img {
-  width: 190px;
-  height: 80px;
+  width: 380rpx;
+  height: 160rpx;
   display: block;
-  border-radius: 5px;
+  border-radius: 10rpx;
 }
 .scroll-view-item-info {
-  margin: 5px 0;
-  font-size: 12px;
+  margin: 10rpx 0;
+  font-size: 24rpx;
   color: #333;
   position: relative;
+  line-height: 1;
 }
 .scroll-view-item-num {
   position: absolute;
   right: 0;
   top: 0;
   color: #888;
-  font-size: 10px;
+  font-size: 22rpx;
 }
 .scroll-view-item-price {
   display: block;
   color: #66d3fc;
-  font-size: 10px;
-  margin-bottom: 5px;
+  font-size: 22rpx;
+  margin-bottom: 10rpx;
+  line-height: 1;
 }

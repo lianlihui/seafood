@@ -1,0 +1,81 @@
+<view class="order-detail-header">
+	<view class="order-detail-header-status">
+	  {{statusTxt}}
+	</view>
+	<view class="order-detail-header-txt">
+		感谢你的支持，欢迎再次使用
+	</view>
+	<view class="order-detail-header-recur">
+		<view class="order-detail-header-recur-btn">
+			再来一单
+		</view>	
+	</view>
+</view>
+
+<view class="order-detail-body">
+	<view class="order-detail-item">
+		<view class="order-detail-item-title">
+			<span class="order-detail-item-title-tit">海极鲜订单</span>
+			<view class="order-detail-item-title-icon"></view>
+			<view class="order-detail-item-title-more"></view>
+		</view>
+
+    <view wx:for="{{order.warelist}}" wx:key="unique1">
+      <view class="order-detail-item-txt">
+			  <span>{{item.warename}}</span>
+        <span class="money">{{item.price}}</span>
+        <span class="num">x{{item.amount}}</span>
+		  </view>
+    </view>
+		
+    <view class="order-detail-item-txt">
+			<span>配送费</span>
+      <span class="money">{{order.transportation_cost}}</span>
+		</view>
+
+    <view class="order-detail-item-txt">
+      <view class="icon"></view>
+			<span class="shop">联系商家</span>
+      <span class="pay">实付：{{order.cost}}</span>
+		</view>
+	</view>
+
+  <view class="order-detail-item">
+		<view class="order-detail-item-title">
+			<span class="order-detail-item-title-tit">配送信息</span>
+			<view class="order-detail-item-title-icon"></view>
+		</view>
+		<view class="order-detail-item-txt">
+			<span>送达时间</span>
+      <span class="money">17:00</span>
+		</view>
+    <view class="order-detail-item-txt">
+			<span>收货地址</span>
+      <span class="money">{{order.detailaddress}}</span>
+      <view class="contact">{{order.ordername}} {{order.mobile}}</view>
+		</view>
+    <view class="order-detail-item-txt">
+			<span>配送方式</span>
+      <span class="money">商家配送</span>
+		</view>
+	</view>
+
+   <view class="order-detail-item">
+		<view class="order-detail-item-title">
+			<span class="order-detail-item-title-tit">订单信息</span>
+			<view class="order-detail-item-title-icon"></view>
+		</view>
+		<view class="order-detail-item-txt">
+			<span>订单号</span>
+      <span class="money">{{order.orderno}}</span>
+		</view>
+    <view class="order-detail-item-txt">
+			<span>支付方式</span>
+      <span class="money">{{payTxt}}</span>
+		</view>
+    <view class="order-detail-item-txt">
+			<span>下单时间</span>
+      <span class="money">{{order.createtime}}</span>
+		</view>
+	</view>
+</view>

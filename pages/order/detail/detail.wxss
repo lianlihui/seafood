@@ -1,0 +1,139 @@
+.order-detail-header{
+	margin-top:20rpx;
+	width:100%;
+	height: 220rpx;
+	background-color: #ffffff;
+	padding-bottom:20rpx;
+}
+.order-detail-header-status{
+	margin-top:20rpx;
+	text-align: center;
+	color:#252525;
+	font-size:32rpx;
+	width:100%;
+	display: inline-block;
+}
+.order-detail-header-txt{
+	width:100%;
+	display: inline-block;
+	margin-top:32rpx;
+	color:#888;
+	font-size:24rpx;
+	text-align: center;
+}
+.order-detail-header-recur{
+	width:100%;
+	display: inline-block;
+	margin-top:45rpx;
+	position: relative;
+	height:51rpx;
+}
+.order-detail-header-recur-btn{
+	position:absolute;
+	top:0;
+	left:50%;
+	width:148rpx;
+	height:51rpx;
+	line-height:51rpx;
+	vertical-align:middle;
+	text-align:center;
+	background:url(../../../images/order/od_icon1.png) no-repeat;
+	background-size: 100%;
+	margin-left:-74rpx;
+	color:#fff;
+	font-size:24rpx;
+}
+
+.order-detail-body{
+  margin-bottom: 20rpx;
+}
+
+.order-detail-item{
+	margin-top:20rpx;
+	width:100%;
+	padding-left: 28rpx;
+	padding-right: 28rpx;
+	background: #fff;
+	-webkit-box-sizing: border-box;
+        box-sizing: border-box;
+}
+.order-detail-item-title{
+	width:100%;
+	height:80rpx;
+	line-height:80rpx;
+	position: relative;
+	border-bottom: 1px solid #cccccc;
+}
+.order-detail-item-title-tit{
+	display: inline-block;
+	color:#252525;
+	font-size:28rpx;
+	margin-left:28rpx;
+}
+.order-detail-item-title-icon{
+	position:absolute;
+	top:50%;
+	left:0;
+	width:6rpx;
+	height:32rpx;
+	vertical-align:middle;
+	background:url(../../../images/order/od_icon2.png) no-repeat;
+	background-size: 100%;
+	margin-top:-15rpx;
+
+}
+.order-detail-item-title-more{
+	position:absolute;
+	top:50%;
+	right:0;
+	width:11rpx;
+	height:20rpx;
+	vertical-align:middle;
+	background:url(../../../images/order/od_icon3.png) no-repeat;
+	background-size: 100%;
+	margin-top:-10rpx;
+}
+.order-detail-item-txt{
+	padding-top:22rpx;
+	padding-bottom:22rpx;
+	border-bottom: 1px solid #f0f0f0;	
+  font-size: 24rpx;
+  color: #252525;
+  position: relative;
+}
+.order-detail-item-txt .num{
+  float: right;
+  display: block;
+  margin-right: 80rpx;
+}
+.order-detail-item-txt .money{
+  float: right;
+  display: block;
+}
+.order-detail-item-txt .icon{
+  position:absolute;
+	top:50%;
+	left:0;
+	width:19rpx;
+	height:20rpx;
+	vertical-align:middle;
+	background:url(../../../images/order/od_icon4.png) no-repeat;
+	background-size: 100%;
+	margin-top:-10rpx;
+}
+.order-detail-item-txt .shop{
+  display: inline-block;
+	margin-left:28rpx;
+  color: #18abfb;
+  font-size: 20rpx;
+}
+.order-detail-item-txt .pay{
+  float: right;
+  display: block;
+  color: #18abfb;
+  font-size: 26rpx;
+}
+.order-detail-item-txt .contact{
+  text-align: right;
+  margin-top:20rpx;
+}

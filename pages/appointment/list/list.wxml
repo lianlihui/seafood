@@ -1,0 +1,34 @@
+<!-- 头部地址 -->
+<view class="address-box">
+  <span class="address-icon"></span>
+  <text>{{address}}</text>
+  <span class="address-refresh" bindtap="bindRefreshTab"></span>
+</view>
+
+<!-- 店铺列表 -->
+<view class="shop-list">
+  <block wx:for="{{shoplist}}" wx:key="unique1">
+    <navigator url="/pages/appointment/info/info?id={{item.id}}">
+    <view class="shop-item">
+        <view class="shop-lf">
+          <image src="{{imageRootPath}}{{item.logo}}" class="shop-lf-img" mode="aspectFill"/>
+        </view>
+        <view class="shop-rt">
+          <text class="shop-item-title">{{item.username}}</text>
+          <view class="shop-address-box">
+            <span class="shop-address-icon"></span>
+            <span class="shop-address">{{item.address}}</span>
+            <text class="shop-distance">{{item.distance}}km</text>
+          </view>
+          <view class="shop-time-box">
+            <span class="shop-time-icon"></span>
+            <text class="shop-time">营业时间：每天{{item.starttime}}-{{item.endtime}}</text>
+          </view>
+        </view>
+    </view>
+    </navigator>
+  </block>
+</view>
+
+<!-- 加载完成 -->
+<view class="loding-box">{{loading}}</view>

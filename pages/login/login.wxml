@@ -1,0 +1,19 @@
+<view class="login-wrap">
+  <view class="login-box">
+    <text class="login-title">绑定海极鲜  享受最美味</text>
+  </view>
+  <form bindsubmit="formSubmit">
+    <view class="login-form">
+      <view class="login-item login-item1">
+        <i class="login-icon login-icon-phone"></i>
+        <input placeholder="输入手机号" name="phone" value=""/>
+        <span class="login-code">发送验证码</span>
+      </view>
+      <view class="login-item">
+        <i class="login-icon login-icon-code"></i>
+        <input placeholder="输入验证码" name="code" value=""/>
+      </view>
+      <button formType="submit" class="login-btn">绑定</button>
+    </view>
+  </form>
+</view>

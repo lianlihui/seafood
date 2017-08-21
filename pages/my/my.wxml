@@ -1,0 +1,18 @@
+<view class="page-my-top">
+  <view class="page-my-top-lf">
+    <image src="{{myInfo.headimgurl}}" class="page-my-top-img" />
+  </view>
+  <view class="page-my-top-rt">
+    <view class="page-my-top-name" wx:if="{{myInfo.nickname}}">{{myInfo.nickname}}</view>
+    <view class="page-my-top-phone">{{myInfo.phone}}</view>
+  </view>
+</view>
+
+<view class="page-my-ct">
+  <navigator url="/pages/address/list/list" class="page-my-item">
+    <view class="page-my-item-icon"></view>
+    <text>我的地址</text>
+    <view class="page-my-item-arrow"></view>
+  </navigator>
+</view>
+
