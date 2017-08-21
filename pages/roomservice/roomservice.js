@@ -144,6 +144,11 @@ Page({
     const product = data.product || this.data.list[data.menuindex].warelist[data.productindex]
     const sizelist = product.sizelist
     const add = data.modaladd || data.cartadd || false // 规格弹窗来源，购物车添加来源
+
+    if (this.data.detailShow) {
+      this.setData({detailShow: false})
+    }
+
     if (sizelist && sizelist.length > 1 && !add) {
       this.setData({
         spec: product,
@@ -300,8 +305,15 @@ Page({
     }
   },
 
+  // 显示单品详情
   showDetail (e, id) {
-    const detail = (id && this.data.products.filter(v => v.id === id)[0]) || e.target.dataset.detail
+    let detail = (id && this.data.products.filter(v => v.id === id)[0]) || e.target.dataset.detail
+
+    detail = Object.assign(detail, {
+      menuindex: this.data.list.map((v, i) => v.id === detail.waretypeid ? i : -1).filter(v => v > -1)[0],
+      productindex: this.data.list.filter(v => v.id === detail.waretypeid)[0].warelist.map((v, i) => v.id === detail.id ? i : -1).filter(v => v > -1)[0]
+    })
+
     this.setData({
       detail,
       detailShow: true
@@ -312,5 +324,25 @@ Page({
     this.setData({
       'cart.show': true
     })
+  },
+
+  // 清空购物车
+  clearCart (e) {
+    let data = {}
+
+    // 清空单品购物数据
+    this.data.list.forEach((menu, menuindex) => {
+      menu.warelist.forEach((v, productindex) => {
+        if (v.cart) {
+          v.cart = {}
+          data['list[' + menuindex + '].warelist[' + productindex + ']'] = v
+        }
+      })
+    })
+
+    // 购物车初始化
+    data.cart = {show: false, list: [], total: 0, freight: 0, amount: 0 }
+
+    this.setData(data)  
   }
 })

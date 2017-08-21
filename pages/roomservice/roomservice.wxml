@@ -101,7 +101,7 @@
       <text class="head-title">已选商品</text>
       <view class="head-clear">
         <image src="/images/head_clear.png" class="icon-head-clear"></image>
-        <text>清空</text>
+        <text bindtap="clearCart">清空</text>
       </view>
     </view>
     <view class="cart-product-list">
@@ -153,7 +153,7 @@
         <text class="title">{{detail.name}}</text>
         <text class="sold">月售：{{detail.number}}份</text>
         <text class="price">￥{{detail.price ? detail.price : detail.sizelist[0].price}}</text>
-        <text class="add-cart">加入购物车</text>
+        <text class="add-cart" bindtap="addToCart" data-product="{{detail}}" data-menuindex="{{detail.menuindex}}" data-productindex="{{detail.productindex}}">加入购物车</text>
       </view>
     </view>
   </view>
