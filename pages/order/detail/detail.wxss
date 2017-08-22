@@ -36,9 +36,9 @@
 	height:51rpx;
 	line-height:51rpx;
 	vertical-align:middle;
+	border-radius: 4rpx;
 	text-align:center;
-	background:url(../../../images/order/od_icon1.png) no-repeat;
-	background-size: 100%;
+	background: #18abfb;
 	margin-left:-74rpx;
 	color:#fff;
 	font-size:24rpx;

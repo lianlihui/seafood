@@ -1,5 +1,7 @@
 // roomservice.js
+let app = getApp()
 let detailId = 0
+let globalData = app.globalData
 
 Page({
 
@@ -95,7 +97,7 @@ Page({
     var that = this
 
     wx.request({
-      url: 'http://hjx.pnkoo.cn/mwarelist.html', //仅为示例，并非真实的接口地址
+      url: globalData.serviceUrl + 'mwarelist.html',
       data: {},
       header: {
           'content-type': 'application/json'
@@ -344,5 +346,41 @@ Page({
     data.cart = {show: false, list: [], total: 0, freight: 0, amount: 0 }
 
     this.setData(data)  
+  },
+
+  // 结算
+  buy () {
+    const that = this;
+    const cart = this.data.cart
+    let postData = {
+      token: 'CFBD8A9B33942457B4F346F5756C5E59',
+      wareids: cart.list.map(v => v.id).join(','),
+      numbers: cart.list.map(v => v.len).join(','),
+      waresizes: cart.list.map(v => v.size.id).join(','),
+    }
+
+    wx.showLoading({title: '正在创建订单', mask: true})
+
+    app.ajax({
+      url: globalData.serviceUrl + 'morderaffirm.htm',
+      data: postData,
+      method: 'GET',
+      successCallback: function (res) {
+        wx.hideLoading()
+        const {code, data, msg } = res
+        if (code == 0) {
+          globalData.newOrder = {data, postData}
+          wx.navigateTo({
+            url: '/pages/orderdetail/orderdetail'
+          })
+        } else {
+          console.error(msg) 
+        }
+      },
+      failCallback: function (res) {
+        console.log(res);
+      }
+    })
   }
+
 })
