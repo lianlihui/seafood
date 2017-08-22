@@ -43,17 +43,18 @@
   padding-top: 43rpx;
 }
 .address-wrap .icon-arrow-right {
-  padding: 0 28rpx;
-  padding-top: 47rpx;
-  padding-bottom: 60rpx;
+  padding: 54rpx 28rpx;
 }
 .address-wrap .contact-wrap {
   -webkit-box-flex: 1;
 }
-.address-wrap .contact {
+.address-wrap .contact, .address-wrap .empty {
   font-size: 30rpx;
   line-height: 82rpx;
   color: #333;
+}
+.address-wrap .empty {
+  margin-top: 24rpx;
 }
 .address-wrap .address {
   font-size: 22rpx;
@@ -80,6 +81,7 @@
   padding-top: 31rpx;
 }
 .time-wrap .time-label {
+  display: block;
   width: 120rpx;
   color: #333;
   font-size: 30rpx;
@@ -88,7 +90,7 @@
 .time-wrap .time-box {
   -webkit-box-flex: 1;
 }
-.time-wrap .time-box text{
+.time-wrap .time-box picker{
   float: right;
   padding-top: 3rpx;
   font-size: 24rpx;
@@ -97,10 +99,10 @@
   position: relative;
   padding-right: 40rpx;
 }
-.time-wrap .time-box text:first-child {
+.time-wrap .time-box picker:first-child {
   padding-right: 0;
 }
-.time-wrap .time-box text:first-child:after {
+.time-wrap .time-box picker:first-child:after {
   content: '';
   display: block;
   position: absolute;

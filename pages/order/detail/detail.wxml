@@ -1,14 +1,12 @@
 <view class="order-detail-header">
 	<view class="order-detail-header-status">
-	  {{statusTxt}}
+	  订单{{statusTxt}}
 	</view>
-	<view class="order-detail-header-txt">
-		感谢你的支持，欢迎再次使用
+	<view hidden="{{status !== 4}}" class="order-detail-header-txt">
+		感谢您对海极鲜外卖的支持，欢迎再次使用
 	</view>
 	<view class="order-detail-header-recur">
-		<view class="order-detail-header-recur-btn">
-			再来一单
-		</view>	
+		<view class="order-detail-header-recur-btn" bindtap="action">{{actionTxt}}</view>
 	</view>
 </view>
 

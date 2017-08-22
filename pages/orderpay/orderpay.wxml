@@ -2,19 +2,19 @@
 <view class="container orderpay-wrap">
   <text class="title">选择支付方式</text>
   <view class="paymode-wrap">
-    <view class="paymode">
+    <view class="paymode" bindtap="select" data-i="0">
       <image src="/images/weixin.png"></image>
       <text>微信支付</text>
-      <image class="checkbox" src="/images/checkbox.png"></image>
-      <image class="checkbox" src="/images/checkbox_active.png"></image>
+      <image wx:if="{{selectIndex !== 0}}" class="checkbox" src="/images/checkbox.png"></image>
+      <image wx:else class="checkbox" src="/images/checkbox_active.png"></image>
     </view>
-    <view class="paymode">
+    <view class="paymode" bindtap="select" data-i="1">
       <image src="/images/car.png"></image>
       <text>货到付款</text>
-      <image class="checkbox" src="/images/checkbox.png"></image>
-      <image class="checkbox" src="/images/checkbox_active.png"></image>
+      <image wx:if="{{selectIndex !== 1}}" class="checkbox" src="/images/checkbox.png"></image>
+      <image wx:else class="checkbox" src="/images/checkbox_active.png"></image>
     </view>
 
   </view>
-  <view class="confirm-btn">确认支付￥29</view>
+  <view class="confirm-btn" bindtap="payOrder">确认支付￥{{amount}}</view>
 </view>

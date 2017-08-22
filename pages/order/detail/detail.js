@@ -9,7 +9,9 @@ Page({
     id: '',
     statusTxt:'',
     payTxt:'',
-    order:null
+    order:null,
+    status: 1,
+    actionTxt:''
   },
 
   /**
@@ -36,35 +38,35 @@ Page({
           order: obj
         });
 
-        if (obj.status=1){
-          self.setData({statusTxt: '未支付'});
+        if (obj.status == 1){
+          self.setData({statusTxt: '未支付', actionTxt: '立即支付'});
         }
-        if (obj.status = 2) {
-          self.setData({ statusTxt: '待配送' });
+        if (obj.status == 2) {
+          self.setData({ statusTxt: '待配送' , actionTxt: '再来一单'});
         }
-        if (obj.status = 3) {
-          self.setData({ statusTxt: '配送中' });
+        if (obj.status == 3) {
+          self.setData({ statusTxt: '配送中' , actionTxt: '再来一单'});
         }
-        if (obj.status = 4) {
-          self.setData({ statusTxt: '已完成' });
+        if (obj.status == 4) {
+          self.setData({ statusTxt: '已完成' , actionTxt: '再来一单'});
         }
-        if (obj.status = 5) {
-          self.setData({ statusTxt: '备货中' });
+        if (obj.status == 5) {
+          self.setData({ statusTxt: '备货中' , actionTxt: '再来一单'});
         }
-        if (obj.status = 7) {
-          self.setData({ statusTxt: '已取消' });
+        if (obj.status == 7) {
+          self.setData({ statusTxt: '已取消' , actionTxt: '再来一单'});
         }
 
-        if (obj.type = 1) {
+        if (obj.type == 1) {
           self.setData({ payTxt: '微信支付' });
         }
-        if (obj.type = 2) {
+        if (obj.type == 2) {
           self.setData({ payTxt: '支付宝支付' });
         }
-        if (obj.type = 3) {
+        if (obj.type == 3) {
           self.setData({ payTxt: '余额支付' });
         }
-        if (obj.type = 4) {
+        if (obj.type == 4) {
           self.setData({ payTxt: '货到付款' });
         }
       },
@@ -72,5 +74,20 @@ Page({
         console.log(res);
       }
     });
+  },
+
+  action: function () {
+    switch(this.data.actionTxt) {
+      case '立即支付':
+        var amount = this.data.order.cost || 0
+        var id = this.data.id
+        wx.redirectTo({
+          url: '/pages/orderpay/orderpay?id=' + id + '&amount=' + amount
+        })
+      break
+      case '再来一单':
+      break
+      default:
+    }
   }
 })
