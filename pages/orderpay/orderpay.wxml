@@ -1,0 +1,20 @@
+<!--orderpay.wxml-->
+<view class="container orderpay-wrap">
+  <text class="title">选择支付方式</text>
+  <view class="paymode-wrap">
+    <view class="paymode">
+      <image src="/images/weixin.png"></image>
+      <text>微信支付</text>
+      <image class="checkbox" src="/images/checkbox.png"></image>
+      <image class="checkbox" src="/images/checkbox_active.png"></image>
+    </view>
+    <view class="paymode">
+      <image src="/images/car.png"></image>
+      <text>货到付款</text>
+      <image class="checkbox" src="/images/checkbox.png"></image>
+      <image class="checkbox" src="/images/checkbox_active.png"></image>
+    </view>
+
+  </view>
+  <view class="confirm-btn">确认支付￥29</view>
+</view>
