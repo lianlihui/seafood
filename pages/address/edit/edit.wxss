@@ -92,11 +92,15 @@
   bottom: 170rpx;
 }
 .addrss-edit-add{
-  width:694rpx;
-  height: 86rpx;
-  background: url(../../../images/address/add_btn.png) no-repeat center center;
+  width: 694rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #3e9af7;
+  background: -webkit-linear-gradient(top, #3e9af7 0%, #7cc9f9 100%);
+  background: linear-gradient(to bottom, #3e9af7 0%, #7cc9f9 100%);
   font-size: 32rpx;
   color: #ffffff;
+  border-radius: 0;
 }
 
 .address-btn-delete{
@@ -105,19 +109,32 @@
   bottom: 45rpx;
 }
 .addrss-edit-delete{
-  width:694rpx;
-  height: 86rpx;
-  background: url(../../../images/address/del_btn.png) no-repeat center center;
+  width: 694rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #CCC;
   font-size: 32rpx;
-  color: #ffffff;
+  color: #fff;
+  border-radius: 0;
 }
 
+/*选择器*/
+.picker-view-wrap {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 1000;
+}
 .picker-view {
   width: 100%; 
   height: 400rpx;
   position: fixed;
   left: 0;
   bottom: 0;
+  background: #fff;
 }
 .picker-view-header{
   width: 100%; 
@@ -127,29 +144,30 @@
   padding: 0 35rpx;
   -webkit-box-sizing:border-box;
   box-sizing:border-box;
+  border-bottom: 1px solid #d5d5d5;
 }
 .picker-view-header-qd{
   width:100rpx;
-  height:70rpx;
-  line-height:70rpx;
-  font-size:40rpx;
-  color:#333333;
+  height:80rpx;
+  line-height:80rpx;
+  font-size: 30rpx;
+  color:#66d3fc;
   text-align:center;
   position:absolute;
   top:50%;
-  margin-top:-35rpx;
+  margin-top:-40rpx;
   right:35rpx;
 }
 .picker-view-header-qx{
   width:100rpx;
-  height:70rpx;
-  line-height:70rpx;
-  font-size:40rpx;
-  color:#333333;
+  height:80rpx;
+  line-height:80rpx;
+  font-size:30rpx;
+  color:#333;
   text-align:center;
   position:absolute;
   top:50%;
-  margin-top:-35rpx;
+  margin-top:-40rpx;
   left:35rpx;
 
 }
@@ -158,6 +176,6 @@
   height: 320rpx;
 }
 .addr-item {
-    line-height: 50rpx;
-    text-align: center;
+  text-align: center;
+  font-size: 30rpx;
 }

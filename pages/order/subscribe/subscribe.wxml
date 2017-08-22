@@ -1,0 +1,43 @@
+<!-- 店铺图片详情 -->
+<view class="swiper-box">
+  <image src="{{imageRootPath}}{{subscribeInfo.logo}}" class="slide-image" mode="widthFix"/>
+  <view class="swiper-hover-box">
+    <text>{{subscribeInfo.shopname}}</text>
+    <span class="swiper-num">1张</span>
+  </view>
+</view>
+
+<!-- 头部地址 -->
+<view class="shop-box">
+  <span class="address-icon"></span>
+  <text>{{subscribeInfo.shopaddress }}</text>
+  <span class="shop-phone" data-phone="{{subscribeInfo.shopphone}}" bindtap="bindPhoneTab"></span>
+</view>
+
+<form bindsubmit="formSubmit">
+
+  <view class="form-item">
+    <label class=""><i class="icon1"></i>就餐房型</label>
+    <span class="form-txt">{{subscribeInfo.room}}</span>
+  </view>
+
+  <view class="form-item">
+    <label><i class="icon2"></i>用餐人数</label>
+    <span class="form-txt">{{subscribeInfo.number}}</span>
+  </view>
+
+  <view class="form-item">
+    <label><i class="icon3"></i>用餐时间</label>
+    <span class="form-txt">{{subscribeInfo.time}}</span>
+  </view>
+
+  <view class="form-item">
+    <label>状态</label>
+    <span class="form-txt">{{status}}</span>
+  </view>
+
+  <view class="shop-btn-group">
+    <button class="shop-btn" wx:if="{{qxBtn}}" bindtap="qxClick">取消预约</button>
+  </view>
+
+</form>

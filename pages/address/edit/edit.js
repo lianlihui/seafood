@@ -192,6 +192,24 @@ Page({
     }
   },
 
+  closeModal: function(e, modalName) {
+    var modal = modalName || e.target.dataset.modal
+     var self = this;
+
+    if (modal == 'closeModal') {
+      self.setData({
+        bcShow: true,
+        isShow: false
+      });
+      //显示删除按钮
+      if(self.data.id!=-1){
+        self.setData({
+          ddShow: true
+        });
+      }
+    }
+  },
+
   //取消选择
   qxSelArea:function(){
     var self = this;

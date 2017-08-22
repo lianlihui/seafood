@@ -4,7 +4,13 @@ Page({
   data: {
     address: '定位中',
     imageRootPath: '',
-    shopInfo: null
+    shopInfo: null,
+    modalSpecShow: false, // 规格弹窗是否显示
+    modalSpecIndex: 0,
+    currentRoom: '',
+    chooseRoom: '',
+    dinnerArr:[1,2,3,4,5,6,7,8],
+    dinnerIdx:0
   },
 
   onLoad: function(query) {
@@ -32,6 +38,11 @@ Page({
                 imageRootPath: ress.data.imageRootPath,
                 shopInfo: ress.data.shopbean
               });
+              if (ress.data.shopbean.roomlist && ress.data.shopbean.roomlist.length > 0) {
+                self.setData({
+                  currentRoom: ress.data.shopbean.roomlist[0].name
+                });
+              }
             } else {
             }
             console.log(ress.data.shopbean);
@@ -59,5 +70,61 @@ Page({
         console.log(res);
       }
     });
-  }
+  },
+
+  //用餐选择
+  bindDinnerChange:function(e){
+    console.log('picker发送选择改变，携带值为', e.detail.value);
+    this.setData({
+      dinnerIdx: e.detail.value
+    });
+  },
+
+  selectSpec: function(e) {
+    console.log('ee');
+    var data = e.target.dataset;
+    this.setData({
+      modalSpecIndex: data.index,
+      currentRoom: data.name
+    });
+  },
+
+  addRoom: function(e) {
+    var data = e.target.dataset;
+    var room = data.room;
+
+    this.setData({
+      modalSpecShow: false,
+      chooseRoom: room
+    });
+  },
+
+  closeModal: function(e, modalName) {
+    var modal = modalName || e.target.dataset.modal
+
+    if (modal == 'specModal') {
+      this.setData({
+        modalSpecShow: false
+      });
+    } else if (modal == 'perModal') {
+      this.setData({
+        isShow: false
+      });
+    }
+  },
+
+  bindChooseRoom: function() {
+    this.setData({
+      modalSpecShow: true
+    });
+  },
+
+  //选择就餐人数
+  selectNum: function() {
+    var self = this;
+    self.setData({
+      isShow: true
+    });
+  },
+
 });

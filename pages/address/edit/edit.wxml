@@ -50,22 +50,24 @@
       <button class="addrss-edit-delete">删除地址</button>
   </view>
 
-<view wx:if="{{isShow}}" class="picker-view">
-  <view class="picker-view-header">
-    <view class="picker-view-header-qx" bindtap="qxSelArea">取消</view>
-    <view class="picker-view-header-qd" bindtap="qdSelArea">确定</view>
+  <view wx:if="{{isShow}}" class="picker-view-wrap" bindtap="closeModal" data-modal="selectModal">
+  <view wx:if="{{isShow}}" class="picker-view">
+    <view class="picker-view-header">
+      <view class="picker-view-header-qx" bindtap="closeModal" data-modal="selectModal">取消</view>
+      <view class="picker-view-header-qd" bindtap="qdSelArea">确定</view>
+    </view>
+    <picker-view class="picker-view-impl" indicator-style="height: 40px;" value="{{value}}" bindchange="bindChangeArea">
+      <picker-view-column>
+        <view wx:for="{{provinces}}" class="addr-item" style="line-height: 40px;">{{item.name}}</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{cities}}" class="addr-item" style="line-height: 40px;">{{item.name}}</view>
+      </picker-view-column>
+      <picker-view-column wx:if="{{showDistrict}}">
+        <view wx:for="{{counties}}" class="addr-item" style="line-height: 40px;">{{item.name}}</view>
+      </picker-view-column>
+    </picker-view>
   </view>
-  <picker-view class="picker-view-impl" indicator-style="height: 50rpx;" value="{{value}}" bindchange="bindChangeArea">
-    <picker-view-column>
-      <view wx:for="{{provinces}}" class="addr-item">{{item.name}}</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{cities}}" class="addr-item">{{item.name}}</view>
-    </picker-view-column>
-    <picker-view-column wx:if="{{showDistrict}}">
-      <view wx:for="{{counties}}" class="addr-item">{{item.name}}</view>
-    </picker-view-column>
-  </picker-view>
 </view>
 
 </view>

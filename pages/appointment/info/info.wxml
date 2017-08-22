@@ -18,13 +18,13 @@
 
   <view class="form-item">
     <label class=""><i class="icon1"></i>就餐房型</label>
-    <input type="text" placeholder="请选择房型" class="form-input"/>
+    <input type="text" placeholder="请选择房型" class="form-input" bindtap="bindChooseRoom" value="{{chooseRoom}}"/>
     <i class="form-arrow"></i>
   </view>
 
   <view class="form-item">
     <label><i class="icon2"></i>用餐人数</label>
-    <input type="text" placeholder="请选择用餐人数" class="form-input"/>
+    <input type="text" placeholder="请选择用餐人数" class="form-input" value="{{dinnerIdx}}" bindtap="selectNum" />
     <i class="form-arrow"></i>
   </view>
 
@@ -39,3 +39,46 @@
   </view>
 
 </form>
+
+<view wx:if="{{isShow}}" class="picker-view-wrap" bindtap="closeModal" data-modal="perModal">
+  <view class="picker-view">
+    <view class="picker-view-header">
+      <view class="picker-view-header-qx" bindtap="closeModal" data-modal="perModal">取消</view>
+      <view class="picker-view-header-qd" bindtap="qdSelArea">确定</view>
+    </view>
+    <picker-view class="picker-view-impl" indicator-style="height: 40px;" value="{{value}}" bindchange="bindChangeArea">
+      <picker-view-column>
+        <view wx:for="{{dinnerArr}}" class="addr-item" style="line-height: 40px;">{{dinnerArr[index]}}</view>
+      </picker-view-column>
+    </picker-view>
+  </view>
+</view>
+
+<!-- 规格弹窗 -->
+  <view hidden="{{!modalSpecShow}}" class="modal-spec modal-wrap vertical-center"
+    bindtap="closeModal" data-modal="specModal">
+    <view class="modal">
+      <view class="modal-header">
+        <text>{{shopInfo.username}}</text>
+        <image src="/images/modal-close.png" class="modal-close" bindtap="closeModal" data-modal="specModal"></image>
+      </view>
+      <view class="modal-body">
+        <view class="title">房型</view>
+        <view class="spec-wrap">
+          <text
+            wx:for="{{shopInfo.roomlist}}"
+            class="spec{{modalSpecIndex == index ? ' active' : ''}}"
+            bindtap="selectSpec"
+            data-index="{{index}}"
+            data-name="{{item.name}}"
+            >{{item.name}}(最多{{item.number}}人)</text>
+          <!-- <text class="spec active">小份（1-4人）</text>
+          <text class="spec">大份（5-8人）</text> -->
+        </view>
+      </view>
+      <view class="modal-footer">
+        <text class="confirm" data-room="{{currentRoom}}" bindtap="addRoom">选好了</text>
+      </view>
+    </view>
+  </view>
+  <!-- /规格弹窗 -->
