@@ -32,7 +32,8 @@ Page({
       total: 0,
       freight: 0,
       amount: 0
-    }
+    },
+    limitAmount: 1000
   },
 
   /**
@@ -208,10 +209,20 @@ Page({
   // 从购物车移除
   rmFromCart (e) {
     const data = e.target.dataset
-    const product = data.product || this.data.list[data.menuindex].warelist[data.productindex]
+    const product = data.product
     let inlineCart = this.data.list[data.menuindex].warelist[data.productindex].cart
+
+    // 多规格的商品只能从购物车删除
+    if (product.sizelist.length > 1 && !product.size) {
+      wx.showToast({
+        title: '多规格商品只能从购物车删除哦',
+        image:'/images/warn.png'
+      })
+      return
+    }
+
     delete inlineCart.count
-    const key = Object.keys(inlineCart)[Object.keys(inlineCart).length - 1]
+    const key = product.size ? product.size.id : product.sizelist[0].id // 减少的商品规格id
     let newSize = Object.assign(inlineCart, {
       [key]: inlineCart[key] - 1,
       count: 0
@@ -246,6 +257,7 @@ Page({
     }
 
     this.calcTotal()
+    this.calcAmount()
 
   },
 
@@ -323,9 +335,11 @@ Page({
   },
 
   showCart (e) {
-    this.setData({
-      'cart.show': true
-    })
+    if (this.data.cart.total > 0) {
+      this.setData({
+        'cart.show': !this.data.cart.show
+      })
+    }
   },
 
   // 清空购物车

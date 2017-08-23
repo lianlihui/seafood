@@ -217,8 +217,8 @@ page {
 }
 .cart-no-empty .left .cart-amount {
   display: block;
-  font-size: 28rpx;
-  line-height: 56rpx;
+  font-size: 30rpx;
+  line-height: 92rpx;
 }
 .cart-no-empty .left .cart-freight {
   display: block;
@@ -307,15 +307,23 @@ page {
   font-size: 28rpx;
   line-height: 38rpx;
   color: #333;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .cart-product .product-name .product-name-sub {
   display: block;
   font-size: 18rpx;
   line-height: 32rpx; 
   color: #ccc;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .cart-product .product-pay {
-  -webkit-box-flex: 1;
+  width: 300rpx;
 }
 .cart-product .product-pay .product-price {
   float: right;

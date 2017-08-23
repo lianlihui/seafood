@@ -77,17 +77,22 @@
   <!-- 底部购物车 -->
   <view class="cart-wrap">
     <image class="cart-img-border" src="/images/cart_border.png" bindtap="showCart"></image>
-    <image hidden="{{cart.total === 0}}" class="cart-img" src="/images/cart.png" bindtap="showCart"></image>
-    <image hidden="{{cart.total}}"class="cart-img" src="/images/cart.png"></image>
-    <view hidden="{{cart.total === 0}}" class="product-total">{{cart.total}}</view>
-    <view hidden="{{cart.total}}" class="cart-empty">
-      <text class="left">购物车为空</text>
-      <text class="right">￥0元起送</text>
+    <image class="cart-img" src="/images/cart.png" bindtap="showCart"></image>
+    <view hidden="{{cart.amount === 0}}" class="product-total">{{cart.total}}</view>
+    <view hidden="{{cart.amount >= 1000}}" class="cart-empty">
+      <block wx:if="{{cart.amount == 0}}">
+        <text class="left">购物车为空</text>
+        <text class="right">￥{{limitAmount}}元起送</text>
+      </block>
+      <block wx:else>
+        <text class="cart-amount">￥{{cart.amount}}元</text>
+        <text class="right">还差￥{{limitAmount - cart.amount}}元起送</text>
+      </block>
     </view>
-    <view hidden="{{cart.total === 0}}" class="cart-no-empty">
+    <view hidden="{{cart.amount < 1000}}" class="cart-no-empty">
       <view class="left">
         <text class="cart-amount">￥{{cart.amount}}元</text>
-        <text class="cart-freight">另需配送费5元</text>
+        <!-- <text class="cart-freight">另需配送费5元</text> -->
       </view>
       <text class="cart-buy" bindtap='buy'>去结算</text>
     </view>
@@ -113,7 +118,7 @@
           </view>
           <view class="product-pay">
             <view class="product-operate">
-              <image src="/images/product_minus.png" bindtap="rmFromCart" data-menuindex="{{item.menuindex}}" data-productindex="{{item.productindex}}" data-specindex="{{item.specIndex}}"></image>
+              <image src="/images/product_minus.png" bindtap="rmFromCart" data-menuindex="{{item.menuindex}}" data-productindex="{{item.productindex}}" data-specindex="{{item.specIndex}}" data-product="{{item}}"></image>
               <text class="product-count">{{item.len}}</text>
               <image src="/images/product_add.png" bindtap="addToCart" data-menuindex="{{item.menuindex}}" data-productindex="{{item.productindex}}" data-specindex="{{item.specIndex}}" data-cartadd="true"></image>
             </view>
