@@ -1,19 +1,21 @@
 <view class="login-wrap">
   <view class="login-box">
+    <image src="/images/login_bg.jpg" class="login-img" mode="widthFix"/>
     <text class="login-title">绑定海极鲜  享受最美味</text>
   </view>
   <form bindsubmit="formSubmit">
     <view class="login-form">
       <view class="login-item login-item1">
-        <i class="login-icon login-icon-phone"></i>
-        <input placeholder="输入手机号" name="phone" value=""/>
-        <span class="login-code">发送验证码</span>
+        <image src="/images/login_icon_phone.png" class="login-icon login-icon-phone" />
+        <input placeholder="输入手机号" name="phone" value="" bindinput="phoneClick"/>
+        <span class="login-code" bindtap="sendSmsCode">发送验证码</span>
       </view>
       <view class="login-item">
-        <i class="login-icon login-icon-code"></i>
-        <input placeholder="输入验证码" name="code" value=""/>
+        <image src="/images/login_icon_code.png" class="login-icon login-icon-code" />
+        <input placeholder="输入验证码" name="code" value="" bindinput="smsCodeClick"/>
       </view>
-      <button formType="submit" class="login-btn">绑定</button>
+      <button formType="submit" class="login-btn" bindtap="loginClick">绑定</button>
+      <button class="cancel-btn" bindtap="cancelClick">返回首页</button>
     </view>
   </form>
 </view>

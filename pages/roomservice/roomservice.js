@@ -352,8 +352,14 @@ Page({
   buy () {
     const that = this;
     const cart = this.data.cart
+
+    if (!app.globalData.token) {
+      wx.redirectTo({ url: "/pages/login/login" });
+      return false;
+    }
+
     let postData = {
-      token: 'CFBD8A9B33942457B4F346F5756C5E59',
+      token: app.globalData.token,
       wareids: cart.list.map(v => v.id).join(','),
       numbers: cart.list.map(v => v.len).join(','),
       waresizes: cart.list.map(v => v.size.id).join(','),

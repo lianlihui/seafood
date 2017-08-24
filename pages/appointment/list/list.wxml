@@ -1,8 +1,9 @@
 <!-- 头部地址 -->
 <view class="address-box">
-  <span class="address-icon"></span>
+  <image src="/images/address_bg.jpg" class="address-box-img" />
+  <image src="/images/address_icon3.png" class="address-icon" />
   <text>{{address}}</text>
-  <span class="address-refresh" bindtap="bindRefreshTab"></span>
+  <image src="/images/address_icon4.png" class="address-refresh" bindtap="bindRefreshTab"/>
 </view>
 
 <!-- 店铺列表 -->
@@ -16,12 +17,12 @@
         <view class="shop-rt">
           <text class="shop-item-title">{{item.username}}</text>
           <view class="shop-address-box">
-            <span class="shop-address-icon"></span>
+            <image src="/images/address_icon1.png" class="shop-address-icon"/>
             <span class="shop-address">{{item.address}}</span>
             <text class="shop-distance">{{item.distance}}km</text>
           </view>
           <view class="shop-time-box">
-            <span class="shop-time-icon"></span>
+            <image src="/images/address_icon2.png" class="shop-time-icon" />
             <text class="shop-time">营业时间：每天{{item.starttime}}-{{item.endtime}}</text>
           </view>
         </view>

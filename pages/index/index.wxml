@@ -37,7 +37,7 @@
             <image src="{{imageRootPath}}{{item1.pic1}}" class="scroll-view-item-img" mode="aspectFill"/>
             <view class="scroll-view-item-info">
               <text>{{item1.name}}</text>
-              <text class="scroll-view-item-num">月售：{{item1.num}}</text>
+              <text class="scroll-view-item-num">月售：{{item1.number}}份</text>
             </view>
             <text class="scroll-view-item-price">￥{{item1.price}}</text>
           </navigator>

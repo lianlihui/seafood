@@ -29,6 +29,10 @@ Page({
       myStatus:false,
       syCls: 'order-header-item active',
       myCls: 'order-header-item',
+      orderlist:[],
+      subscribelist:[],
+      syPage:1,
+      myPage:1
     });
     this.getSyData();
   },
@@ -39,6 +43,10 @@ Page({
       myStatus: true,
       syCls: 'order-header-item',
       myCls: 'order-header-item active',
+      orderlist:[],
+      subscribelist:[],
+      syPage:1,
+      myPage:1
     });
     this.getMyData();
   },
@@ -47,6 +55,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if (!app.globalData.token) {
+      wx.redirectTo({ url: "/pages/login/login" });
+      return false;
+    }
     this.getSyData();
   },
 
@@ -54,7 +66,7 @@ Page({
   getSyData: function () {
     var self = this;
     var postData = {
-      token: 'CFBD8A9B33942457B4F346F5756C5E59',
+      token: app.globalData.token,
       page: self.data.syPage
     };
 
@@ -94,7 +106,7 @@ Page({
   getMyData:function(){
     var self = this;
     var postData = {
-      token: 'CFBD8A9B33942457B4F346F5756C5E59',
+      token: app.globalData.token,
       page: self.data.myPage
     };
 

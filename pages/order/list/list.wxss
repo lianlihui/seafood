@@ -71,8 +71,6 @@
   margin-right: 10rpx;
   display: inline-block;
   vertical-align: middle;
-  background: url(../../../images/address_icon1.png) no-repeat;
-  background-size: 100%;
 }
 .shop-address {
   width: 400rpx;
@@ -83,18 +81,16 @@
   position: absolute;
   top: 0rpx;
   right: 0rpx;
-  width: 90rpx;
   height: 28rpx;
   line-height: 28rpx;
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-  font-size: 18rpx;
+  font-size: 22rpx;
   color: #379aff;
 }
 .order-item-my-yy-wait.wait{
-  background: url(../../../images/order/wait.png) no-repeat;
-  background-size: 100%;
+  background: #379aff;
   color: #fff;
 }
 .order-item-my-yy-box {
@@ -103,19 +99,22 @@
 .order-item-my-yy-icon {
   width: 48rpx;
   height: 22rpx;
+  line-height: 22rpx;
   margin-right: 10rpx;
   display: inline-block;
   vertical-align: middle;
   text-align: center;
   color: #fff;
-  font-size: 18rpx;
-  background: url(../../../images/order/yy_icon.png) no-repeat;
-  background-size: 100%;
+  font-size: 20rpx;
+  background: #379AFF;
+  border-radius: 2px;
 }
 .order-item-my-yy-span{
   font-size: 22rpx;
   color: #888;
   margin-right: 10rpx;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .order-item-sy{
@@ -147,17 +146,16 @@
   line-height: 1;
   color: #333;
   font-size: 30rpx;
-  display: block;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .order-item-sy-arrow {
   width:11rpx;
   height:20rpx;
-  background:url(../../../images/order/sy_icon1.png) no-repeat;
-  background-size:100%;
-  position:absolute;
-  top:5rpx;
-  left:112rpx;
+  margin-left: 10rpx;
+  display: inline-block;
+  vertical-align: middle;
 }
 .order-item-sy-time,.order-item-sy-detail,.order-item-sy-money{
   display: block;
@@ -165,9 +163,6 @@
 .order-item-sy-time,.order-item-sy-detail{
   font-size: 20rpx;
   color: #888;
-}
-.order-item-sy-detail{
-  margin-top:50rpx;
 }
 .order-item-sy-money{
   font-size: 24rpx;
@@ -187,8 +182,7 @@
   width:114rpx;
   height:35rpx;
   line-height: 35rpx;
-  background: url(../../../images/order/sy_icon3.png) no-repeat;
-  background-size: 100%;
+  border: 1px solid #379aff;
   position: absolute;
   bottom: 0rpx;
   right: 0rpx;
@@ -199,8 +193,13 @@
   color: #379aff;
 }
 .order-item-sy-pay.pay{
-  background: url(../../../images/order/sy_icon2.png) no-repeat;
-  background-size: 100%;
+  background: #379aff;
   font-size: 24rpx;
   color: #fff;
+}
+.loading-status {
+  margin: 20rpx auto;
+  text-align: center;
+  color: #333;
+  font-size: 24rpx;
 }

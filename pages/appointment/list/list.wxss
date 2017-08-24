@@ -1,11 +1,17 @@
 .address-box {
   padding: 26rpx 120rpx 26rpx 70rpx;
-  background: url(../../../images/address_bg.jpg) no-repeat;
-  background-size: 100% 100%;
   font-size: 24rpx;
   color: #888;
   position: relative;
   margin-bottom: 20rpx;
+}
+.address-box-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 .address-icon {
   width: 29rpx;
@@ -14,17 +20,13 @@
   left: 26rpx;
   margin-top: -14.5rpx;
   position: absolute;
-  background: url(../../../images/address_icon3.png) no-repeat;
-  background-size: 100%;
 }
 .address-refresh {
-  width: 80rpx;
-  height: 80rpx;
-  background: url(../../../images/address_icon4.png) no-repeat right center;
-  background-size: 32rpx auto;
+  width: 32rpx;
+  height: 29rpx;
   position: absolute;
   top: 50%;
-  margin-top: -40rpx;
+  margin-top: -15rpx;
   right: 28rpx;
 }
 .address-box text {
@@ -76,8 +78,6 @@
   margin-right: 10rpx;
   display: inline-block;
   vertical-align: middle;
-  background: url(../../../images/address_icon1.png) no-repeat;
-  background-size: 100%;
 }
 .shop-address {
   width: 360rpx;
@@ -101,8 +101,6 @@
   margin-right: 10rpx;
   display: inline-block;
   vertical-align: middle;
-  background: url(../../../images/address_icon2.png) no-repeat;
-  background-size: 100%;
 }
 
 .loding-box {

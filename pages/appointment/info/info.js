@@ -10,11 +10,16 @@ Page({
     currentRoom: '',
     chooseRoom: '',
     dinnerArr:[1,2,3,4,5,6,7,8],
-    dinnerIdx:0
+    dinnerIdx:0,
+    shopId:'',
+    modalSubShow:false   //确定预约弹框
   },
 
   onLoad: function(query) {
     var self = this;
+    self.setData({
+      shopId: query.id
+    });
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
@@ -126,5 +131,56 @@ Page({
       isShow: true
     });
   },
+
+  //确定预约
+  subClick:function(){
+    var self = this;
+    app.globalData.token = '';
+    if (!app.globalData.token) {
+      wx.redirectTo({ url: "/pages/login/login" });
+      return false;
+    } 
+    self.setData({
+      modalSubShow: true
+    });
+  },
+
+  //取消预约
+  qxSub:function(){
+    var self = this;
+    self.setData({
+      modalSubShow: false
+    });
+  },
+
+  //确定预约
+  qdSub: function () {
+    var self = this;
+    var postData={
+      token: 'CFBD8A9B33942457B4F346F5756C5E59',
+      shopid: self.data.shopId,
+      room: self.data.chooseRoom,
+      number: self.data.dinnerArr[self.data.dinnerIdx],
+      time:'2017-08-23 17:24:36'
+    }
+    app.ajax({
+      url: app.globalData.serviceUrl + 'msubscribeadd.htm',
+      data: postData,
+      successCallback: function (ress) {
+        console.log(ress);
+        if(ress.code==0){
+          //跳转到我的私宴
+          wx.switchTab({
+            url: '/pages/order/list/list'
+          });
+        }else{
+          console.log(ress.msg);
+        }
+      },
+      failCallback: function (ress) {
+
+      }
+    });
+  }
 
 });

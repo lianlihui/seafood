@@ -1,14 +1,34 @@
 //app.js
 App({
   onLaunch: function() {
-    //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    //获取token
+    this.getToken();
   },
 
   //获取token
   getToken: function() {
+    var self = this;
+
+    wx.login({
+      success: function (res) {
+        var _code = res.code;
+        var url = self.globalData.serviceUrl + 'mwxgettoken.html?_code=' + _code;
+        var data = {_code: _code};
+        self.ajax({
+          url: url,
+          data: data,
+          method: 'GET',
+          successCallback: function(res) {
+            if (res.code == 0) {
+              self.globalData.token = res.data;
+            }
+          },
+          failCallback: function(res) {
+            console.log(res);
+          }
+        });
+      }
+    });
   },
 
   ajax: function (obj) {
@@ -28,7 +48,7 @@ App({
     });
   },
 
-  getUserInfo: function(cb) {
+  getUserInfo: function(cb) { 
     var that = this;
     if (this.globalData.userInfo) {
       typeof cb == "function" && cb(this.globalData.userInfo)
@@ -45,6 +65,7 @@ App({
   },
 
   globalData: {
+    token:'',
     userInfo: null,
     serviceUrl: 'http://hjx.pnkoo.cn/'
   }

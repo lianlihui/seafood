@@ -15,7 +15,7 @@
 		<view class="order-detail-item-title">
 			<span class="order-detail-item-title-tit">海极鲜订单</span>
 			<view class="order-detail-item-title-icon"></view>
-			<view class="order-detail-item-title-more"></view>
+			<image src="/images/order/od_icon3.png" class="order-detail-item-title-more" />
 		</view>
 
     <view wx:for="{{order.warelist}}" wx:key="unique1">
@@ -32,7 +32,7 @@
 		</view>
 
     <view class="order-detail-item-txt">
-      <view class="icon"></view>
+      <image src="/images/order/od_icon4.png" class="order-detail-item-txt-icon" />
 			<span class="shop">联系商家</span>
       <span class="pay">实付：{{order.cost}}</span>
 		</view>
@@ -61,7 +61,7 @@
    <view class="order-detail-item">
 		<view class="order-detail-item-title">
 			<span class="order-detail-item-title-tit">订单信息</span>
-			<view class="order-detail-item-title-icon"></view>
+			<image src="/images/order/od_icon2.png" class="order-detail-item-title-icon" />
 		</view>
 		<view class="order-detail-item-txt">
 			<span>订单号</span>

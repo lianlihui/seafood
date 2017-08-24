@@ -10,6 +10,7 @@ Page({
     loading: '加载中'
   },
   onLoad: function() {
+    console.log(getCurrentPages());
     var self = this;
     wx.getLocation({
       type: 'wgs84',

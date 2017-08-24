@@ -6,11 +6,20 @@ Page({
   data: {
     myInfo: null
   },
-  onShow: function() {
+
+  onLoad: function (options) {
+    if (!app.globalData.token) {
+      wx.redirectTo({ url: "/pages/login/login" });
+      return false;
+    } 
+    this.getMyData();
+  },
+
+  getMyData: function() {
     var self = this;
     app.ajax({
       url: app.globalData.serviceUrl + 'muser.htm',
-      data: {token: 'CFBD8A9B33942457B4F346F5756C5E59'},
+      data: { token: app.globalData.token},
       method: 'POST',
       successCallback: function(res) {
         self.setData({
@@ -22,4 +31,5 @@ Page({
       }
     });
   }
+
 });

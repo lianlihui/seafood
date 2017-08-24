@@ -1,4 +1,5 @@
 <view class="page-my-top">
+  <image src="/images/my_bg.jpg" class="page-my-top-bg"/>
   <view class="page-my-top-lf">
     <image src="{{myInfo.headimgurl}}" class="page-my-top-img" />
   </view>
@@ -10,9 +11,9 @@
 
 <view class="page-my-ct">
   <navigator url="/pages/address/list/list" class="page-my-item">
-    <view class="page-my-item-icon"></view>
+    <image src="/images/my_icon.jpg" class="page-my-item-icon" />
     <text>我的地址</text>
-    <view class="page-my-item-arrow"></view>
+    <image src="/images/my_arrow.jpg" class="page-my-item-arrow"/>
   </navigator>
 </view>
 

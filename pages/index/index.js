@@ -16,6 +16,12 @@ Page({
     'foodList': []
   },
   onShow: function() {
+    wx.showLoading({title: '页面加载中', mask: true})
+    this.getIndexData();
+  },
+
+  getIndexData: function() {
+    console.log(getCurrentPages());
     var self = this;
     var postData = {
       token: ''
@@ -27,6 +33,7 @@ Page({
       data: postData,
       method: 'GET',
       successCallback: function(res) {
+        wx.hideLoading();
         console.log(res);
         self.setData({
           imgUrls: res.data.poslinklist,
@@ -38,5 +45,7 @@ Page({
         console.log(res);
       }
     });
+
   }
+
 })

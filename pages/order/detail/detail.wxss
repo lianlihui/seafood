@@ -77,8 +77,6 @@
 	width:6rpx;
 	height:32rpx;
 	vertical-align:middle;
-	background:url(../../../images/order/od_icon2.png) no-repeat;
-	background-size: 100%;
 	margin-top:-15rpx;
 
 }
@@ -89,8 +87,6 @@
 	width:11rpx;
 	height:20rpx;
 	vertical-align:middle;
-	background:url(../../../images/order/od_icon3.png) no-repeat;
-	background-size: 100%;
 	margin-top:-10rpx;
 }
 .order-detail-item-txt{
@@ -110,15 +106,13 @@
   float: right;
   display: block;
 }
-.order-detail-item-txt .icon{
+.order-detail-item-txt-icon{
   position:absolute;
 	top:50%;
 	left:0;
 	width:19rpx;
 	height:20rpx;
 	vertical-align:middle;
-	background:url(../../../images/order/od_icon4.png) no-repeat;
-	background-size: 100%;
 	margin-top:-10rpx;
 }
 .order-detail-item-txt .shop{

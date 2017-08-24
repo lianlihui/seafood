@@ -1,8 +1,15 @@
 .page-my-top {
   width: 100%;
   height: 325rpx;
-  background: url(../../images/my_bg.jpg) no-repeat;
-  background-size: 100%;
+  position: relative;
+}
+.page-my-top-bg {
+  width: 100%;
+  height: 325rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
 }
 .page-my-top-lf,
 .page-my-top-rt {
@@ -53,14 +60,10 @@
   display: inline-block;
   vertical-align: middle;
   font-size: 30rpx;
-  background: url(../../images/my_icon.jpg) no-repeat;
-  background-size: 100%;
 }
 .page-my-item-arrow {
   width: 11rpx;
   height: 19rpx;
-  background: url(../../images/my_arrow.jpg) no-repeat;
-  background-size: 100%;
   position: absolute;
   top: 33rpx;
   right: 30rpx;

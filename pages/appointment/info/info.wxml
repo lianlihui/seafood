@@ -9,33 +9,34 @@
 
 <!-- 头部地址 -->
 <view class="shop-box">
-  <span class="address-icon"></span>
+  <image src="/images/address_bg.jpg" class="shop-box-img"/>
+  <image src="/images/info_icon1.png" class="address-icon"/>
   <text>{{address}}</text>
-  <span class="shop-phone" data-phone="{{shopInfo.phone}}" bindtap="bindPhoneTab"></span>
+  <image src="/images/info_icon6.png" class="shop-phone" data-phone="{{shopInfo.phone}}" bindtap="bindPhoneTab"/>
 </view>
 
 <form bindsubmit="formSubmit">
 
   <view class="form-item">
-    <label class=""><i class="icon1"></i>就餐房型</label>
+    <label class=""><image src="/images/info_icon3.png" />就餐房型</label>
     <input type="text" placeholder="请选择房型" class="form-input" bindtap="bindChooseRoom" value="{{chooseRoom}}"/>
-    <i class="form-arrow"></i>
+    <image src="/images/info_icon2.png" class="form-arrow"/>
   </view>
 
   <view class="form-item">
-    <label><i class="icon2"></i>用餐人数</label>
+    <label><image src="/images/info_icon4.png"/>用餐人数</label>
     <input type="text" placeholder="请选择用餐人数" class="form-input" value="{{dinnerIdx}}" bindtap="selectNum" />
-    <i class="form-arrow"></i>
+    <image src="/images/info_icon2.png" class="form-arrow"/>
   </view>
 
   <view class="form-item">
-    <label><i class="icon3"></i>用餐时间</label>
+    <label><image src="/images/info_icon5.png"/>用餐时间</label>
     <input type="text" placeholder="请选择用餐时间" class="form-input"/>
-    <i class="form-arrow"></i>
+    <image src="/images/info_icon2.png" class="form-arrow"/>
   </view>
 
   <view class="shop-btn-group">
-    <button class="shop-btn">确定预定</button>
+    <button class="shop-btn" bindtap="subClick">确定预定</button>
   </view>
 
 </form>
@@ -78,6 +79,28 @@
       </view>
       <view class="modal-footer">
         <text class="confirm" data-room="{{currentRoom}}" bindtap="addRoom">选好了</text>
+      </view>
+    </view>
+  </view>
+  <!-- /规格弹窗 -->
+
+
+  <!-- 确定预约 -->
+  <view hidden="{{!modalSubShow}}" class="modal-spec modal-wrap vertical-center"
+    bindtap="closeModal" data-modal="specModal">
+    <view class="modal">
+      <view class="submodal-header">
+        <text>确定预约</text> 
+      </view>
+      <view class="modal-body">
+        <view class="subtitle">店名：{{shopInfo.username}}</view>
+        <view class="subtitle">房间名：{{chooseRoom}}</view>
+        <view class="subtitle">人数：{{dinnerArr[dinnerIdx]}}</view>
+        <view class="subtitle">时间：2017-08-23 17:24:36</view>
+      </view>
+      <view class="submodal-footer">
+        <span bindtap="qdSub">确定</span>
+        <span bindtap="qxSub">取消</span>
       </view>
     </view>
   </view>
