@@ -9,14 +9,78 @@ Page({
     modalSpecIndex: 0,
     currentRoom: '',
     chooseRoom: '',
+    time: '',  //用餐时间
     dinnerArr:[1,2,3,4,5,6,7,8],
-    dinnerIdx:0,
+    dinnerIdx: 0,
     shopId:'',
-    modalSubShow:false   //确定预约弹框
+    modalSubShow:false,   //确定预约弹框
+    timeArray:[[],[],[]],
+    timeIndex:[0,0,0],
+    timeTxt:'请选择用餐时间',
+    dateArr:[],
+    selTimeVal:[]
   },
+
+  //用餐时间确定
+  bindMultiPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value);
+    var selVal = e.detail.value;
+    var timeArray = this.data.timeArray;
+    var hh = timeArray[1][selVal[1]] < 10 ? '0' + timeArray[1][selVal[1]] : timeArray[1][selVal[1]] ;
+    var mm = timeArray[2][selVal[2]] < 10 ? '0' + timeArray[2][selVal[2]] : timeArray[2][selVal[2]];
+    var ss = timeArray[0][selVal[0]]+" "
+      + hh + ":" + mm;
+    this.setData({
+      timeTxt: ss,
+      selTimeVal: e.detail.value
+    });
+  }, 
+
+  timeFormat: function (today){
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var day = today.getDate();
+    var week = "星期" + "日一二三四五六".charAt(today.getDay());
+    var dates = month + '月' + day + '日 ' + week;
+    return dates;
+  },  
 
   onLoad: function(query) {
     var self = this;
+
+    //用餐时间赋值
+    var dd = null;
+    var arr = [];
+    arr[0] = [];
+    for(var i=0;i<=1000;i++){
+      dd = new Date();
+      dd.setDate(dd.getDate() + i);
+
+      var year = dd.getFullYear();
+      var month = dd.getMonth() + 1;
+      var day = dd.getDate();
+      month = month < 10 ? '0' + month : month;
+      day = day < 10 ? '0' + day : day;
+      var sday = year + '-' + month + '-' + day;
+      self.data.dateArr.push(sday);  //保存时间组，用于获取
+
+      var ss = this.timeFormat(dd);
+      arr[0].push(ss);
+    }
+    
+    arr[1]=[];
+    arr[2]=[];
+    for(var i=0;i<=23;i++){
+      arr[1].push(i);
+    }
+    for (var i = 0; i <= 59; i++) {
+      arr[2].push(i);
+    }
+    self.setData({
+      timeArray: arr
+    });
+    console.log(arr);
+    
     self.setData({
       shopId: query.id
     });
@@ -64,6 +128,7 @@ Page({
     });
   },
 
+  //打电话
   bindPhoneTab: function(event) {
     var phoneNumber = event.target.dataset.phone;
     wx.makePhoneCall({
@@ -85,6 +150,7 @@ Page({
     });
   },
 
+  //选择房间
   selectSpec: function(e) {
     console.log('ee');
     var data = e.target.dataset;
@@ -94,6 +160,7 @@ Page({
     });
   },
 
+  //选好了
   addRoom: function(e) {
     var data = e.target.dataset;
     var room = data.room;
@@ -118,6 +185,7 @@ Page({
     }
   },
 
+  //选择房间
   bindChooseRoom: function() {
     this.setData({
       modalSpecShow: true
@@ -125,22 +193,50 @@ Page({
   },
 
   //选择就餐人数
-  selectNum: function() {
-    var self = this;
-    self.setData({
-      isShow: true
-    });
+  // selectNum: function() {
+  //   var self = this;
+  //   self.setData({
+  //     isShow: true
+  //   });
+  // },
+  bindDinnerChange:function(e){
+    this.setData({
+      dinnerIdx: e.detail.value
+    })
   },
 
   //确定预约
   subClick:function(){
     var self = this;
-    app.globalData.token = '';
+    
     if (!app.globalData.token) {
       wx.redirectTo({ url: "/pages/login/login" });
       return false;
     } 
+
+    if (!self.data.chooseRoom) {
+      self.showMsg('请选择就餐房型');
+      return false;
+    }
+
+    if (self.data.selTimeVal.length == 0) {
+      self.showMsg('请选择用餐时间');
+      return false;
+    }
+
+    var time = '';
+    var selVal = self.data.selTimeVal;
+    var timeArray = self.data.timeArray;
+    var dateArr = self.data.dateArr;
+    var hh = timeArray[1][selVal[1]] < 10 ? '0' + timeArray[1][selVal[1]] : timeArray[1][selVal[1]];
+    var mm = timeArray[2][selVal[2]] < 10 ? '0' + timeArray[2][selVal[2]] : timeArray[2][selVal[2]];
+
+    var oDate = new Date();
+    var ss = oDate.getSeconds(); //秒
+    time = dateArr[selVal[0]] + " " + hh + ":" + mm +":"+ (ss < 10 ? '0' + ss : ss);
+
     self.setData({
+      time: time,
       modalSubShow: true
     });
   },
@@ -156,13 +252,15 @@ Page({
   //确定预约
   qdSub: function () {
     var self = this;
-    var postData={
-      token: 'CFBD8A9B33942457B4F346F5756C5E59',
+
+    var postData = {
+      token: app.globalData.token,
       shopid: self.data.shopId,
       room: self.data.chooseRoom,
       number: self.data.dinnerArr[self.data.dinnerIdx],
-      time:'2017-08-23 17:24:36'
+      time: self.data.time
     }
+
     app.ajax({
       url: app.globalData.serviceUrl + 'msubscribeadd.htm',
       data: postData,
@@ -180,6 +278,15 @@ Page({
       failCallback: function (ress) {
 
       }
+    });
+  },
+
+  showMsg:function(msg){
+    wx.showModal({
+      title: '提示',
+      content: msg,
+      showCancel: false,
+      confirmText: '我知道了'
     });
   }
 

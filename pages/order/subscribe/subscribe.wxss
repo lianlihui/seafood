@@ -27,12 +27,18 @@
 }
 .shop-box {
   padding: 26rpx 120rpx 26rpx 70rpx;
-  background: url(../../../images/address_bg.jpg) no-repeat;
-  background-size: 100% 100%;
   font-size: 24rpx;
   color: #888;
   position: relative;
   margin-bottom: 20rpx;
+}
+.shop-box-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 .address-icon {
   width: 29rpx;
@@ -41,8 +47,6 @@
   left: 26rpx;
   margin-top: -14.5rpx;
   position: absolute;
-  background: url(../../../images/info_icon1.png) no-repeat;
-  background-size: 100%;
 }
 .shop-phone {
   width: 80rpx;
@@ -91,24 +95,12 @@
   height: 1.4rem;
   line-height: 1.4rem;
 }
-.form-item label i {
+.form-item label image {
   width: 23rpx;
   height: 24rpx;
   margin-right: 12rpx;
   display: inline-block;
   vertical-align: middle;
-}
-.form-item .icon1 {
-  background: url(../../../images/info_icon3.png) no-repeat;
-  background-size: 100%;
-}
-.form-item .icon2 {
-  background: url(../../../images/info_icon4.png) no-repeat;
-  background-size: 100%;
-}
-.form-item .icon3 {
-  background: url(../../../images/info_icon5.png) no-repeat;
-  background-size: 100%;
 }
 .form-arrow {
   width: 11rpx;
@@ -118,8 +110,6 @@
   top: 50%;
   margin-top: -7rpx;
   right: 26rpx;
-  background: url(../../../images/info_icon2.png) no-repeat;
-  background-size: 100%;
 }
 .form-input {
   -webkit-box-flex: 1.0;

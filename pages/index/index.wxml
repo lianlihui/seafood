@@ -22,10 +22,6 @@
     </navigator>
   </view>
 
-  <navigator url="/pages/login/login" class="service-link">
-      登录
-  </navigator>
-
   <view wx:for="{{warelablelist}}" wx:key="unique1">
     <view class="classify-box">
       <view class="classify-title-box">

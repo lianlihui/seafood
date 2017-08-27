@@ -10,12 +10,17 @@ Page({
   },
 
   onLoad: function (query) {
+    if (!app.globalData.token) {
+      wx.redirectTo({ url: "/pages/login/login" });
+      return false;
+    }
+
     var self=this;
     self.setData({
       id: query.id
     });
     var postData = {
-      token: 'CFBD8A9B33942457B4F346F5756C5E59',
+      token: app.globalData.token,
       id: query.id
     };
     app.ajax({
@@ -24,6 +29,7 @@ Page({
       successCallback: function (ress) {
         console.log(ress);
         if (ress.code == 0) {
+          ress.data.subscribebean.time = self.timeFormat(ress.data.subscribebean.time);
           self.setData({
             imageRootPath: ress.data.imageRootPath,
             subscribeInfo: ress.data.subscribebean
@@ -55,6 +61,24 @@ Page({
     });
   },
 
+  //我的预约时间格式化
+  timeFormat: function (timeStr) {
+    var time = new Date(timeStr);
+    var month = time.getMonth() + 1;
+    var date = time.getDate();
+    var day = time.getDay();
+    var hour = time.getHours();
+    var minutes = time.getMinutes();
+    month < 10 ? month = '0' + month : month;
+    hour < 10 ? hour = '0' + hour : hour;
+    minutes < 10 ? minutes = '0' + minutes : minutes;
+
+    var week = "星期" + "日一二三四五六".charAt(time.getDay());
+    var now_time = month + '月' + date + '日'
+      + ' ' + week + ' ' + hour + ':' + minutes;
+    return now_time;
+  },
+
   bindPhoneTab: function (event) {
     var phoneNumber = event.target.dataset.phone;
     wx.makePhoneCall({
@@ -78,7 +102,7 @@ Page({
         if (res.confirm) {
           var id = self.data.id;
           var postData = {
-            token: 'CFBD8A9B33942457B4F346F5756C5E59',
+            token: app.globalData.token,
             id: id
           };
           app.ajax({

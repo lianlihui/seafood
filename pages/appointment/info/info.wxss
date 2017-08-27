@@ -116,6 +116,15 @@
   color: #333;
   font-size: 28rpx;
 }
+.pickerCls {
+  position: absolute;
+  right: 0rpx;
+  margin-right: 50rpx;
+  bottom:32rpx;
+  width: 280rpx;
+  text-align: right;
+}
+
 .picCls{
   position: absolute;
   right: 0rpx;

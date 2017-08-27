@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/order/list/list",
     "pages/order/detail/detail",
+    "pages/order/subscribe/subscribe",
     "pages/my/my",
     "pages/roomservice/roomservice",
     "pages/orderdetail/orderdetail",
@@ -41,9 +42,9 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#369BFD",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "#fff",
     "enablePullDownRefresh": false
   },
   "networkTimeout": {

@@ -40,13 +40,13 @@
   height: 150rpx;
   margin-right: 40rpx;
   overflow: hidden;
-  background: #000;
 }
 .order-item-my-lf-img {
   width: 150rpx;
   height: 150rpx;
 }
 .order-item-my-rt {
+  padding-right: 80rpx;
   position: relative;
   -webkit-box-flex: 1.0;
           box-flex: 1.0;
@@ -88,6 +88,7 @@
   text-align: center;
   font-size: 22rpx;
   color: #379aff;
+  padding: 0 4rpx;
 }
 .order-item-my-yy-wait.wait{
   background: #379aff;
@@ -131,7 +132,6 @@
   height: 130rpx;
   margin-right: 40rpx;
   overflow: hidden;
-  background: #000;
 }
 .order-item-sy-lf-img {
   width: 130rpx;

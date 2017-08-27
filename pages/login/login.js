@@ -8,28 +8,17 @@ Page({
   data: {
     _code:'',  //微信小程序code
     phone:'',
-    smscode:''
+    smscode:'',
+    smscodeTxt: '发送验证码',
+    smscodeTime: 60  //验证码倒计时
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(getCurrentPages());
+    console.log(options);
     var self = this;
-    wx.login({
-      success: function (res) {
-        if (res.code) {
-          self.setData({
-            _code: res.code
-          })
-        } else {
-          console.log('获取用户登录态失败！' + res.errMsg)
-        }
-        console.log('_code:'+self.data._code);
-      }
-    });
-    
   },
 
   //输入手机号码
@@ -48,15 +37,48 @@ Page({
     });
   },
 
+  //发送验证码倒计时
+  smscodeTimeCli: function () {
+    var self = this;
+    var countdown = self.data.smscodeTime;
+
+    if (countdown == 0) {
+      self.setData({
+        smscodeTxt: '发送验证码',
+        smscodeTime: 60
+      });
+      return false;
+    } else {
+      var time = countdown - 1;
+      self.setData({
+        smscodeTxt: countdown + "s重新发送",
+        smscodeTime: time
+      });
+    }
+    setTimeout(function () {
+      self.smscodeTimeCli()
+    }, 1000)
+  },
+
   //发送验证码
   sendSmsCode: function(){
-    var self = this;
-    console.log('phone:' + self.data.phone);
 
-    if (!/^1d{10}$/.test(self.data.phone)) {
+    wx.navigateBack({
+      delta: 1
+    })
+
+    var self = this;
+
+    if (!/^1[34578]\d{9}$/.test(self.data.phone)) {
       self.showMsg('请输入正确的手机号码');
       return false;
     }
+
+    //60秒发送一次
+    if (self.data.smscodeTime < 60) {
+      return false;
+    }
+    self.smscodeTimeCli();
 
     var postData = {
       phone: self.data.phone
@@ -83,13 +105,8 @@ Page({
   //绑定
   loginClick:function(){
     var self = this;
-    var postData = {
-      phone: self.data.phone,
-      smscode: self.data.smscode,
-      _code: self.data._code
-    };
 
-    if (!/^1d{10}$/.test(self.data.phone)) {
+    if (!/^1[34578]\d{9}$/.test(self.data.phone)) {
       self.showMsg('请输入正确的手机号码');
       return false;
     }
@@ -99,25 +116,43 @@ Page({
       return false;
     }
 
-    app.ajax({ 
-      url: app.globalData.serviceUrl + 'mwxregist.html',
-      data: postData,
-      method: 'POST',
-      successCallback: function (res) {
-        console.log(res);
-        if (res.code == 0) {
-          //注册成功后设置token
-          app.globalData.token = res.data;
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          var _code = res.code;
+          
+          var postData = {
+            phone: self.data.phone,
+            smscode: self.data.smscode,
+            _code: _code
+          };
 
-          wx.switchTab({
-            url: '/pages/index/index'
+          app.ajax({
+            url: app.globalData.serviceUrl + 'mwxregist.html',
+            data: postData,
+            method: 'POST',
+            successCallback: function (res) {
+              console.log(res);
+              if (res.code == 0) {
+                //注册成功后设置token
+                app.globalData.token = res.data;
+
+                wx.switchTab({
+                  url: '/pages/index/index'
+                });
+              } else {
+                self.showMsg(res.msg);
+              }
+            },
+            failCallback: function (res) {
+              console.log(res);
+            }
           });
-        }else{
-          self.showMsg(res.msg);
+
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
         }
-      },
-      failCallback: function (res) {
-        console.log(res);
+        console.log('_code:' + self.data._code);
       }
     });
   },

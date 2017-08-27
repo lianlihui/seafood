@@ -32,9 +32,11 @@
 		</view>
 
     <view class="order-detail-item-txt">
-      <image src="/images/order/od_icon4.png" class="order-detail-item-txt-icon" />
-			<span class="shop">联系商家</span>
-      <span class="pay">实付：{{order.cost}}</span>
+      <view bindtap="bindPhoneTab" data-phone="13450473110" class="contact-shop">
+          <image src="/images/order/od_icon4.png" class="order-detail-item-txt-icon" />
+          <span class="shop">联系商家</span>
+      </view>
+      <span class="pay">实付：¥{{order.cost}}</span>
 		</view>
 	</view>
 
@@ -49,12 +51,12 @@
 		</view>
     <view class="order-detail-item-txt">
 			<span>收货地址</span>
-      <span class="money">{{order.detailaddress}}</span>
+      <span class="money">{{order.province}}{{order.city}}{{order.country}}{{order.detailaddress}}</span>
       <view class="contact">{{order.ordername}} {{order.mobile}}</view>
 		</view>
     <view class="order-detail-item-txt">
 			<span>配送方式</span>
-      <span class="money">商家配送</span>
+      <span class="money">{{order.payMode}}</span>
 		</view>
 	</view>
 

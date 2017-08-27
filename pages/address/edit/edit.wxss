@@ -40,6 +40,15 @@
   height: 28rpx;
   line-height: 28rpx;
 }
+
+.addrss-edit-item-area{
+  font-size: 24rpx;
+  color: #cccccc;
+  margin-left:150rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+}
+
 .address-edit-item-picker{
   display:inline-block;
   margin-left:150rpx;

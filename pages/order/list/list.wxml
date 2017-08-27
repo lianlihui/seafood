@@ -14,7 +14,7 @@
       <navigator url="/pages/order/detail/detail?id={{item.id}}">
       <view class="order-item-sy">
         <view class="order-item-sy-lf">
-          <image src="{{imageRootPath}}{{item.warelist[0].warepic}}" class="order-item-sy-lf-img"/>
+          <image src="{{imageRootPath}}{{item.warelist[0].warepic}}" class="order-item-sy-lf-img" mode="widthFix"/>
         </view>
         <view class="order-item-sy-rt">
           <text class="order-item-sy-name">{{item.warelist[0].warename}}</text>
@@ -23,7 +23,7 @@
           <text class="order-item-sy-detail">
             {{item.warelist[0].warename}}等{{item.warelist.length}}件商品
           </text>
-          <text class="order-item-sy-money">${{item.cost}}</text>
+          <text class="order-item-sy-money">¥{{item.cost}}</text>
 
           <view class="order-item-sy-status" wx:if="{{item.status == 1}}">
             等待支付
@@ -62,6 +62,7 @@
   <view class="order-list-my" wx:if="{{myStatus}}">
     
     <view wx:for="{{subscribelist}}" wx:key="unique1">
+      <navigator url="/pages/order/subscribe/subscribe?id={{item.id}}">      
       <view class="order-item-my">
         <view class="order-item-my-lf">
           <image src="{{imageRootPath}}{{item.logo}}" class="order-item-my-lf-img"/>
@@ -90,6 +91,7 @@
           </view>
         </view>
       </view>
+      </navigator>
     </view>
 
     <view wx:if="{{myLoading}}" class="loading-status">加载中...</view>

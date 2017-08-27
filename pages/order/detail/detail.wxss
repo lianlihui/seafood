@@ -98,9 +98,13 @@
   position: relative;
 }
 .order-detail-item-txt .num{
-  float: right;
+  /* float: right;
   display: block;
-  margin-right: 80rpx;
+  margin-right: 80rpx; */
+  display: block;
+  position: absolute;
+  right:120rpx;
+  bottom:19rpx;
 }
 .order-detail-item-txt .money{
   float: right;
@@ -113,7 +117,7 @@
 	width:19rpx;
 	height:20rpx;
 	vertical-align:middle;
-	margin-top:-10rpx;
+	margin-top:-8rpx;
 }
 .order-detail-item-txt .shop{
   display: inline-block;
@@ -130,4 +134,8 @@
 .order-detail-item-txt .contact{
   text-align: right;
   margin-top:20rpx;
+}
+.contact-shop {
+  display: inline-block;
+  vertical-align: middle;
 }

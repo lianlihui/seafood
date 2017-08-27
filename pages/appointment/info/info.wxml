@@ -25,13 +25,23 @@
 
   <view class="form-item">
     <label><image src="/images/info_icon4.png"/>用餐人数</label>
-    <input type="text" placeholder="请选择用餐人数" class="form-input" value="{{dinnerIdx}}" bindtap="selectNum" />
+    <!-- <input type="text" placeholder="请选择用餐人数" class="form-input" value="{{dinnerIdx}}" bindtap="selectNum" /> -->
+    <picker class="pickerCls" bindchange="bindDinnerChange" value="{{dinnerIdx}}" range="{{dinnerArr}}">
+      <view class="picker">
+        {{dinnerArr[dinnerIdx]}}
+      </view>
+    </picker>
     <image src="/images/info_icon2.png" class="form-arrow"/>
   </view>
 
   <view class="form-item">
     <label><image src="/images/info_icon5.png"/>用餐时间</label>
-    <input type="text" placeholder="请选择用餐时间" class="form-input"/>
+    <!-- <input type="text" placeholder="请选择用餐时间" class="form-input"/> -->
+    <picker class="pickerCls" mode="multiSelector" bindchange="bindMultiPickerChange" value="{{timeIndex}}" range="{{timeArray}}">
+      <view class="picker">
+        {{timeTxt}}
+      </view>
+    </picker>
     <image src="/images/info_icon2.png" class="form-arrow"/>
   </view>
 
@@ -96,7 +106,7 @@
         <view class="subtitle">店名：{{shopInfo.username}}</view>
         <view class="subtitle">房间名：{{chooseRoom}}</view>
         <view class="subtitle">人数：{{dinnerArr[dinnerIdx]}}</view>
-        <view class="subtitle">时间：2017-08-23 17:24:36</view>
+        <view class="subtitle">时间：{{time}}</view>
       </view>
       <view class="submodal-footer">
         <span bindtap="qdSub">确定</span>

@@ -13,10 +13,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onLoad: function () {
+    if (!app.globalData.token) {
+      wx.redirectTo({ url: "/pages/login/login" });
+      return false;
+    }
     console.log('cc');
     var self = this;
     var postData = {
-      token: 'CFBD8A9B33942457B4F346F5756C5E59'
+      token: app.globalData.token
     };
 
     //获取首页数据    

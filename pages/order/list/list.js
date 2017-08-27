@@ -30,9 +30,10 @@ Page({
       syCls: 'order-header-item active',
       myCls: 'order-header-item',
       orderlist:[],
-      subscribelist:[],
       syPage:1,
-      myPage:1
+      syLoading: false,
+      syNoData: false,
+      syLoad: true   //私宴可以分页
     });
     this.getSyData();
   },
@@ -43,10 +44,11 @@ Page({
       myStatus: true,
       syCls: 'order-header-item',
       myCls: 'order-header-item active',
-      orderlist:[],
       subscribelist:[],
-      syPage:1,
-      myPage:1
+      myPage:1,
+      myLoading: false,
+      myNoData: false,
+      myLoad: true   //预约可以分页
     });
     this.getMyData();
   },
@@ -79,8 +81,21 @@ Page({
         var list=[];
         if (self.data.orderlist.length==0){
           list = res.data.orderlist;
+          //时间格式处理
+          for (var i = 0; i < list.length;i++){
+            if (list[i].createtime!=null){
+              list[i].createtime = list[i].createtime.substring(0,16);
+            }
+          }
         }else{
-          list = self.data.orderlist.concat(res.data.orderlist);
+          //时间格式处理
+          var alist = res.data.orderlist;
+          for (var i = 0; i < alist.length; i++) {
+            if (alist[i].createtime != null) {
+              alist[i].createtime = alist[i].createtime.substring(0, 16);
+            }
+          }
+          list = self.data.orderlist.concat(alist);
         }
 
         self.setData({
@@ -120,8 +135,21 @@ Page({
         var list = [];
         if (self.data.subscribelist.length == 0) {
           list = res.data.subscribelist;
+          //时间格式处理
+          for (var i = 0; i < list.length; i++) {
+            if (list[i].time != null) {
+              list[i].time = self.timeFormat(list[i].time);
+            }
+          }
         } else {
-          list = self.data.subscribelist.concat(res.data.subscribelist);
+          //时间格式处理
+          var alist = res.data.subscribelist;
+          for (var i = 0; i < alist.length; i++) {
+            if (alist[i].time != null) {
+              alist[i].time = self.timeFormat(alist[i].time);
+            }
+          }
+          list = self.data.subscribelist.concat(alist);
         }
 
         self.setData({
@@ -141,6 +169,24 @@ Page({
         console.log(res);
       }
     });
+  },
+
+  //我的预约时间格式化
+  timeFormat:function(timeStr){
+    var time = new Date(timeStr);
+    var month = time.getMonth()+1;
+    var date = time.getDate();
+    var day = time.getDay();
+    var hour = time.getHours();
+    var minutes = time.getMinutes();
+    month < 10 ? month = '0' + month : month;
+    hour < 10 ? hour = '0' + hour : hour;
+    minutes < 10 ? minutes = '0' + minutes : minutes;
+
+    var week = "星期" + "日一二三四五六".charAt(time.getDay());
+    var now_time = month + '月' + date + '日' 
+      + ' ' + week + ' ' + hour + ':' + minutes;
+    return now_time;
   },
 
   onReachBottom:function(){

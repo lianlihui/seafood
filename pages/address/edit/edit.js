@@ -14,7 +14,7 @@ Page({
     city:0,
     county:0,
     selAreaVal:'',   //区域选中的值
-    address:'',
+    address:'请选择(省)/请选择(市)/请选择(区)',
     bcShow:true,   //显示保存按钮
     ddShow:false,   //显示删除按钮
     isShow: false, // 显示区域选择框
@@ -22,14 +22,57 @@ Page({
     ordername:'',  //收货人姓名
     mobile:'',  //手机号码
     detailaddress:'', //详细地址
-    isdefault:0  //是否默认
+    isdefault:0,  //是否默认
+
+    areaArray: [[],[],[]],
+    areaIndex: [0, 0, 0],
+
+  },
+
+  bindMultiPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value);
+    var self = this;
+    var current_value = e.detail.value;
+
+    var address = self.data.areaArray[0][current_value[0]].name
+      + '/' + self.data.areaArray[1][current_value[1]].name
+      + '/' + self.data.areaArray[2][current_value[2]].name;
+    self.setData({
+      areaIndex: current_value,
+      address: address
+    });
+  },
+  bindMultiPickerColumnChange: function (e) {
+    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    var self=this;
+    
+    var col = e.detail.column;
+    var val = e.detail.value;
+    //切换省份
+    if (col == 0){
+      var code = self.data.areaArray[0][val].code;
+      self.getCityByProvinceCode(code);
+    }
+    //切换地市
+    if (col == 1) {
+      var code = self.data.areaArray[1][val].code;
+      console.log('code:'+code);
+      self.getCountiesByCityCode(code);
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (!app.globalData.token) {
+      wx.redirectTo({ url: "/pages/login/login" });
+      return false;
+    }
+
     var self=this;
+    self.getProvince();
+
     var title = "编辑地址";
     if (options.id == -1) {
       title = "新增地址";
@@ -43,49 +86,39 @@ Page({
     wx.setNavigationBarTitle({
       title: title
     })
-    var id = options.id;
-    //获取地址数据
-    var postData = {
-      token: 'CFBD8A9B33942457B4F346F5756C5E59',
-      id:id
-    };
-    app.ajax({
-      url: app.globalData.serviceUrl + 'maddressdetail.htm',
-      data: postData,
-      method: 'GET',
-      successCallback: function (res) {
-        if (res.code==0){
-          var obj = res.data.addressbean;
-          var address = obj.province + '/' 
-            + obj.city + '/' + obj.area;
-          self.setData({
-            ordername: obj.ordername,
-            mobile: obj.mobile,
-            detailaddress: obj.detailaddress,
-            isdefault: obj.isdefault,
-            address: address,
-            province: obj.province,
-            city: obj.city,
-            county: obj.area
-          });
-        }
-      },
-      failCallback: function (res) {
-        console.log(res);
-      }
-    });
-  },
+    if (options.id != -1) {
+      var id = options.id;
+      //获取地址数据
+      var postData = {
+        token: app.globalData.token,
+        id:id
+      };
+      app.ajax({
+        url: app.globalData.serviceUrl + 'maddressdetail.htm',
+        data: postData,
+        method: 'GET',
+        successCallback: function (res) {
+          if (res.code==0){
+            var obj = res.data.addressbean;
+            var address = obj.province + '/' 
+              + obj.city + '/' + obj.area;
+            
+            self.getAreaByName(obj.province, obj.city, obj.area);
 
-  //选择地市
-  selArea:function(){
-    var self=this;
-    self.setData({
-      bcShow:false,
-      ddShow:false,
-      isShow:true
-    });
-    //获取省份
-    self.getProvince();
+            self.setData({
+              ordername: obj.ordername,
+              mobile: obj.mobile,
+              detailaddress: obj.detailaddress,
+              isdefault: obj.isdefault,
+              address: address
+            });
+          }
+        },
+        failCallback: function (res) {
+          console.log(res);
+        }
+      });
+    }
   },
 
   //获取省份
@@ -100,13 +133,17 @@ Page({
         var data = res.data;
         if (data.code == 0) {
           provinces = data.data.provincelist;
+          
+          var areaArray = thisPage.data.areaArray;
+          areaArray[0] = provinces;
+          thisPage.setData({
+            areaArray: areaArray
+          });
+
           //根据第一个省份获取地市
           thisPage.getCityByProvinceCode(provinces[0].code);
         }
-        thisPage.setData({
-          provinces: provinces,
-          province:0
-        });
+        
       },
       fail: function () {
         console.log('init district information failed');
@@ -125,13 +162,18 @@ Page({
         var data = res.data;
         if (data.code == 0) {
           cities = data.data.list;
-          //根据第一个地市获取区
-          thisPage.getCountiesByCityCode(cities[0].code);
+
+          var areaArray = thisPage.data.areaArray;
+          areaArray[1] = cities;
+          thisPage.setData({
+            areaArray: areaArray
+          });
+
+          if (thisPage.data.id==-1){
+            //根据第一个地市获取区
+            thisPage.getCountiesByCityCode(cities[0].code);
+          }   
         }
-        thisPage.setData({
-          cities: cities,
-          city: 0
-        })
       },
       fail: function () {
         console.log('init district information failed');
@@ -150,108 +192,18 @@ Page({
         var data = res.data;
         if (data.code == 0) {
           counties = data.data.list;
+
+          var areaArray = thisPage.data.areaArray;
+          areaArray[2] = counties;
+          thisPage.setData({
+            areaArray: areaArray
+          });
         }
-        thisPage.setData({
-          counties: counties,
-          county: 0
-        })
       },
       fail: function () {
         console.log('init district information failed');
       }
     })
-  },
-
-  //选择区域触发
-  bindChangeArea: function (e) {
-    const current_value = e.detail.value;
-    var self=this;
-    self.data.selAreaVal = current_value;
-
-    if (current_value.length > 2) {
-      if (self.data.province !== current_value[0] 
-        && self.data.city === current_value[1] 
-        && self.data.county === current_value[2]) {
-        // 滑动省份
-        var provinceCode = self.data.provinces[current_value[0]].code;
-        self.getCityByProvinceCode(provinces[0].code);
-      } else if (self.data.province === current_value[0]
-        && self.data.city !== current_value[1]
-        && self.data.county === current_value[2]) {
-        // 滑动城市
-        var cityCode = self.data.cities[current_value[1]].code;
-        self.getCountiesByCityCode(cityCode);
-      } else if (self.data.province === current_value[0]
-        && self.data.city === current_value[1]
-        && self.data.county !== current_value[2]) {
-        // 滑动地区
-        var address = self.data.provinces[current_value[0]].name 
-          + '/' + self.data.cities[current_value[1]].name 
-          + '/' + self.data.counties[current_value[2]].name;
-      }
-    }
-  },
-
-  closeModal: function(e, modalName) {
-    var modal = modalName || e.target.dataset.modal
-     var self = this;
-
-    if (modal == 'closeModal') {
-      self.setData({
-        bcShow: true,
-        isShow: false
-      });
-      //显示删除按钮
-      if(self.data.id!=-1){
-        self.setData({
-          ddShow: true
-        });
-      }
-    }
-  },
-
-  //取消选择
-  qxSelArea:function(){
-    var self = this;
-    self.setData({
-      bcShow: true,
-      isShow: false
-    });
-    //显示删除按钮
-    if(self.data.id!=-1){
-      self.setData({
-        ddShow: true
-      });
-    }
-  },
-
-  //确定选择
-  qdSelArea: function () {
-    var self = this;
-    var current_value = self.data.selAreaVal;
-    if (current_value==''){
-      current_value=[0,0,0];  //如果没有触发选择，默认第一个
-    }
-    var address = self.data.provinces[current_value[0]].name
-      + '/' + self.data.cities[current_value[1]].name
-      + '/' + self.data.counties[current_value[2]].name;
-    //重新设置选中的值
-    self.setData({
-      province: current_value[0],
-      city: current_value[1],
-      county: current_value[2],
-      address: address
-    });
-    self.setData({
-      bcShow: true,
-      isShow: false
-    });
-    //显示删除按钮
-    if (self.data.id != -1) {
-      self.setData({
-        ddShow: true
-      });
-    }
   },
 
   //默认地址切换
@@ -271,24 +223,47 @@ Page({
   formSubmit: function (e) {
     var self = this;
     var formData = e.detail.value;
+
+    if (!formData.ordername) {
+      self.showMsg('请输入收货人');
+      return false;
+    }
+
+    if (!/^1[34578]\d{9}$/.test(formData.mobile)) {
+      self.showMsg('请输入正确的手机号码');
+      return false;
+    }
+
+    if (!formData.detailaddress) {
+      self.showMsg('请输入详细信息');
+      return false;
+    }
+
     formData.isdefault = self.data.isdefault;
+    var cv = self.data.areaIndex;
+
     formData.province ='';
-    if (self.data.provinces.length!=0){
-      formData.province = self.data.provinces[self.data.province].name;
+    var arr0 = self.data.areaArray[0];
+    if (arr0.length!=0){
+      formData.province = arr0[cv[0]].name;
     }
+
     formData.city ='';
-    if (self.data.cities.length != 0) {
-      formData.city = self.data.cities[self.data.city].name;
+    var arr1 = self.data.areaArray[1];
+    if (arr1.length != 0) {
+      formData.city = arr1[cv[1]].name;
     }
+
     formData.area ='';
-    if (self.data.counties.length != 0) {
-      formData.area = self.data.counties[self.data.county].name;
+    var arr2 = self.data.areaArray[2];
+    if (arr2.length != 0) {
+      formData.area = arr2[cv[2]].name;
     }
     self.saveOrUpdate(formData);
   },
 
   saveOrUpdate: function (postData){
-    postData.token ='CFBD8A9B33942457B4F346F5756C5E59';
+    postData.token = app.globalData.token;
     var url = app.globalData.serviceUrl + 'maddressadd.htm';
     if(this.data.id!=-1){
       url = app.globalData.serviceUrl + 'maddressupdate.htm';
@@ -322,7 +297,7 @@ Page({
         if (res.confirm) {
           var id = self.data.id;
           var postData = {
-            token: 'CFBD8A9B33942457B4F346F5756C5E59',
+            token: app.globalData.token,
             id: id
           };
           app.ajax({
@@ -343,5 +318,81 @@ Page({
         }
       }
     })
-  }
+  },
+
+  //弹框提示
+  showMsg: function (msg) {
+    wx.showModal({
+      title: '提示',
+      content: msg,
+      showCancel: false,
+      confirmText: '关闭'
+    })
+  },
+
+  //地址获取code
+  getAreaByName: function (provinceName,cityName, countyName) {
+    var thisPage = this;
+    var areaIndex = thisPage.data.areaIndex;
+
+    wx.request({
+      url: app.globalData.serviceUrl + 'getProvince.html',
+      data: {},
+      method: 'GET',
+      success: function (res) {
+        var data = res.data;
+        var provinces = data.data.provincelist;
+        for (var i = 0; i < provinces.length; i++) {
+          if (provinceName == provinces[i].name) {
+            areaIndex[0] = i;
+            break;
+          }
+        }
+
+        wx.request({
+          url: app.globalData.serviceUrl + 'getArea.html',
+          data: { 'code': provinces[areaIndex[0]].code },
+          method: 'GET',
+          success: function (res) {
+            var data = res.data;    
+            var cities = data.data.list;
+            for (var ii = 0; ii < cities.length; ii++) {
+              if (cityName == cities[ii].name) {
+                areaIndex[1] = ii;
+                break;
+              }
+            }
+
+            if (thisPage.data.id != -1) {
+              //根据第一个地市获取区
+              thisPage.getCountiesByCityCode(cities[areaIndex[1]].code);
+            } 
+            
+            wx.request({
+              url: app.globalData.serviceUrl + 'getArea.html',
+              data: { 'code': cities[areaIndex[1]].code },
+              method: 'GET',
+              success: function (res) {
+                var data = res.data;
+                var counties = data.data.list;
+                for (var iii = 0; iii < counties.length; iii++) {
+                  if (countyName == counties[iii].name) {
+                    areaIndex[2] = iii;
+                    break;
+                  }
+                }
+                thisPage.setData({
+                  areaIndex: areaIndex
+                });
+                console.log(areaIndex);
+              }
+            });
+          }
+        });
+      },
+      fail: function () {
+        console.log('init district information failed');
+      }
+    })
+  },
 })

@@ -8,7 +8,7 @@
       <view class="login-item login-item1">
         <image src="/images/login_icon_phone.png" class="login-icon login-icon-phone" />
         <input placeholder="输入手机号" name="phone" value="" bindinput="phoneClick"/>
-        <span class="login-code" bindtap="sendSmsCode">发送验证码</span>
+        <span class="login-code" bindtap="sendSmsCode">{{smscodeTxt}}</span>
       </view>
       <view class="login-item">
         <image src="/images/login_icon_code.png" class="login-icon login-icon-code" />

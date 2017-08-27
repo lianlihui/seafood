@@ -18,6 +18,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (!app.globalData.token) {
+      wx.redirectTo({ url: "/pages/login/login" });
+      return false;
+    }
+
     var self = this;
     self.setData({
       id: options.id
@@ -25,7 +30,7 @@ Page({
     var id = options.id;
     //获取数据
     var postData = {
-      token: 'CFBD8A9B33942457B4F346F5756C5E59',
+      token: app.globalData.token,
       id: id
     };
     app.ajax({
@@ -34,6 +39,8 @@ Page({
       method: 'GET',
       successCallback: function (res) {
         var obj = res.data.orderbean;
+        obj.createtime = obj.createtime.substring(0,16);
+        
         self.setData({
           order: obj
         });
@@ -89,5 +96,21 @@ Page({
       break
       default:
     }
-  }
+  },
+
+  bindPhoneTab: function(event) {
+    console.log(event);
+    var phoneNumber = event.target.dataset.phone;
+    wx.makePhoneCall({
+      phoneNumber: phoneNumber,
+      success: function(res) {
+        console.log(res);
+      }, 
+      fail: function(res) {
+        console.log(res);
+      }
+    });
+  },
+
+
 })
