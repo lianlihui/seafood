@@ -49,11 +49,16 @@ Page({
     var self = this;
 
     //用餐时间赋值
-    var dd = null;
+    var currentDd = new Date();
+    var ddTimeFormat = currentDd.getTime();
     var arr = [];
+    var endTime = new Date('2018/12/31 23:59:59');
+    var allDay = Math.ceil((endTime.getTime() - currentDd.getTime())/(1000*60*60*24));
+    var dd = null;
+
     arr[0] = [];
-    for(var i=0;i<=1000;i++){
-      dd = new Date();
+    for(var i=0;i<=allDay;i++){
+      var dd = new Date();
       dd.setDate(dd.getDate() + i);
 
       var year = dd.getFullYear();
