@@ -30,7 +30,7 @@ Page({
     let url = ''
     const {id, selectIndex} = this.data // 订单id
     const postData = {
-      token: 'CFBD8A9B33942457B4F346F5756C5E59',
+      token: globalData.token,
       id
     }
     switch(selectIndex) {
