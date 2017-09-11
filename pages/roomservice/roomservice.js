@@ -40,6 +40,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({title: '页面加载中', mask: true})
     if (options.id) {
       detailId = parseInt(options.id)
     }
@@ -104,6 +105,7 @@ Page({
           'content-type': 'application/json'
       },
       success: function(res) {
+        wx.hideLoading()
         res = res.data
         const {msg, code} = res
         const {warelablelist, waretypelist, imageRootPath} = res.data

@@ -44,13 +44,18 @@ Page({
   onShow: function () {
     const d = new Date()
     const {imageRootPath, freight, warelist, addressbean, couponslist} = globalData.newOrder.data
-    const addressid = addressbean.id
     const list = warelist
-    const addressDefault = addressbean
     const date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
     const day = ['日','一','二','三','四','五','六'][d.getDay()]
     const sendtime = date + ' ' + this.data.time
     let amount = parseInt(freight)
+    let addressid
+    let addressDefault
+
+    if (addressbean) {
+      addressid = addressbean.id
+      addressDefault = addressbean
+    }
 
     list.forEach(v => {
       amount += v.number * v.sizeprice
@@ -159,14 +164,15 @@ Page({
     app.ajax({
       url: globalData.serviceUrl + 'maddresslist.htm',
       data: {
-        token: 'CFBD8A9B33942457B4F346F5756C5E59'
+        token: globalData.token
       },
       method: 'GET',
       successCallback: function (res) {
         const {code, data, msg } = res
 
         if (code == 0) {
-          const freight = data.addresslist.filter(v => v.isdefault)[0].freight || 0
+          const defaultAddress = data.addresslist.filter(v => v.isdefault)
+          const freight = defaultAddress.length && defaultAddress[0].freight || 0
           that.setData({
             freight,
             amount: that.data.amount + freight

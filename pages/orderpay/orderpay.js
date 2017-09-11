@@ -27,6 +27,7 @@ Page({
   },
 
   payOrder (e) {
+    let that = this
     let url = ''
     const {id, selectIndex} = this.data // 订单id
     const postData = {
@@ -36,7 +37,7 @@ Page({
     switch(selectIndex) {
       // 微信支付
       case 0:
-        // TODO
+        url = globalData.serviceUrl + 'morderwx_xcxpay.htm'
       break
 
       // 货到付款
@@ -54,24 +55,56 @@ Page({
       method: 'GET',
       successCallback: function (res) {
         wx.hideLoading()
-        const {code, data, msg } = res
-        if (code == 0) {
-          wx.showToast({
-            title: '支付成功',
-            icon: 'success'
-          })
-          setTimeout(function() {
-            wx.redirectTo({
-              url: '/pages/order/detail/detail?id=' + id
+        switch (selectIndex) {
+          // 微信支付
+          case 0:
+            const {timeStamp, nonceStr, package: pkg, signType, paySign} = res
+            wx.requestPayment({
+              timeStamp, nonceStr, package: pkg, signType, paySign,
+              success () {
+                success({code: 0})
+              },
+              fail () {
+                that.showMsg('支付未完成，请重新支付！')
+              }
             })
-          }, 1500);
-        } else {
-          console.error(msg) 
+          break
+
+          // 货到付款
+          case 1:
+            success(res)
+          break
+        }
+        function success(res) {
+          const {code, data, msg } = res
+          if (code == 0) {
+            wx.showToast({
+              title: '支付成功',
+              icon: 'success'
+            })
+            setTimeout(function() {
+              wx.redirectTo({
+                url: '/pages/order/detail/detail?id=' + id
+              })
+            }, 1500);
+          } else {
+            console.error(msg) 
+          }
         }
       },
       failCallback: function (res) {
         console.log(res);
       }
+    })
+  },
+
+  //弹框提示
+  showMsg: function (msg){
+    wx.showModal({
+      title: '提示',
+      content: msg,
+      showCancel: false,
+      confirmText: '关闭'
     })
   }
 })

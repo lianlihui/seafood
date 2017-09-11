@@ -1,6 +1,6 @@
 <!--orderdetail.wxml-->
 <view class="container orderdetail-wrap">
-  <navigator class="address-wrap" url="/pages/address/list/list">
+  <navigator class="address-wrap" url="/pages/address/list/list?select=1" open-type="redirectTo">
     <image src="/images/address.png" class="icon icon-address"></image>
     <view class="contact-wrap">
       <view wx:if="{{addressDefault.ordername ? 0:1}}" class="empty">选择地址</view>

@@ -67,6 +67,6 @@ App({
   globalData: {
     token:'',
     userInfo: null,
-    serviceUrl: 'http://hjx.pnkoo.cn/'
+    serviceUrl: 'https://hjx.pnkoo.cn/'
   }
 })

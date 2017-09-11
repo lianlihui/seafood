@@ -66,6 +66,7 @@ Page({
 
   //获取我的私宴
   getSyData: function () {
+    debugger
     var self = this;
     var postData = {
       token: app.globalData.token,

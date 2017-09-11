@@ -8,7 +8,7 @@
     <view wx:for="{{addressList}}" wx:key="unique1">
       <view class="address-item">
         <view class="address-item-icon"></view>
-        <view class="address-item-content">
+        <view class="address-item-content" data-addr="{{item}}" bindtap="selectAddr">
           <view class="address-item-content-contact">
             <span class="name">{{item.ordername}}</span>
             <span>{{item.mobile}}</span>
