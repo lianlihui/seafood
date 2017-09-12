@@ -33,7 +33,7 @@ Page({
       freight: 0,
       amount: 0
     },
-    limitAmount: 1000
+    limitAmount: 0
   },
 
   /**
@@ -108,7 +108,7 @@ Page({
         wx.hideLoading()
         res = res.data
         const {msg, code} = res
-        const {warelablelist, waretypelist, imageRootPath} = res.data
+        const {warelablelist, waretypelist, imageRootPath, freightZuidi} = res.data
         console.log(res)
         if (code == 0) {
           let list = []
@@ -123,7 +123,7 @@ Page({
               products = products.concat(v.warelist)
             })
           }
-          that.setData({list, products, imageRootPath})
+          that.setData({list, products, imageRootPath, limitAmount: freightZuidi})
 
           if (detailId) {
             that.showDetail(null, detailId)

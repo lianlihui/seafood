@@ -1,14 +1,14 @@
 <!--orderdetail.wxml-->
 <view class="container orderdetail-wrap">
-  <navigator class="address-wrap" url="/pages/address/list/list?select=1" open-type="redirectTo">
+  <navigator class="address-wrap" url="/pages/address/list/list?select=1">
     <image src="/images/address.png" class="icon icon-address"></image>
     <view class="contact-wrap">
-      <view wx:if="{{addressDefault.ordername ? 0:1}}" class="empty">选择地址</view>
+      <view wx:if="{{address.ordername ? 0:1}}" class="empty">选择地址</view>
       <!-- <view class="contact">华小姐 13233333333</view>
       <view class="address">广东省深圳市宝安区广东省深圳市宝安区广东省深圳市宝安区</view> -->
       <block wx:else>
-        <view class="contact">{{addressDefault.ordername}} {{addressDefault.mobile}}</view>
-        <view class="address">{{addressDefault.province}}{{addressDefault.city}}{{addressDefault.area}}{{addressDefault.detailaddress}}</view>
+        <view class="contact">{{address.ordername}} {{address.mobile}}</view>
+        <view class="address">{{address.province}}{{address.city}}{{address.area}}{{address.detailaddress}}</view>
       </block>
     </view>
     <image src="/images/arrow_right.png" class="icon icon-arrow-right"></image>
@@ -52,11 +52,11 @@
       <text class="freight-price">￥{{freight}}</text>
     </view>
   </view>
-  <view class="coupons-wrap">
+  <!-- <view class="coupons-wrap">
     <view class="icon icon-coupons">减</view>
     <text class="coupons-label">使用优惠券</text>
     <image src="/images/arrow_right.png" class="icon icon-arrow-right"></image>
     <text class="coupons-count">{{couponslist.length}}张可用</text>
-  </view>
+  </view> -->
   <view class="confirm-btn" bindtap="confirmOrder">提交订单</view>
 </view>

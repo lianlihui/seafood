@@ -9,7 +9,7 @@ Page({
    */
   data: {
     addresslist: [], // 全部地址
-    addressDefault: {}, // 默认地址
+    address: {}, // 填充的地址
     imageRootPath: '', // 图片根路径
     couponslist: [],
     list: [], // 订单商品
@@ -43,28 +43,35 @@ Page({
    */
   onShow: function () {
     const d = new Date()
-    const {imageRootPath, freight, warelist, addressbean, couponslist} = globalData.newOrder.data
+    const {imageRootPath, warelist, addressbean, couponslist} = globalData.newOrder.data
     const list = warelist
     const date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
     const day = ['日','一','二','三','四','五','六'][d.getDay()]
     const sendtime = date + ' ' + this.data.time
-    let amount = parseInt(freight)
     let addressid
-    let addressDefault
+    let address
+    let freight
+    let amount = 0
 
     if (addressbean) {
       addressid = addressbean.id
-      addressDefault = addressbean
+      freight = addressbean.freight
+      address = addressbean
     }
 
     list.forEach(v => {
       amount += v.number * v.sizeprice
     })
 
+    if (addressbean === undefined) {
+      this.calcDefaultFreight()
+    } else {
+      amount += parseInt(freight)
+    }
+
     this.setData({
-      imageRootPath, list, freight, date, day, addressDefault, sendtime, addressid, couponslist ,amount
+      imageRootPath, list, freight, date, day, address, sendtime, addressid, couponslist ,amount
     })
-    this.calcDefaultFreight()
   },
 
   /**
