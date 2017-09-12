@@ -56,7 +56,7 @@
 		</view>
     <view class="order-detail-item-txt">
 			<span>配送方式</span>
-      <span class="money">{{order.payMode}}</span>
+      <span class="money">商家配送</span>
 		</view>
 	</view>
 

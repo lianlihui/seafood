@@ -46,12 +46,12 @@
   height: 150rpx;
 }
 .order-item-my-rt {
-  padding-right: 80rpx;
   position: relative;
   -webkit-box-flex: 1.0;
           box-flex: 1.0;
 }
 .shop-item-title {
+  padding-right: 100rpx;
   line-height: 1;
   color: #333;
   font-size: 28rpx;

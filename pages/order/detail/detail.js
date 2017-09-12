@@ -49,7 +49,7 @@ Page({
           self.setData({statusTxt: '未支付', actionTxt: '立即支付'});
         }
         if (obj.status == 2) {
-          self.setData({ statusTxt: '待配送' , actionTxt: '再来一单'});
+          self.setData({ statusTxt: '待配送' , actionTxt: '取消订单'});
         }
         if (obj.status == 3) {
           self.setData({ statusTxt: '配送中' , actionTxt: '再来一单'});
@@ -90,10 +90,14 @@ Page({
         var id = this.data.id
         wx.redirectTo({
           url: '/pages/orderpay/orderpay?id=' + id + '&amount=' + amount
-        })
-      break
+        });
+        break;
+      case '取消订单':
+
+      break;
       case '再来一单':
-      break
+        
+      break;
       default:
     }
   },

@@ -31,7 +31,6 @@
           <view class="order-item-sy-pay pay" wx:if="{{item.status == 1}}">
             去支付
           </view>
-
           <view class="order-item-sy-status" wx:if="{{item.status == 2}}">
             待配送
           </view>
@@ -47,7 +46,10 @@
           <view class="order-item-sy-status" wx:if="{{item.status == 7}}">
             已取消
           </view>
-          <view class="order-item-sy-pay" wx:if="{{item.status == 2 || item.status == 3 || item.status == 4 ||item.status == 5 ||item.status == 7}}">
+          <view class="order-item-sy-pay" wx:if="{{(item.type == 4 && item.status == 2) || (item.type == 1 && item.status == 1)}}">
+            取消订单
+          </view>
+          <view class="order-item-sy-pay" wx:else>
             再来一单
           </view>
         </view>

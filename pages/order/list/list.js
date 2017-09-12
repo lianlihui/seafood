@@ -61,6 +61,10 @@ Page({
       wx.redirectTo({ url: "/pages/login/login" });
       return false;
     }
+    this.setData({
+      orderlist:[],
+      subscribelist:[]
+    });
     this.getSyData();
   },
 
