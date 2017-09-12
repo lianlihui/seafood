@@ -50,8 +50,8 @@ Page({
   //编辑地址信息
   editAddress: function (event) {
     var id = event.target.dataset.id;
-    wx.navigateTo({
-      url: '../edit/edit?id=' + id
+    wx.redirectTo({
+      url: '../edit/edit?id=' + id + (this.data.isSelect ? '&select=1' : '')
     })
 
   },
@@ -59,7 +59,7 @@ Page({
   // 选择收货地址
   selectAddr: function (event) {
     if (this.data.isSelect) {
-      var addr = event.target.dataset.addr;
+      var addr = event.currentTarget.dataset.addr;
       app.globalData.newOrder.data.addressbean = addr
       wx.navigateTo({
         url: '/pages/orderdetail/orderdetail'

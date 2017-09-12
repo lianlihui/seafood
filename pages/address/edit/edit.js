@@ -81,7 +81,8 @@ Page({
     }
     self.setData({
       id: options.id,
-      ddShow: true
+      ddShow: true,
+      isSelect: !!options.select
     });
     wx.setNavigationBarTitle({
       title: title
@@ -263,6 +264,7 @@ Page({
   },
 
   saveOrUpdate: function (postData){
+    var self = this;
     postData.token = app.globalData.token;
     var url = app.globalData.serviceUrl + 'maddressadd.htm';
     if(this.data.id!=-1){
@@ -277,8 +279,8 @@ Page({
       successCallback: function (res) {
         if(res.code==0){
           wx.redirectTo({
-            url: '../list/list'
-          });
+             url: '../list/list' + (self.data.isSelect ? '?select=1' : '')
+          })
         }
       },
       failCallback: function (res) {
