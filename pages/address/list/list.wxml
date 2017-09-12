@@ -7,15 +7,17 @@
 
     <view wx:for="{{addressList}}" wx:key="unique1">
       <view class="address-item">
-        <view class="address-item-icon"></view>
-        <view class="address-item-content" data-addr="{{item}}" bindtap="selectAddr">
-          <view class="address-item-content-contact">
-            <span class="name">{{item.ordername}}</span>
-            <span>{{item.mobile}}</span>
-          </view>
-          <view class="address-item-content-address">
-            <span class="defaut" wx:if="{{item.isdefault == 1}}">[默认地址]</span>
-            <span class="adrss">{{item.province}}{{item.city}}{{item.area}}{{item.detailaddress}}</span>
+        <view class="address-item-lf" bindtap="selectAddr">
+          <view class="address-item-icon {{className}}"></view>
+          <view class="address-item-content" data-addr="{{item}}">
+            <view class="address-item-content-contact">
+              <span class="name">{{item.ordername}}</span>
+              <span>{{item.mobile}}</span>
+            </view>
+            <view class="address-item-content-address">
+              <span class="defaut" wx:if="{{item.isdefault == 1}}">[默认地址]</span>
+              <span class="adrss">{{item.province}}{{item.city}}{{item.area}}{{item.detailaddress}}</span>
+            </view>
           </view>
         </view>
         <view class="address-item-eidt" data-id="{{item.id}}" bindtap="editAddress">
@@ -25,11 +27,11 @@
     </view>
 
   </view>
-
-  <view class="address-btn">
-    <navigator url="/pages/address/edit/edit?id=-1">
-      <button class="address-btn-impl">新增收货地址</button>
-    </navigator>
-  </view>
+  
 </view>
 
+<view class="address-btn">
+  <navigator url="/pages/address/edit/edit?id=-1">
+    <button class="address-btn-impl">新增收货地址</button>
+  </navigator>
+</view>

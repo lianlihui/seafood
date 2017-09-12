@@ -277,8 +277,8 @@ Page({
       successCallback: function (res) {
         if(res.code==0){
           wx.redirectTo({
-             url: '../list/list'
-          })
+            url: '../list/list'
+          });
         }
       },
       failCallback: function (res) {
@@ -308,7 +308,7 @@ Page({
               if (res.code == 0) {
                 wx.redirectTo({
                   url: '../list/list'
-                })
+                });
               }
             },
             failCallback: function (res) {

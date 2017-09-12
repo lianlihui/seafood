@@ -66,7 +66,6 @@ Page({
 
   //获取我的私宴
   getSyData: function () {
-    debugger
     var self = this;
     var postData = {
       token: app.globalData.token,
@@ -78,8 +77,16 @@ Page({
       data: postData,
       method: 'GET',
       successCallback: function (res) {
+        var list = [];
 
-        var list=[];
+        if (!res.code != 0) {
+          self.setData({
+            syNoData: true,  //显示已经没有数据
+            syLoad: false  //滚动不用再触发
+          });
+          return false;
+        }
+
         if (self.data.orderlist.length==0){
           list = res.data.orderlist;
           //时间格式处理
@@ -134,6 +141,13 @@ Page({
       successCallback: function (res) {
 
         var list = [];
+        if (res.code != 0) {
+          self.setData({
+            myNoData: true,  //显示已经没有数据
+            myLoad: false  //滚动不用再触发
+          });
+          return false;
+        }
         if (self.data.subscribelist.length == 0) {
           list = res.data.subscribelist;
           //时间格式处理

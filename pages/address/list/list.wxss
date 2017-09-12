@@ -5,6 +5,7 @@
 }
 .address-list{
   width:100%;
+  padding-bottom: 
   background-color: #fff;
   margin-top: 20rpx;
 }
@@ -23,31 +24,39 @@
 }
 
 .address-item{
-  padding: 20rpx 92rpx;
+  padding: 20rpx 92rpx 20rpx 20rpx;
   width:100%;
   -webkit-box-sizing:border-box;
   box-sizing:border-box;
   border-bottom: 1px solid #cccccc;
   position: relative;
 }
+.address-item-lf {
+  width: 100%;
+  display: table;
+  vertical-align: middle;
+}
 .address-item-icon{
-  width: 92rpx;
+  width: 72rpx;
   height: 110rpx;
-  background: url(../../../images/address/sel_icon1.png) no-repeat center center;
+  display: none;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAP1BMVEUAAACIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIjomaf9AAAAFHRSTlMA7A9MlR2SV+aAxYffrTYtx6B9JzUCBLIAAADJSURBVCjPhZNZEoQgDETDvo3LKPc/65hYCky08j4spSGNoYGG8TnWGrM3wNBJ1RuV9KiGWAdi6FVbGbap01nSGgd6N/a0mS7V0+d2++mtXx/w/bNAx/LBMfLXWCs6GHAR3bBewokz/DHjaAIAXFyAUXA5gDmrMMjT0La/o9J64SHTJA6VzWTtnmRH5vUAniCFHvpVpuL7e/GM3XvdmvBjQluEpgpHIhyoEIcWxNLCVK4wsSiCG6IoB5n81SiqIFwihvGrOqS1v4I/K0IXE8DYivEAAAAASUVORK5CYII=) no-repeat center center;
   background-size: 30rpx;
-  position: absolute;
-  top: 50%;
-  margin-top: -55rpx;
-  left: 0;
+}
+.address-item-icon.show {
+  display: table-cell;
 }
 .address-item-icon.active {
-  background: url(../../../images/address/sel_icon2.png) no-repeat center center;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAb1BMVEUAAAA8zv88zv88zv88zv88zv88zv88zv88zv88zv88zv88zv88zv88zv88zv/////5/v/J8v9Az//h+P+t6/+M4v9t2v9d1v9J0v/w+/+b5v9V1f/c9/++7/953f9z3P/z/P/C8P+27f+U5P9R0/+oSHXLAAAADnRSTlMA6pQE+VdMEMWA7K3HgaFmAEAAAAEDSURBVCjPhZPZkoQgDEVBFMHuBsRde5nt/79xiAKVxpniPkioU5ELSUgU44WgZUlFwRlJVUuqohpZv9MKIBKtEGSFOqlgkV7UH7oEHnLTfH+u+kfV7pmqRGvfDrs/8C9Tuhmtv/ZIOl+n5IfW+vO4HiM8paN2Wo+Yn2zbu6OdDeZFggdIfvqNIMnR8+JoG9+WlO+4d9RMYVd6vE3jDOtkHO5VxP7nrTHLYN3q6DJHTL21sQO/ryf4GlSUCBf7MUDgc7e4KtxHU6sPjcgoJ6wJ8asD+kCUMlwS+/2hzYawTAo69ytOrjPtkGmmTCvmGzk/BuD/1qAhutURoBG8wghe8Qj+Agb0J9qckcweAAAAAElFTkSuQmCC) no-repeat center center;
   background-size: 30rpx;
 }
 .address-item-content{
-  padding:27rpx 0;
+  display: table-cell;
   -webkit-box-sizing:border-box;
-  box-sizing:border-box;
+          box-sizing:border-box;
+  -webkit-box-flex: 1.0;
+          box-flex: 1.0;
+  padding:27rpx 0;
   font-size: 28rpx;
 }
 .address-item-content-contact{
@@ -86,9 +95,10 @@
 }
 .address-btn{
   width: 100%;
-  border-bottom: 1px solid #eee;
+  position: fixed;
+  bottom: 0;
   margin-top:100rpx;
-  margin-bottom:55rpx;
+  margin-bottom:40rpx;
 }
 .address-btn-impl{
   width:694rpx;

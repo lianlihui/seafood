@@ -22,9 +22,11 @@ Page({
       data: { token: app.globalData.token},
       method: 'POST',
       successCallback: function(res) {
-        self.setData({
-          myInfo: res.data.userbean
-        });
+        if(res.code == 0) {
+          self.setData({
+            myInfo: res.data.userbean
+          });
+        }
       },
       failCallback: function(res) {
         console.log('fail' + res);

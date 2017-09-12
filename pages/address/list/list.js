@@ -7,7 +7,8 @@ Page({
    */
   data: {
     'addressList':[],
-    isSelect: false
+    isSelect: false,
+    className: ''
   },
 
   /**
@@ -15,7 +16,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      isSelect: !!options.select
+      isSelect: !!options.select,
+      className: options.select ? 'show' : ''
     })
     if (!app.globalData.token) {
       wx.redirectTo({ url: "/pages/login/login" });
@@ -33,10 +35,11 @@ Page({
       data: postData,
       method: 'GET',
       successCallback: function (res) {
-        console.log(res);
-        self.setData({
-          addressList: res.data.addresslist
-        });
+        if (res.code == 0) {
+          self.setData({
+            addressList: res.data.addresslist
+          });
+        }
       },
       failCallback: function (res) {
         console.log(res);
@@ -47,7 +50,7 @@ Page({
   //编辑地址信息
   editAddress: function (event) {
     var id = event.target.dataset.id;
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../edit/edit?id=' + id
     })
 
@@ -58,7 +61,7 @@ Page({
     if (this.data.isSelect) {
       var addr = event.target.dataset.addr;
       app.globalData.newOrder.data.addressbean = addr
-      wx.redirectTo({
+      wx.navigateTo({
         url: '/pages/orderdetail/orderdetail'
       }) 
     }
