@@ -1,6 +1,4 @@
 var app = getApp();
-// var QQMapWX = require('../../../utils/qqmap-wx-jssdk.min.js');
-// var qqmapsdk;
 
 Page({
   data: {
@@ -10,8 +8,8 @@ Page({
     loading: '加载中'
   },
   onLoad: function() {
-    console.log(getCurrentPages());
     var self = this;
+    console.log('开始获取地址数据');
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
