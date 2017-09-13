@@ -27,11 +27,11 @@ Page({
     detailShow: false, // 单品详情是否显示
     detail: {}, // 单品详情数据
     cart: { // 购物车
-      show: false,
-      list: [],
-      total: 0,
-      freight: 0,
-      amount: 0
+      show: false, // 是否显示购物车
+      list: [], // 商品数据
+      total: 0, // 总数量
+      freight: 0, // 运费
+      amount: 0 // 总价
     },
     limitAmount: 0
   },
@@ -40,62 +40,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log({globalData})
     wx.showLoading({title: '页面加载中', mask: true})
     if (options.id) {
       detailId = parseInt(options.id)
     }
+    this.fetchData(() => {
+
+      // 显示特定商品
+      if (detailId) {
+        this.showDetail(null, detailId)
+      }
+
+      // 再来一单数据处理
+      if (globalData.repeatOrder) {
+        this.initRepeatOrderData()
+      }
+
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-    this.fetchData()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
-  
+    // 离开私宴页面销毁再来一单的数据
+    globalData.repeatOrder = null
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
-  fetchData () {    
+  fetchData (cb) {    
     var that = this
 
     wx.request({
@@ -125,9 +98,7 @@ Page({
           }
           that.setData({list, products, imageRootPath, limitAmount: freightZuidi})
 
-          if (detailId) {
-            that.showDetail(null, detailId)
-          }
+          cb && cb()
         } else {
           console.error(msg)
         }
@@ -166,7 +137,7 @@ Page({
       let index // 相同单品（含规格）的位置
       const specIndex = data.specindex || this.data.modalSpecIndex // 规格位置
       const list = this.data.cart.list.filter((v, i) => {
-        if (v.id === product.id && (this.data.spec.sizelist ? v.size.id === this.data.spec.sizelist[specIndex].id : 1)) {
+        if (v.id === product.id && v.size.id === product.sizelist[specIndex].id) {
           index = i // 找到相同单品（含规格）
           return true
         } else{
@@ -216,10 +187,7 @@ Page({
 
     // 多规格的商品只能从购物车删除
     if (product.sizelist.length > 1 && !product.size) {
-      wx.showToast({
-        title: '多规格商品只能从购物车删除哦',
-        image:'/images/warn.png'
-      })
+      this.showMsg('多规格商品只能从购物车删除哦')
       return
     }
 
@@ -403,6 +371,87 @@ Page({
         console.log(res);
       }
     })
-  }
+  },
 
+  // 处理再来一单的数据初始化
+  initRepeatOrderData () {
+
+    // 1. 先处理购物车数据
+    let data = {
+      ['cart.list'] : globalData.repeatOrder.map(({wareid, amount, price, cost, warename, warepic, sizename, sizeid}) => {return {
+        id: wareid,
+        len: amount,
+        name: warename,
+        size: {
+          id: sizeid,
+          name: sizename,
+          price
+        },
+        sizeid, sizename
+        // menuindex, productindex, specindex, sizelist
+      }})
+    }
+
+    // 2. 处理菜单的数据
+    let indexVisitObj = {} // 标记已访问的商品，方便多规格的商品数据的购物车数据叠加
+    globalData.repeatOrder.forEach(({wareid, amount, sizeid}) => {
+      this.data.list.forEach((v1, i1) => {
+        v1.warelist.forEach((v2, i2) => {
+
+          // 找到商品后处理
+          if (v2.id === wareid) {
+            // debugger
+            // 寻找分类位置，商品位置
+            let menuindex = i1, productindex = i2, specIndex, newSize       
+            // 寻找规格位置   
+            v2.sizelist.forEach((v3, i3) => {
+              specIndex = v3.id === sizeid ? i3 : 0
+            })
+
+            let curSize = indexVisitObj['visit_' + menuindex + '_' + productindex]
+
+            if (curSize) {
+              curSize[sizeid] = amount
+              curSize.count += amount
+              newSize = curSize
+            } else {
+              newSize = {
+                [sizeid]: amount,
+                count: amount
+              }
+            }
+
+            indexVisitObj['visit_' + menuindex + '_' + productindex] = newSize
+
+            // 2.1 补充购物车位置信息
+            // menuindex, productindex, specindex, sizelist
+            data['cart.list'] = data['cart.list'].map(v4 => {
+              return v4.id === v2.id && v4.sizeid === sizeid ? {...v4, ...{menuindex, productindex, specIndex, sizelist: v2.sizelist}} : v4
+            })
+
+            // 循环处理
+            data = {...data, ...{
+              ['list[' + menuindex + '].warelist[' + productindex + '].cart']: newSize
+            }}
+
+          }
+        })
+      })
+    })
+
+    // 3. 设置所有数据
+    this.setData(data),
+    this.calcTotal()
+    this.calcAmount()
+
+  },
+
+  showMsg (msg) {
+    wx.showModal({
+      title: '提示',
+      content: msg,
+      showCancel: false,
+      confirmText: '我知道了'
+    });
+  }
 })
