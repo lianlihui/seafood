@@ -1,4 +1,5 @@
 var app = getApp();
+var globalData = app.globalData;
 
 Page({
 
@@ -88,16 +89,20 @@ Page({
       case '立即支付':
         var amount = this.data.order.cost || 0
         var id = this.data.id
-        wx.redirectTo({
+        wx.navigateTo({
           url: '/pages/orderpay/orderpay?id=' + id + '&amount=' + amount
         });
         break;
       case '取消订单':
-
+      
       break;
       case '再来一单':
-        
-      break;
+        // 传输订单数据到私宴页面
+        globalData.repeatOrder = this.data.order.warelist;
+        wx.navigateTo({
+          url: '/pages/roomservice/roomservice'
+        })
+      break
       default:
     }
   },
