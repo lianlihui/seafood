@@ -50,6 +50,7 @@ Page({
       // 显示特定商品
       if (detailId) {
         this.showDetail(null, detailId)
+        detailId = 0
       }
 
       // 再来一单数据处理
