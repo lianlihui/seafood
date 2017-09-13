@@ -264,7 +264,7 @@
   border: 1rpx solid #e6e6e6;
   background: #e6e6e6;
   border-radius: 20rpx;
-  margin-left: 38rpx;
+  margin-right: 38rpx;
   margin-bottom: 10rpx;
 }
 .modal-body .spec.active {
@@ -272,9 +272,9 @@
   color: #0b84ff;
   border-color: #0b84ff;
 }
-.modal-body .spec:first-child {
+/*.modal-body .spec:first-child {
   margin-left: 0;
-}
+}*/
 .modal-footer {
   display: -webkit-box;
   margin-top: 50rpx;
