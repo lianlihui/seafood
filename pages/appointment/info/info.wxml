@@ -25,13 +25,13 @@
 
   <view class="form-item">
     <label><image src="/images/info_icon4.png"/>用餐人数</label>
-    <!-- <input type="text" placeholder="请选择用餐人数" class="form-input" value="{{dinnerIdx}}" bindtap="selectNum" /> -->
-    <picker class="pickerCls" bindchange="bindDinnerChange" value="{{dinnerIdx}}" range="{{dinnerArr}}">
+    <!-- <input type="text" placeholder="请输入用餐人数" class="form-input" value="{{dinnerIdx}}" bindtap="selectNum" /> -->
+    <input placeholder="请选择用餐人数" maxlength="2" bindchange="bindDinnerChange" class="form-input"/>
+    <!--<picker class="pickerCls" bindchange="bindDinnerChange" value="{{dinnerIdx}}" range="{{dinnerArr}}">
       <view class="picker">
         {{dinnerArr[dinnerIdx]}}
       </view>
-    </picker>
-    <image src="/images/info_icon2.png" class="form-arrow"/>
+    </picker>-->
   </view>
 
   <view class="form-item">
@@ -105,7 +105,7 @@
       <view class="modal-body">
         <view class="subtitle">店名：{{shopInfo.username}}</view>
         <view class="subtitle">房间名：{{chooseRoom}}</view>
-        <view class="subtitle">人数：{{dinnerArr[dinnerIdx]}}</view>
+        <view class="subtitle">人数：{{dinnerIdx}}</view>
         <view class="subtitle">时间：{{time}}</view>
       </view>
       <view class="submodal-footer">

@@ -103,7 +103,6 @@ Page({
   },
 
   bindPhoneTab: function(event) {
-    console.log(event);
     var phoneNumber = event.target.dataset.phone;
     wx.makePhoneCall({
       phoneNumber: phoneNumber,

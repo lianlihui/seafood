@@ -27,7 +27,6 @@ Page({
       url: app.globalData.serviceUrl + 'mSubscribeDetail.htm',
       data: postData,
       successCallback: function (ress) {
-        console.log(ress);
         if (ress.code == 0) {
           ress.data.subscribebean.time = self.timeFormat(ress.data.subscribebean.time);
           self.setData({
@@ -42,7 +41,7 @@ Page({
             });
           } else if (obj.status == 1) {
             self.setData({
-              qxBtn: true,
+              qxBtn: false,
               status: '预约完成'
             });
           } else if (obj.status == 2) {
@@ -53,7 +52,6 @@ Page({
           }
         } else {
         }
-        console.log(ress.data.subscribebean);
       },
       failCallback: function (ress) {
 
@@ -63,7 +61,7 @@ Page({
 
   //我的预约时间格式化
   timeFormat: function (timeStr) {
-    var time = new Date(timeStr);
+    var time = new Date(timeStr.replace(/-/gi, '/'));
     var month = time.getMonth() + 1;
     var date = time.getDate();
     var day = time.getDay();

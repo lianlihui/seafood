@@ -30,7 +30,6 @@ Page({
   },
 
   bindMultiPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value);
     var self = this;
     var current_value = e.detail.value;
 
@@ -43,7 +42,6 @@ Page({
     });
   },
   bindMultiPickerColumnChange: function (e) {
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
     var self=this;
     
     var col = e.detail.column;
@@ -56,7 +54,6 @@ Page({
     //切换地市
     if (col == 1) {
       var code = self.data.areaArray[1][val].code;
-      console.log('code:'+code);
       self.getCountiesByCityCode(code);
     }
   },

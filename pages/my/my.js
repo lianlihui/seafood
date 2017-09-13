@@ -1,7 +1,5 @@
 var app = getApp();
 
-console.log('my');
-
 Page({
   data: {
     myInfo: null

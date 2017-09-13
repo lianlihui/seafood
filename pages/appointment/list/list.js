@@ -9,11 +9,9 @@ Page({
   },
   onLoad: function() {
     var self = this;
-    console.log('开始获取地址数据');
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
-        console.log(res);
         self.setData({
           latitude: res.latitude,
           longitude: res.longitude
@@ -50,9 +48,8 @@ Page({
             });
           }
         });
-
       },
-      fail: function() {
+      fail: function(res) {
         self.setData({
           address: '定位失败'
         });

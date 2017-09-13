@@ -65,6 +65,7 @@ App({
   },
 
   globalData: {
+    orderTab:'sy',
     token:'',
     userInfo: null,
     serviceUrl: 'https://hjx.pnkoo.cn/'

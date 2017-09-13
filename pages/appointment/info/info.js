@@ -10,7 +10,6 @@ Page({
     currentRoom: '',
     chooseRoom: '',
     time: '',  //用餐时间
-    dinnerArr:[1,2,3,4,5,6,7,8],
     dinnerIdx: 0,
     shopId:'',
     modalSubShow:false,   //确定预约弹框
@@ -23,7 +22,6 @@ Page({
 
   //用餐时间确定
   bindMultiPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value);
     var selVal = e.detail.value;
     var timeArray = this.data.timeArray;
     var hh = timeArray[1][selVal[1]] < 10 ? '0' + timeArray[1][selVal[1]] : timeArray[1][selVal[1]] ;
@@ -84,7 +82,6 @@ Page({
     self.setData({
       timeArray: arr
     });
-    console.log(arr);
     
     self.setData({
       shopId: query.id
@@ -92,7 +89,6 @@ Page({
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
-        console.log(res);
         self.setData({
           latitude: res.latitude,
           longitude: res.longitude
@@ -149,15 +145,18 @@ Page({
 
   //用餐选择
   bindDinnerChange:function(e){
-    console.log('picker发送选择改变，携带值为', e.detail.value);
-    this.setData({
-      dinnerIdx: e.detail.value
-    });
+    var vl = e.detail.value;
+    if (/^\d{1,2}$/.test(vl)) {
+      this.setData({
+        dinnerIdx: vl
+      });
+    } else {
+      self.showMsg('请输入正确的就餐人数');
+    }
   },
 
   //选择房间
   selectSpec: function(e) {
-    console.log('ee');
     var data = e.target.dataset;
     this.setData({
       modalSpecIndex: data.index,
@@ -195,19 +194,6 @@ Page({
     this.setData({
       modalSpecShow: true
     });
-  },
-
-  //选择就餐人数
-  // selectNum: function() {
-  //   var self = this;
-  //   self.setData({
-  //     isShow: true
-  //   });
-  // },
-  bindDinnerChange:function(e){
-    this.setData({
-      dinnerIdx: e.detail.value
-    })
   },
 
   //确定预约
@@ -262,7 +248,7 @@ Page({
       token: app.globalData.token,
       shopid: self.data.shopId,
       room: self.data.chooseRoom,
-      number: self.data.dinnerArr[self.data.dinnerIdx],
+      number: self.data.dinnerIdx,
       time: self.data.time
     }
 
@@ -270,8 +256,8 @@ Page({
       url: app.globalData.serviceUrl + 'msubscribeadd.htm',
       data: postData,
       successCallback: function (ress) {
-        console.log(ress);
         if(ress.code==0){
+          app.globalData.orderTab='my';
           //跳转到我的私宴
           wx.switchTab({
             url: '/pages/order/list/list'

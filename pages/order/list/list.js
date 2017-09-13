@@ -53,10 +53,33 @@ Page({
     this.getMyData();
   },
 
+  onLoad: function(query) {
+    
+  },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if(app.globalData.orderTab=='my'){
+      //取消预约跳转而来
+      this.myClick();
+      app.globalData.orderTab='sy';
+    }else{
+      //预约详情返回
+      if(this.data.syStatus){
+        this.syClick();
+      }else{
+        this.myClick();
+      }
+      
+    }
+    /*if(this.data.syStatus){
+      this.getSyData();
+    }else{
+      this.getMyData();
+    }*/
+
     if (!app.globalData.token) {
       wx.redirectTo({ url: "/pages/login/login" });
       return false;
@@ -65,7 +88,7 @@ Page({
       orderlist:[],
       subscribelist:[]
     });
-    this.getSyData();
+    
   },
 
   //获取我的私宴
@@ -165,6 +188,7 @@ Page({
           var alist = res.data.subscribelist;
           for (var i = 0; i < alist.length; i++) {
             if (alist[i].time != null) {
+              console.log(alist[i].time);
               alist[i].time = self.timeFormat(alist[i].time);
             }
           }
@@ -192,7 +216,7 @@ Page({
 
   //我的预约时间格式化
   timeFormat:function(timeStr){
-    var time = new Date(timeStr);
+    var time = new Date(timeStr.replace(/-/gi, '/'));
     var month = time.getMonth()+1;
     var date = time.getDate();
     var day = time.getDay();
