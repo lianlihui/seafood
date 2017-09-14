@@ -6,7 +6,8 @@
 		感谢您对海极鲜外卖的支持，欢迎再次使用
 	</view>
 	<view class="order-detail-header-recur">
-		<view class="order-detail-header-recur-btn" bindtap="action">{{actionTxt}}</view>
+		<view class="{{actionCls}}" bindtap="action">{{actionTxt}}</view>
+    <view class="order-detail-header-recur-btn" wx:if="{{qxStatus}}" style="left:60%;" bindtap="qxOrder">取消订单</view>
 	</view>
 </view>
 

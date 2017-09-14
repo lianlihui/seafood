@@ -44,6 +44,22 @@
 	font-size:24rpx;
 }
 
+.order-detail-header-recur-btn-other{
+	position:absolute;
+	top:0;
+	left:40%;
+	width:148rpx;
+	height:51rpx;
+	line-height:51rpx;
+	vertical-align:middle;
+	border-radius: 4rpx;
+	text-align:center;
+	background: #18abfb;
+	margin-left:-74rpx;
+	color:#fff;
+	font-size:24rpx;
+}
+
 .order-detail-body{
   margin-bottom: 20rpx;
 }
