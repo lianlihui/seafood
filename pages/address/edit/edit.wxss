@@ -95,36 +95,28 @@
   background-size: 30rpx;
 }
 
-.address-btn-add{
-  width: 100%;
-  position: absolute;
-  bottom: 170rpx;
-}
-.addrss-edit-add{
-  width: 694rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  background: #3e9af7;
-  background: -webkit-linear-gradient(top, #3e9af7 0%, #7cc9f9 100%);
-  background: linear-gradient(to bottom, #3e9af7 0%, #7cc9f9 100%);
-  font-size: 32rpx;
-  color: #ffffff;
-  border-radius: 0;
-}
-
-.address-btn-delete{
+.address-btn-group {
   width: 100%;
   position: absolute;
   bottom: 45rpx;
 }
-.addrss-edit-delete{
+.addrss-edit-add,
+.addrss-edit-delete {
   width: 694rpx;
   height: 80rpx;
   line-height: 80rpx;
-  background: #CCC;
   font-size: 32rpx;
-  color: #fff;
+  color: #ffffff;
   border-radius: 0;
+}
+.addrss-edit-add {
+  background: #3e9af7;
+  background: -webkit-linear-gradient(top, #3e9af7 0%, #7cc9f9 100%);
+  background: linear-gradient(to bottom, #3e9af7 0%, #7cc9f9 100%);
+  margin-bottom: 30rpx;
+}
+.addrss-edit-delete{
+  background: #CCC;
 }
 
 /*选择器*/

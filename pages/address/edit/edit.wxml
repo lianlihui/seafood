@@ -46,14 +46,13 @@
 
   </view>
 
-  <view class="address-btn-add" wx:if="{{bcShow}}">
-      <button class="addrss-edit-add" formType="submit">保存</button>
+  <view class="address-btn-group">
+    <button class="addrss-edit-add" formType="submit" wx:if="{{bcShow}}">保存</button>
+    <button class="addrss-edit-delete" wx:if="{{ddShow}}" bindtap="deleteAddress">删除地址</button>
   </view>
+  
   </form>
   
-  <view class="address-btn-delete" wx:if="{{ddShow}}" bindtap="deleteAddress">
-      <button class="addrss-edit-delete">删除地址</button>
-  </view>
 
   <view wx:if="{{isShow}}" class="picker-view-wrap" bindtap="closeModal" data-modal="selectModal">
   <view wx:if="{{isShow}}" class="picker-view">

@@ -67,23 +67,26 @@ Page({
       return false;
     }
 
-    var self=this;
-    self.getProvince();
-
+    var self = this;
+    var ddShow = true;
     var title = "编辑地址";
+
+    self.getProvince();
     if (options.id == -1) {
       title = "新增地址";
-    }else{
-      var self = this;
+      ddShow = false;
     }
+
     self.setData({
       id: options.id,
-      ddShow: true,
+      ddShow: ddShow,
       isSelect: !!options.select
     });
+
     wx.setNavigationBarTitle({
       title: title
-    })
+    });
+
     if (options.id != -1) {
       var id = options.id;
       //获取地址数据
