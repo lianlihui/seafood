@@ -40,7 +40,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log({globalData})
     wx.showLoading({title: '页面加载中', mask: true})
     if (options.id) {
       detailId = parseInt(options.id)
@@ -83,7 +82,6 @@ Page({
         res = res.data
         const {msg, code} = res
         const {warelablelist, waretypelist, imageRootPath, freightZuidi} = res.data
-        console.log(res)
         if (code == 0) {
           let list = []
           let products = []

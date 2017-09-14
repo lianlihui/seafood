@@ -140,7 +140,6 @@ Page({
     if (couponsid) {postData.couponsid = couponsid}
 
     wx.showLoading({title: '正在提交订单', mask: true})
-    console.log({postData})
 
     app.ajax({
       url: globalData.serviceUrl + 'mordersub.htm',

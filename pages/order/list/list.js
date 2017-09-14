@@ -106,7 +106,7 @@ Page({
       successCallback: function (res) {
         var list = [];
 
-        if (!res.code != 0) {
+        if (res.code != 0) {
           self.setData({
             syNoData: true,  //显示已经没有数据
             syLoad: false  //滚动不用再触发
@@ -188,7 +188,6 @@ Page({
           var alist = res.data.subscribelist;
           for (var i = 0; i < alist.length; i++) {
             if (alist[i].time != null) {
-              console.log(alist[i].time);
               alist[i].time = self.timeFormat(alist[i].time);
             }
           }
@@ -250,5 +249,84 @@ Page({
         this.getMyData();
       }
     }
+  },
+
+  //去支付
+  payAction:function(e){
+    var id = e.target.dataset.id;
+    var amount = e.target.dataset.amount;
+    wx.navigateTo({
+      url: '/pages/orderpay/orderpay?id=' + id + '&amount=' + amount
+    });
+  },
+
+  //取消订单
+  qxAction: function (e) {
+    var id = e.target.dataset.id;
+    var self=this;
+    wx.showModal({
+      title: '提示',
+      content: '确定取消该订单？',
+      success: function (res) {
+        if (res.confirm) {
+          var postData = {
+            token: app.globalData.token,
+            id: id
+          };
+          app.ajax({
+            url: app.globalData.serviceUrl + 'mordercancel.htm',
+            data: postData,
+            method: 'POST',
+            successCallback: function (res) {
+              if (res.code == 0) {
+                self.syClick();
+              }
+            },
+            failCallback: function (res) {
+            }
+          });
+        }
+      }
+    });
+  },
+
+  //再来一单
+  zlAction:function(e){
+    var warelist = e.target.dataset.warelist;
+    app.globalData.repeatOrder = warelist;
+    wx.navigateTo({
+      url: '/pages/roomservice/roomservice'
+    })
+  },
+
+  //取消我的预约
+  qxMyAction:function(e){
+    var id = e.target.dataset.id;
+    var self = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定取消该预约？',
+      success: function (res) {
+        if (res.confirm) {
+          var postData = {
+            token: app.globalData.token,
+            id: id
+          };
+          app.ajax({
+            url: app.globalData.serviceUrl + 'mSubscribeCancle.htm',
+            data: postData,
+            method: 'POST',
+            successCallback: function (res) {
+              if (res.code == 0) {
+                self.myClick();
+              }
+            },
+            failCallback: function (res) {
+              console.log(res);
+            }
+          });
+        }
+      }
+    });
   }
 })

@@ -5,10 +5,18 @@
 	<view hidden="{{status !== 4}}" class="order-detail-header-txt">
 		感谢您对海极鲜外卖的支持，欢迎再次使用
 	</view>
-	<view class="order-detail-header-recur">
-		<view class="{{actionCls}}" bindtap="action">{{actionTxt}}</view>
-    <view class="order-detail-header-recur-btn" wx:if="{{qxStatus}}" style="left:60%;" bindtap="qxOrder">取消订单</view>
-	</view>
+
+  <view class="order-detail-header-recur">
+    <view class="order-detail-header-recur-btn" bindtap="action" wx:if="{{order.status == 1}}" data-txt="立即支付">
+      去支付
+    </view>
+    <view class="order-detail-header-recur-btn cancel" bindtap="qxOrder"  wx:if="{{(order.type == 4 && order.status == 2) || (order.status == 1)}}" data-txt="取消订单">
+      取消订单
+    </view>
+    <view class="order-detail-header-recur-btn" bindtap="action" data-txt="再来一单" data-warelist="{{order.warelist}}" wx:else>
+      再来一单
+    </view>
+  </view>
 </view>
 
 <view class="order-detail-body">

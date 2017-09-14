@@ -21,7 +21,6 @@ Page({
   },
 
   getIndexData: function() {
-    console.log(getCurrentPages());
     var self = this;
     var postData = {
       token: ''
@@ -34,7 +33,6 @@ Page({
       method: 'GET',
       successCallback: function(res) {
         wx.hideLoading();
-        console.log(res);
         self.setData({
           imgUrls: res.data.poslinklist,
           imageRootPath: res.data.imageRootPath,

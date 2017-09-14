@@ -42,62 +42,44 @@ Page({
       method: 'GET',
       successCallback: function (res) {
         var obj = res.data.orderbean;
+        var statusTxt = '';
+        var payTxt = '';
         obj.createtime = obj.createtime.substring(0,16);
         
         self.setData({
           order: obj
         });
 
-        if (obj.status == 1){
-          self.setData({ 
-            statusTxt: '未支付', 
-            actionTxt: '立即支付', 
-            qxStatus:true,
-            actionCls: 'order-detail-header-recur-btn-other'
-          });
+        switch(obj.status) {
+          case 1: statusTxt = '未支付'; break;
+          case 2: statusTxt = '待配送'; break;
+          case 3: statusTxt = '配送中'; break;
+          case 4: statusTxt = '已完成'; break;
+          case 5: statusTxt = '备货中'; break;
+          case 7: statusTxt = '已取消'; break;
+          default: statusTxt = '未支付';
         }
-        if (obj.status == 2) {
-          self.setData({ 
-            statusTxt: '待配送' , 
-            actionTxt: '再来一单',
-            qxStatus: true,
-            actionCls: 'order-detail-header-recur-btn-other'
-          });
-        }
-        if (obj.status == 3) {
-          self.setData({ statusTxt: '配送中' , actionTxt: '再来一单'});
-        }
-        if (obj.status == 4) {
-          self.setData({ statusTxt: '已完成' , actionTxt: '再来一单'});
-        }
-        if (obj.status == 5) {
-          self.setData({ statusTxt: '备货中' , actionTxt: '再来一单'});
-        }
-        if (obj.status == 7) {
-          self.setData({ statusTxt: '已取消' , actionTxt: '再来一单'});
-        }
+        self.setData({ 
+          statusTxt: statusTxt
+        });
 
-        if (obj.type == 1) {
-          self.setData({ payTxt: '微信支付' });
+        switch(obj.type) {
+          case 1: payTxt = '微信支付'; break;
+          case 2: payTxt = '支付宝支付'; break;
+          case 3: payTxt = '余额支付'; break;
+          case 4: payTxt = '货到付款'; break;
+          default: payTxt = '未支付';
         }
-        if (obj.type == 2) {
-          self.setData({ payTxt: '支付宝支付' });
-        }
-        if (obj.type == 3) {
-          self.setData({ payTxt: '余额支付' });
-        }
-        if (obj.type == 4) {
-          self.setData({ payTxt: '货到付款' });
-        }
+        self.setData({ payTxt: payTxt});
       },
       failCallback: function (res) {
-        console.log(res);
       }
     });
   },
 
-  action: function () {
-    switch(this.data.actionTxt) {
+  action: function(e) {
+    var actionTxt = e.target.dataset.txt;;
+    switch(actionTxt) {
       case '立即支付':
         var amount = this.data.order.cost || 0
         var id = this.data.id
@@ -138,11 +120,12 @@ Page({
             method: 'POST',
             successCallback: function (res) {
               if (res.code == 0) {
+                var obj = self.data.order;
+                obj.status = 7;
                 self.setData({ 
-                  statusTxt: '已取消', 
-                  actionTxt: '再来一单',
-                  qxStatus: false,
-                  actionCls: 'order-detail-header-recur-btn' });
+                  order: obj,
+                  statusTxt: '已取消'
+                });
               }
             },
             failCallback: function (res) {
@@ -159,10 +142,8 @@ Page({
     wx.makePhoneCall({
       phoneNumber: phoneNumber,
       success: function(res) {
-        console.log(res);
       }, 
       fail: function(res) {
-        console.log(res);
       }
     });
   },

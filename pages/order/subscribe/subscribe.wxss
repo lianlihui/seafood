@@ -51,7 +51,7 @@
 .shop-phone {
   width: 80rpx;
   height: 80rpx;
-  background: url(../../../images/info_icon6.png) no-repeat right center;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAjCAMAAADR57icAAABelBMVEUAAABIsP9cyv45nf9cyf5Apf5Cp/5Bpv06nv43mv9Zxv84nP9Svf5Uv/43mv8+ov5byP06nv45nf9Pt/lGrf1FrP9Apv9dyv43m/9UwP5Zx/4+o/9Ls/5FrP87n/88of9cyv44nP9Dqv5Puf43mv9ax/03mv9Svf5ax/46nf1cyf5YxP5Ru/5Xw/xSvf1Vwf1byP1SvP0+ofpXw/04nP9PtvhKsv5cyv5Cqf9Jsf5byP43mv9Tvf5YxP5Tvv5Xwv1Dqf89ov5Ntv5Hr/5Xw/5Jsf5Tvv5Quf5VwP5Ntf5Tvf03mv88of9Eqv5YxP0+o/9Ruv5FrP49oP1Dqf46nv9Ot/5Xwvw+o/45nf5FrP1UvvxBpv1Uvv08oPxXw/1Yxf44nP9VwP43mv9Svf49ov88oP9Wwf5ax/4/pf9cyv5byP5Xw/46nv87n/85nf9Qu/5LtP9Jsf9Grv8+o/9Cqf9Bp/9Eq/9Puf5Nt/9FrP9OuP5Tv/9PuP9Ot/8v0FYiAAAAX3RSTlMABebeKxINA5+b8+/hml5UTkYeCwn49u/o5eLVw7y7tK+tqqCTj4qFhHZiXl1XUU9HQDo5NTQpJBoW/vj07Ozs5+bh39XQz8G3srGloZyWlZORfnZualpXT01IQSopHJt80CQAAAGmSURBVDjLtdNXU8JAFAXgNUQDSBHB3nvvBbH33nsnhRYglNAE9b97N+jow5plnPE8f7Nn780G/SFlvb2uUhxnEsXuihJgtwg5KKe6ikoM+Q6qdAzUizyEJm0LJls9z8di0dY5PTddKfImmyEWjSr+1mqdzZhwq/HWoCh+v+/8d1htABeLGh0Gv89Xa9eFcDtFMU42+VI3ertpg9vh1kP7iR3p5RIzqE05dBmeWmOhNo72IIzAUqFQJ6LlaQ1YKNPCUeUAdunVSSp0NWUy6XT2CFHzUAsuX3P3c2vDMyR5UZPNq+rG7PeEXXHLBAFyZ6qqJpNbX6/HaZUkyXJPkM5OcMlE8+eZM6+SJAgNYwTpaUkmEomX9Svt15nYFwQhEFkZIcjyZnCFt9xO3+hU3/aoNRCIRLxmkvTsvRdy8XhcWlzGrdaI1+sNmodIZ3aBgyFwa8B8fQwuGA6zpK9+WnRa61JVDzCZcSNShi0a01obx/tlua4KkfO4Cw4YbmXGexjsyOGGNossDMexZUgnz/2NGpOZQUQJO9jOzMvtU4gep5tlXej/8gGWqnXwF8Pn/gAAAABJRU5ErkJggg==) no-repeat right center;
   background-size: 40rpx auto;
   position: absolute;
   top: 50%;

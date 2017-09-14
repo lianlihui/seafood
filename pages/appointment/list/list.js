@@ -23,7 +23,6 @@ Page({
             longitude: res.longitude
           },
           successCallback: function(ress) {
-            console.log(ress);
             if (ress.code == 0) {
               var shoplist = ress.data.shoplist;
               for (var i = 0, len = shoplist.length; i < len; i++) {
@@ -40,7 +39,6 @@ Page({
                 loading: '加载失败，请重新加载'
               });
             }
-            console.log(ress.data.shoplist);
           },
           failCallback: function(ress) {
             self.setData({

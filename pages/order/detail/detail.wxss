@@ -27,37 +27,26 @@
 	margin-top:45rpx;
 	position: relative;
 	height:51rpx;
+  text-align: center;
 }
 .order-detail-header-recur-btn{
-	position:absolute;
-	top:0;
-	left:50%;
 	width:148rpx;
 	height:51rpx;
 	line-height:51rpx;
+  display:inline-block;
 	vertical-align:middle;
 	border-radius: 4rpx;
 	text-align:center;
 	background: #18abfb;
-	margin-left:-74rpx;
 	color:#fff;
 	font-size:24rpx;
+  margin: 0 10rpx;
+  border-radius: 2px;
+  border: 1px solid #18abfb;
 }
-
-.order-detail-header-recur-btn-other{
-	position:absolute;
-	top:0;
-	left:40%;
-	width:148rpx;
-	height:51rpx;
-	line-height:51rpx;
-	vertical-align:middle;
-	border-radius: 4rpx;
-	text-align:center;
-	background: #18abfb;
-	margin-left:-74rpx;
-	color:#fff;
-	font-size:24rpx;
+.order-detail-header-recur-btn.cancel {
+  background: #fff;
+  color: #18abfb;
 }
 
 .order-detail-body{

@@ -101,7 +101,6 @@ Page({
             longitude: res.longitude
           },
           successCallback: function(ress) {
-            console.log(ress);
             if (ress.code == 0) {
               self.setData({
                 address: ress.data.address,
@@ -115,7 +114,6 @@ Page({
               }
             } else {
             }
-            console.log(ress.data.shopbean);
           },
           failCallback: function(ress) {
 
@@ -135,10 +133,8 @@ Page({
     wx.makePhoneCall({
       phoneNumber: phoneNumber,
       success: function(res) {
-        console.log(res);
       }, 
       fail: function(res) {
-        console.log(res);
       }
     });
   },

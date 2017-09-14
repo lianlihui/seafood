@@ -157,17 +157,21 @@
   display: inline-block;
   vertical-align: middle;
 }
-.order-item-sy-time,.order-item-sy-detail,.order-item-sy-money{
-  display: block;
-}
 .order-item-sy-time,.order-item-sy-detail{
-  font-size: 20rpx;
+  padding: 10rpx 0;
+  font-size: 22rpx;
   color: #888;
+  border-bottom: 1px solid #eee;
+}
+.order-item-sy-detail {
+  padding: 20rpx 0;
 }
 .order-item-sy-money{
   font-size: 24rpx;
   color: #333;
   margin-top:15rpx;
+  display: inline-block;
+  float: left;
 }
 .order-item-sy-status{
   position: absolute;
@@ -178,19 +182,20 @@
   font-size: 20rpx;
   color: #000;
 }
+.order-item-sy-group {
+  text-align: right;
+}
 .order-item-sy-pay{
   width:114rpx;
   height:35rpx;
   line-height: 35rpx;
   border: 1px solid #379aff;
-  position: absolute;
-  bottom: 0rpx;
-  right: 0rpx;
   display: inline-block;
   vertical-align: middle;
   text-align: center;
   font-size: 20rpx;
   color: #379aff;
+  margin-right: 20rpx;
 }
 .order-item-sy-pay.pay{
   background: #379aff;

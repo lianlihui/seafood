@@ -30,15 +30,15 @@
   color: #333333;
   position:absolute;
   top:50%;
-  margin-top: -14rpx;
+  margin-top: -19rpx;
   left: 0;
 }
 .addrss-edit-item-inp{
   font-size: 24rpx;
   color: #333;
   margin-left:150rpx;
-  height: 28rpx;
-  line-height: 28rpx;
+  /*height: 28rpx;
+  line-height: 28rpx;*/
 }
 
 .addrss-edit-item-area{
@@ -63,6 +63,8 @@
   left: 0;
 }
 .addrss-edit-item-textarea{
+  height: 20px;
+  padding: 0;
   font-size: 24rpx;
   color: #333;
   margin-left:150rpx;

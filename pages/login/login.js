@@ -17,7 +17,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     var self = this;
   },
 
@@ -89,7 +88,6 @@ Page({
       data: postData,
       method: 'GET',
       successCallback: function (res) {
-        console.log(res);
         if(res.code!=0){
           self.showMsg(res.msg);
         }else{
@@ -132,7 +130,6 @@ Page({
             data: postData,
             method: 'POST',
             successCallback: function (res) {
-              console.log(res);
               if (res.code == 0) {
                 //注册成功后设置token
                 app.globalData.token = res.data;
@@ -152,7 +149,6 @@ Page({
         } else {
           console.log('获取用户登录态失败！' + res.errMsg)
         }
-        console.log('_code:' + self.data._code);
       }
     });
   },

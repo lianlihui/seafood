@@ -27,7 +27,6 @@ Page({
         }
       },
       failCallback: function(res) {
-        console.log('fail' + res);
       }
     });
   }

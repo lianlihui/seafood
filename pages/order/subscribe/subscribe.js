@@ -82,10 +82,8 @@ Page({
     wx.makePhoneCall({
       phoneNumber: phoneNumber,
       success: function (res) {
-        console.log(res);
       },
       fail: function (res) {
-        console.log(res);
       }
     });
   },
