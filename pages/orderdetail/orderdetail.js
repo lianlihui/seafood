@@ -192,5 +192,16 @@ Page({
         console.log(res);
       }
     })
+  },
+
+  // 选择地址
+  goAddressList () {
+    let url = '/pages/address/list/list?select=1'
+
+    if (this.data.addressid) {
+      url += '&curid=' + this.data.addressid
+    }
+
+    wx.navigateTo({url})
   }
 })

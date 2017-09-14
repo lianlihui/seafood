@@ -8,7 +8,7 @@
     <view wx:for="{{addressList}}" wx:key="unique1">
       <view class="address-item">
         <view class="address-item-lf" bindtap="selectAddr" data-addr="{{item}}">
-          <view class="address-item-icon {{className}}"></view>
+          <view class="address-item-icon {{className}} {{curid == item.id ? 'active': ''}}"></view>
           <view class="address-item-content">
             <view class="address-item-content-contact">
               <span class="name">{{item.ordername}}</span>
