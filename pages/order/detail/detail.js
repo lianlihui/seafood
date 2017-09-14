@@ -12,7 +12,9 @@ Page({
     payTxt:'',
     order:null,
     status: 1,
-    actionTxt:''
+    actionTxt:'',
+    qxStatus:false,
+    actionCls:'order-detail-header-recur-btn'
   },
 
   /**
@@ -47,10 +49,20 @@ Page({
         });
 
         if (obj.status == 1){
-          self.setData({statusTxt: '未支付', actionTxt: '立即支付'});
+          self.setData({ 
+            statusTxt: '未支付', 
+            actionTxt: '立即支付', 
+            qxStatus:true,
+            actionCls: 'order-detail-header-recur-btn-other'
+          });
         }
         if (obj.status == 2) {
-          self.setData({ statusTxt: '待配送' , actionTxt: '取消订单'});
+          self.setData({ 
+            statusTxt: '待配送' , 
+            actionTxt: '再来一单',
+            qxStatus: true,
+            actionCls: 'order-detail-header-recur-btn-other'
+          });
         }
         if (obj.status == 3) {
           self.setData({ statusTxt: '配送中' , actionTxt: '再来一单'});
@@ -105,6 +117,41 @@ Page({
       break
       default:
     }
+  },
+
+  //取消订单
+  qxOrder:function(){
+    var self = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定取消该订单？',
+      success: function (res) {
+        if (res.confirm) {
+          var id = self.data.id;
+          var postData = {
+            token: app.globalData.token,
+            id: id
+          };
+          app.ajax({
+            url: app.globalData.serviceUrl + 'mordercancel.htm',
+            data: postData,
+            method: 'POST',
+            successCallback: function (res) {
+              if (res.code == 0) {
+                self.setData({ 
+                  statusTxt: '已取消', 
+                  actionTxt: '再来一单',
+                  qxStatus: false,
+                  actionCls: 'order-detail-header-recur-btn' });
+              }
+            },
+            failCallback: function (res) {
+              console.log(res);
+            }
+          });
+        }
+      }
+    })
   },
 
   bindPhoneTab: function(event) {
