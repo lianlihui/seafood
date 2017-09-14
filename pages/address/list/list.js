@@ -8,7 +8,8 @@ Page({
   data: {
     'addressList':[],
     isSelect: false,
-    className: ''
+    className: '', // 是否出现选框
+    curid: 0 // 当前选中的id
   },
 
   /**
@@ -17,7 +18,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       isSelect: !!options.select,
-      className: options.select ? 'show' : ''
+      className: options.select ? 'show' : '',
+      curid: options.curid || 0 
     })
     if (!app.globalData.token) {
       wx.redirectTo({ url: "/pages/login/login" });
@@ -61,7 +63,7 @@ Page({
     if (this.data.isSelect) {
       var addr = event.currentTarget.dataset.addr;
       app.globalData.newOrder.data.addressbean = addr
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/orderdetail/orderdetail'
       }) 
     }

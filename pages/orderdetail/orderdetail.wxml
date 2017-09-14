@@ -1,6 +1,6 @@
 <!--orderdetail.wxml-->
 <view class="container orderdetail-wrap">
-  <navigator class="address-wrap" url="/pages/address/list/list?select=1">
+  <view class="address-wrap" bindtap="goAddressList">
     <image src="/images/address.png" class="icon icon-address"></image>
     <view class="contact-wrap">
       <view wx:if="{{address.ordername ? 0:1}}" class="empty">选择地址</view>
@@ -12,7 +12,7 @@
       </block>
     </view>
     <image src="/images/arrow_right.png" class="icon icon-arrow-right"></image>
-  </navigator>
+  </view>
   <view class="time-wrap">
     <image src="/images/arrive_time.png" class="icon icon-arrive-time"></image>
       <text class="time-label">送达时间</text>
@@ -58,5 +58,11 @@
     <image src="/images/arrow_right.png" class="icon icon-arrow-right"></image>
     <text class="coupons-count">{{couponslist.length}}张可用</text>
   </view> -->
-  <view class="confirm-btn" bindtap="confirmOrder">提交订单</view>
+  <view class="bottom-wrap">
+    <view class="left">
+      <text>待支付：</text>
+      <text class="bottom-amount">￥{{amount}}</text>
+    </view>
+    <text class="confirm-btn" bindtap='confirmOrder'>提交订单</text>
+  </view>
 </view>
