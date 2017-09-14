@@ -143,17 +143,18 @@
           box-flex: 1.0;
 }
 .order-item-sy-name {
+  padding-right: 100rpx;
   line-height: 1;
   color: #333;
   font-size: 30rpx;
   display: inline-block;
   vertical-align: middle;
 }
-
 .order-item-sy-arrow {
   width:11rpx;
   height:20rpx;
   margin-left: 10rpx;
+  margin-top: -2rpx;
   display: inline-block;
   vertical-align: middle;
 }
@@ -169,7 +170,7 @@
 .order-item-sy-money{
   font-size: 24rpx;
   color: #333;
-  margin-top:15rpx;
+  margin-top:8rpx;
   display: inline-block;
   float: left;
 }
@@ -195,7 +196,7 @@
   text-align: center;
   font-size: 20rpx;
   color: #379aff;
-  margin-right: 20rpx;
+  margin-left: 20rpx;
 }
 .order-item-sy-pay.pay{
   background: #379aff;

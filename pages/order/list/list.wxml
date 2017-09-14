@@ -17,8 +17,8 @@
           <image src="{{imageRootPath}}{{item.warelist[0].warepic}}" class="order-item-sy-lf-img" mode="widthFix"/>
         </view>
         <view class="order-item-sy-rt">
-          <view class="order-item-sy-name">{{item.warelist[0].warename}}</view>
-          <image src="/images/order/sy_icon1.png" class="order-item-sy-arrow" />
+          <view class="order-item-sy-name">{{item.warelist[0].warename}}<image src="/images/order/sy_icon1.png" class="order-item-sy-arrow" /></view>
+          
           <view class="order-item-sy-time">{{item.createtime}}</view>
           <view class="order-item-sy-detail">
             {{item.warelist[0].warename}}等{{item.warelist.length}}件商品
