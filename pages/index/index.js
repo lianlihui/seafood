@@ -16,7 +16,7 @@ Page({
     'foodList': []
   },
   onShow: function() {
-    wx.showLoading({title: '页面加载中', mask: true})
+    // wx.showLoading({title: '页面加载中', mask: true})
     this.getIndexData();
   },
 
@@ -32,7 +32,7 @@ Page({
       data: postData,
       method: 'GET',
       successCallback: function(res) {
-        wx.hideLoading();
+        // wx.hideLoading();
         self.setData({
           imgUrls: res.data.poslinklist,
           imageRootPath: res.data.imageRootPath,

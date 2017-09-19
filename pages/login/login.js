@@ -62,10 +62,6 @@ Page({
   //发送验证码
   sendSmsCode: function(){
 
-    wx.navigateBack({
-      delta: 1
-    })
-
     var self = this;
 
     if (!/^1[34578]\d{9}$/.test(self.data.phone)) {
