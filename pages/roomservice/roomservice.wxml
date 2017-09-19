@@ -25,12 +25,13 @@
     class="menu-wrap"
     scroll-y="true"
     scroll-top="{{scrollTop.menu}}"
-    scroll-into-view="{{scrollIntoViewId}}">
-    <view wx:for="{{list}}" class="menu" id="Menu{{index}}">
+    scroll-into-view="{{scrollIntoViewId}}"
+    bindscroll="scrollHandle">
+    <view wx:for="{{list}}" class="menu" id="Menu{{index}}" data-index="{{index}}">
       <text class="menu-title">{{item.name}}</text>
       <view wx:for="{{item.warelist}}" wx:key="*this" wx:for-item="product" wx:for-index="productindex" class="menu-list">
         <view class="menu-product">
-          <image class="product-img" src="{{imageRootPath}}{{product.pic1}}"></image>
+          <image class="product-img" src="{{imageRootPath}}{{product.pic1}}"  bindtap="showDetail" data-detail="{{product}}"></image>
           <view class="product-body">
             <text class="product-name" bindtap="showDetail" data-detail="{{product}}">{{product.name}}</text>
             <text class="product-desc">{{product.descript}}</text>

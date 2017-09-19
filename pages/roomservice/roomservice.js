@@ -2,6 +2,9 @@
 let app = getApp()
 let detailId = 0
 let globalData = app.globalData
+let scrollTime = null // 函数节流时间戳
+let rects = [] // 各菜单的位置信息
+let mainScrollViewHeight = 0 // 主视图的高度
 
 Page({
 
@@ -57,6 +60,20 @@ Page({
         this.initRepeatOrderData()
       }
 
+      const query = wx.createSelectorQuery()
+
+      // 设置各菜单的位置信息
+      setTimeout(() => {
+        query.selectAll('.menu').boundingClientRect((rs) => {
+          rects = rs.map(v => {return {index: v.dataset.index, top: v.top}})
+          // console.log({rects})
+        }).exec()
+      }, 300);
+
+      // 设置主视图的高度
+      query.select('.menu-wrap').boundingClientRect(res => {
+        mainScrollViewHeight = res.height
+      }).exec()
     })
   },
 
@@ -452,5 +469,15 @@ Page({
       showCancel: false,
       confirmText: '我知道了'
     });
+  },
+
+  // 滚动菜单事件
+  scrollHandle (e) {
+    clearTimeout(scrollTime)
+    scrollTime = setTimeout(() => {
+      let ele = rects.filter(v => v.top >= e.detail.scrollTop)[0]
+      if (ele.top >= e.detail.scrollTop + mainScrollViewHeight) return
+      this.setData({curMenuId: ele.index})
+    }, 100);
   }
 })
