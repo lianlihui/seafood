@@ -29,7 +29,7 @@
       </view>
       <scroll-view class="scroll-view" scroll-x="true" style="width: 100%">
         <view class="scroll-view-item" wx:for="{{item.warelist}}" wx:for-item="item1">
-          <navigator url="/pages/roomservice/roomservice?id={{item1.id}}">
+          <navigator url="/pages/roomservice/roomservice?id={{item1.id}}&menu={{item.id}}">
             <image src="{{imageRootPath}}{{item1.pic1}}" class="scroll-view-item-img" mode="aspectFill"/>
             <view class="scroll-view-item-info">
               <text>{{item1.name}}</text>

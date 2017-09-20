@@ -1,10 +1,12 @@
 // roomservice.js
 let app = getApp()
 let detailId = 0
+let menuId = 0
 let globalData = app.globalData
 let scrollTime = null // 函数节流时间戳
 let rects = [] // 各菜单的位置信息
 let mainScrollViewHeight = 0 // 主视图的高度
+let scrollHandleDis = false
 
 Page({
 
@@ -46,13 +48,15 @@ Page({
     wx.showLoading({title: '页面加载中', mask: true})
     if (options.id) {
       detailId = parseInt(options.id)
+      menuId = parseInt(options.menu)
     }
     this.fetchData(() => {
 
       // 显示特定商品
       if (detailId) {
-        this.showDetail(null, detailId)
+        this.showDetail(null, detailId, menuId)
         detailId = 0
+        menuId = 0
       }
 
       // 再来一单数据处理
@@ -124,10 +128,19 @@ Page({
 
   showMenu (e) {
     const id = e.target.dataset.menuid
-    this.setData({
-      scrollIntoViewId: 'Menu'+id,
-      curMenuId: id
+    let menuindex = 0
+
+    this.data.list.forEach((v, i) => {
+      if (v.id === id) {
+        menuindex = i
+      }
     })
+    this.setData({
+      curMenuId: id,
+      'scrollTop.menu': rects.filter(v => v.index == menuindex)[0].top
+    })
+
+    scrollHandleDis = true // 禁止触发滚动回调
   },
 
   // 加入购物车
@@ -306,17 +319,26 @@ Page({
   },
 
   // 显示单品详情
-  showDetail (e, id) {
+  showDetail (e, id, menuId = 0) {
     let detail = (id && this.data.products.filter(v => v.id === id)[0]) || e.target.dataset.detail
+    let menuindex = 0
 
     detail = Object.assign(detail, {
       menuindex: this.data.list.map((v, i) => v.id === detail.waretypeid ? i : -1).filter(v => v > -1)[0],
       productindex: this.data.list.filter(v => v.id === detail.waretypeid)[0].warelist.map((v, i) => v.id === detail.id ? i : -1).filter(v => v > -1)[0]
     })
 
+    this.data.list.forEach((v, i) => {
+      if (v.id === detail.waretypeid) {
+        menuindex = i
+      }
+    })
+
     this.setData({
       detail,
-      detailShow: true
+      detailShow: true,
+      curMenuId: menuId,
+      'scrollTop.menu': rects.filter(v => v.index == menuindex)[0].top
     })
   },
 
@@ -474,10 +496,14 @@ Page({
   // 滚动菜单事件
   scrollHandle (e) {
     clearTimeout(scrollTime)
-    scrollTime = setTimeout(() => {
-      let ele = rects.filter(v => v.top >= e.detail.scrollTop)[0]
-      if (ele.top >= e.detail.scrollTop + mainScrollViewHeight) return
-      this.setData({curMenuId: ele.index})
-    }, 100);
+    if (!scrollHandleDis) {
+      scrollTime = setTimeout(() => {
+        let ele = rects.filter(v => v.top >= e.detail.scrollTop)[0]
+        if (ele.top >= e.detail.scrollTop + mainScrollViewHeight) return
+        this.setData({curMenuId: ele.index})
+      }, 100);
+    } else {
+      scrollHandleDis = false
+    }
   }
 })

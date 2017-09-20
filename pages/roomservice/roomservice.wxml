@@ -8,8 +8,8 @@
     scroll-top="{{scrollTop.category}}">
     <text
       wx:for="{{list}}"
-      class="category{{index == curMenuId ? ' active' : ''}}"
-      data-menuid="{{index}}"
+      class="category{{item.id == curMenuId ? ' active' : ''}}"
+      data-menuid="{{item.id}}"
       wx:key="*this"
       bindtap="showMenu">{{item.name}}</text>
     <!-- <text class="category active">热销榜</text>
