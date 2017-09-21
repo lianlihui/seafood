@@ -22,7 +22,7 @@ Page({
       menu: 0
     },
     scrollIntoViewId: '', // 滚动选中分类id
-    curMenuId: 0, // 当前选中分类
+    curMenuId: 1, // 当前选中分类
     spec: {}, // 规格弹窗数据
     specMenuIndex: 0,
     specProductIndex: 0,
@@ -187,10 +187,33 @@ Page({
           newSize.count += newSize[key]
         }
       }
-      this.setData({
-        ['cart.list[' + (list ? index : this.data.cart.list.length) + ']'] : newList,
-        ['list[' + data.menuindex + '].warelist[' + data.productindex + '].cart'] : newSize
-      })
+
+      // 如果是热卖或者新品这种label分类，同时操作两个分类的同一个商品
+      if (product.warelabelid) {
+        let menuindex2, productindex2
+
+        this.data.list.forEach((v, i) => {
+          if (i !== data.menuindex && (v.id === product.waretypeid || v.id === product.warelabelid) ) {
+            menuindex2 = i
+            v.warelist.forEach((v1,i1) => {
+              if (v1.id === product.id) {
+                productindex2 = i1
+              }
+            })
+          }
+        })
+
+        this.setData({
+          ['list[' + data.menuindex + '].warelist[' + data.productindex + '].cart'] : newSize,
+          ['list[' + menuindex2 + '].warelist[' + productindex2 + '].cart'] : newSize,
+          ['cart.list[' + (list ? index : this.data.cart.list.length) + ']'] : newList,
+        })
+      } else {
+        this.setData({
+          ['cart.list[' + (list ? index : this.data.cart.list.length) + ']'] : newList,
+          ['list[' + data.menuindex + '].warelist[' + data.productindex + '].cart'] : newSize
+        })
+      }
 
       this.calcTotal()
       this.calcAmount()
@@ -233,9 +256,30 @@ Page({
       newCartListRm.len -= 1
     }
 
-    this.setData({
-      ['list[' + data.menuindex + '].warelist[' + data.productindex + '].cart'] : newSize
-    })
+    // 如果是热卖或者新品这种label分类，同时操作两个分类的同一个商品
+    if (product.warelabelid) {
+      let menuindex2, productindex2
+
+      this.data.list.forEach((v, i) => {
+        if (i !== data.menuindex && (v.id === product.waretypeid || v.id === product.warelabelid) ) {
+          menuindex2 = i
+          v.warelist.forEach((v1,i1) => {
+            if (v1.id === product.id) {
+              productindex2 = i1
+            }
+          })
+        }
+      })
+      this.setData({
+        ['list[' + data.menuindex + '].warelist[' + data.productindex + '].cart'] : newSize,
+        ['list[' + menuindex2 + '].warelist[' + productindex2 + '].cart'] : newSize
+      })
+    } else {
+      this.setData({
+        ['list[' + data.menuindex + '].warelist[' + data.productindex + '].cart'] : newSize
+      })
+    }
+
     if (newCartListRm) {
       this.setData({
         ['cart.list[' + cartListRmIndex + ']'] : newCartListRm
