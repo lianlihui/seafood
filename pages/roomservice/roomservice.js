@@ -69,8 +69,8 @@ Page({
       // 设置各菜单的位置信息
       setTimeout(() => {
         query.selectAll('.menu').boundingClientRect((rs) => {
-          rects = rs.map(v => {return {index: v.dataset.index, top: v.top}})
-          // console.log({rects})
+          rects = rs.map(v => {return {menuId: v.dataset.menuid, top: v.top}})
+          console.log({rects})
         }).exec()
       }, 300);
 
@@ -128,19 +128,12 @@ Page({
 
   showMenu (e) {
     const id = e.target.dataset.menuid
-    let menuindex = 0
-
-    this.data.list.forEach((v, i) => {
-      if (v.id === id) {
-        menuindex = i
-      }
-    })
-    this.setData({
-      curMenuId: id,
-      'scrollTop.menu': rects.filter(v => v.index == menuindex)[0].top
-    })
 
     scrollHandleDis = true // 禁止触发滚动回调
+    this.setData({
+      curMenuId: id,
+      'scrollTop.menu': rects.filter(v => v.menuId == id)[0].top
+    })
   },
 
   // 加入购物车
@@ -321,25 +314,24 @@ Page({
   // 显示单品详情
   showDetail (e, id, menuId = 0) {
     let detail = (id && this.data.products.filter(v => v.id === id)[0]) || e.target.dataset.detail
-    let menuindex = 0
 
     detail = Object.assign(detail, {
-      menuindex: this.data.list.map((v, i) => v.id === detail.waretypeid ? i : -1).filter(v => v > -1)[0],
-      productindex: this.data.list.filter(v => v.id === detail.waretypeid)[0].warelist.map((v, i) => v.id === detail.id ? i : -1).filter(v => v > -1)[0]
-    })
-
-    this.data.list.forEach((v, i) => {
-      if (v.id === detail.waretypeid) {
-        menuindex = i
-      }
+      menuindex: this.data.list.map((v, i) => v.id === (menuId || detail.waretypeid) ? i : -1).filter(v => v > -1)[0],
+      productindex: this.data.list.filter(v => v.id === (menuId || detail.waretypeid))[0].warelist.map((v, i) => v.id === detail.id ? i : -1).filter(v => v > -1)[0]
     })
 
     this.setData({
       detail,
       detailShow: true,
-      curMenuId: menuId,
-      'scrollTop.menu': rects.filter(v => v.index == menuindex)[0].top
+      curMenuId: menuId
     })
+
+    setTimeout(() => {
+      scrollHandleDis = true
+      this.setData({
+        'scrollTop.menu': rects.filter(v => v.menuId == menuId)[0].top
+      })
+    }, 500);
   },
 
   showCart (e) {
@@ -500,7 +492,7 @@ Page({
       scrollTime = setTimeout(() => {
         let ele = rects.filter(v => v.top >= e.detail.scrollTop)[0]
         if (ele.top >= e.detail.scrollTop + mainScrollViewHeight) return
-        this.setData({curMenuId: ele.index})
+        this.setData({curMenuId: ele.menuId})
       }, 100);
     } else {
       scrollHandleDis = false

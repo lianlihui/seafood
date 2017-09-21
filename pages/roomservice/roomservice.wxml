@@ -27,7 +27,7 @@
     scroll-top="{{scrollTop.menu}}"
     scroll-into-view="{{scrollIntoViewId}}"
     bindscroll="scrollHandle">
-    <view wx:for="{{list}}" class="menu" id="Menu{{index}}" data-index="{{index}}">
+    <view wx:for="{{list}}" class="menu" id="Menu{{index}}" data-index="{{index}}" data-menuid="{{item.id}}">
       <text class="menu-title">{{item.name}}</text>
       <view wx:for="{{item.warelist}}" wx:key="*this" wx:for-item="product" wx:for-index="productindex" class="menu-list">
         <view class="menu-product">
