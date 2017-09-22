@@ -63,9 +63,7 @@ Page({
     if (this.data.isSelect) {
       var addr = event.currentTarget.dataset.addr;
       app.globalData.newOrder.data.addressbean = addr
-      wx.redirectTo({
-        url: '/pages/orderdetail/orderdetail'
-      }) 
+      wx.navigateBack()
     }
   }
 })
